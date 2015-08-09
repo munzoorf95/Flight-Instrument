@@ -1,0 +1,15 @@
+{
+  "name": "aircraft-gauges",
+  "version": "0.0.0",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "david howard",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^1.1.0"
+  },
+  "description": "svg based aircraft gauges",
+  "dependencies": {
+  }
+}
