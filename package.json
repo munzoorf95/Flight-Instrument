@@ -13,6 +13,7 @@
     "grunt-babel": "^5.0.1",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-eslint": "^17.1.0",
+    "grunt-execute": "^0.2.2",
     "grunt-mocha-test": "^0.12.7",
     "mocha": "^2.2.5",
     "preprocess": "^3.0.2"

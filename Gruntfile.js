@@ -7,6 +7,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-eslint');
   grunt.loadNpmTasks('grunt-babel');
+  grunt.loadNpmTasks('grunt-execute');
 
   grunt.initConfig({
     // Configure a mochaTest task
@@ -32,21 +33,27 @@ module.exports = function(grunt) {
         }
       }
     },
+    execute: {
+      examples: {
+        options: {
+          args: ['example/gg.template', 'example/gg.html']
+        },
+        src: ['lib/preprocess.js']
+      }
+    },
     watch : {
       files: ['!.git/**','!node_modules/**'],
       js: {
         files: ['../Gruntfile.js', '*.js','lib/*.js'],
         tasks: ['eslint']
-      },
-      babel: {
-        files: ['lib/*.js'],
-        tasks: ['babel']
       }
     }
   });
+
   grunt.event.on('watch',function(action,filepath,target) {
     grunt.log.writeln(target + ':' + filepath + ':' + action);
   });
 
+  grunt.registerTask('build',['execute:examples']);
   grunt.registerTask('default', ['eslint','babel']);
 };
