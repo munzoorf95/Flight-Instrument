@@ -79,7 +79,7 @@
 
   function VSI(vsiId) {
     var vsi = document.querySelector('#' + vsiId);
-    var needle = document.querySelector( '#' + headingId + '-needle');
+    var needle = document.querySelector( '#' + vsiId + '-needle');
     return {
       set : function(vertical_speed) {
       },
