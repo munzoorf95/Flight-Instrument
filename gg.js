@@ -5,12 +5,14 @@
   function pad(f, size){ return ('000000000' + f.toFixed(0)).substr(-size); }
 
   // create altimeter
-  function Altimeter(global,parent,altimeterId) {
+  function Altimeter(global,parent,altimeterId,draw) {
     var altimeter;
     var needle;
     var drum;
 
-    drawAltimeter(global,parent,altimeterId);
+    if (draw) {
+      drawAltimeter(global, parent, altimeterId);
+    }
     altimeter = global.querySelector('#' + altimeterId);
     needle    = global.querySelector( '#' + altimeterId + '-needle');
     drum      = global.querySelector( '#' + altimeterId + '-drum');
@@ -97,11 +99,11 @@
   }
 
   function gg_createElementNS(global,ns,name,attr,id) {
-    var e = global.createElementNS(ns,name,attr);
+    var e = global.createElementNS(ns,name);
     if (id) {
       e.setAttribute('id',id);
     }
-    attr.forEach(function(v,i,a) {
+    attr.forEach(function(v) {
       e.setAttribute(v[0],v[1]);
     });
     return e;
@@ -250,9 +252,9 @@
     var e;
     var g;
     var l;
-    g = global.querySelector('#gg');
+
     svg = gg_createElementNS(global,ns,svg.name,svg.attr,id);
-    g.appendChild(svg);
+    parent.appendChild(svg);
 
     e = gg_createElementNS(global,ns,r1.name,r1.attr);
     svg.appendChild(e);

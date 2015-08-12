@@ -3,14 +3,16 @@
 <head>
 </head>
 <body>
+  <div id="gg">
   <!-- @include alt.svg -->
+  </div>
 
   <input type='button' id='btn' value='zoom'></input>
 
-  <script src="gg.js"></script>
+  <script src="../gg.js"></script>
 
   <script>
-  var altimeter = gg.Altimeter("prefix-altimeter");
+  var altimeter = gg.Altimeter(document,document.querySelector("#gg"),"gg145-altimeter",false);
   var altitude=0.0;
   function rotate(timestamp) {
       altimeter.set(altitude);
