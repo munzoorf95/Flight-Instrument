@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+<img>
+<svg id='svg' xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
+    <rect x="0" y="0" width="100" height="100" fill="#000"/>
+    <ellipse cx="50" cy="50" rx="20" ry="20" stroke="#fff"/>
+</svg>
+<img id='box' src="box.png" width="100" height="100"/>
+<input type='button' value='expand' onclick='resizeSvg();'/>
+<script>
+    function resizeSvg() {
+        var svg = document.querySelector("#svg");
+        svg.setAttribute('width','400');
+        svg.setAttribute('height','400');
+        var box = document.querySelector("#box");
+        box.setAttribute('width','400');
+        box.setAttribute('height','400');
+    }
+</script>
+</body>
+</html>
