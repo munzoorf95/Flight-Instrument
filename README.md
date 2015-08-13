@@ -83,7 +83,7 @@ Note MDN describes the viewbox a little differently but the effect is the same.
     </body>
     </html>
 
-Now the resize works. Notice how cleanly the image appears after zooming. If you zoomed a single jpg or png image
+Now the resize works. Try it [here](https://jsbin.com/foqiyu/edit?html,output). Notice how cleanly the image appears after zooming. If you zoomed a single jpg or png image
 it would be pixelated.
 
 ### Aircraft Altimeter
