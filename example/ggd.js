@@ -2,12 +2,12 @@
 
 function ticks(parent) {
   "use strict";
-  var  r3 = 45.0f;
-  var  r1 = 40.0f;
-  var  r2 = 49.0f;
-  var  cx = 50.0f;
-  var  cy = 50.0f;
-  var  a  = 270.0f * (PI/180.0f);
+  var  r3 = 45.0;
+  var  r1 = 40.0;
+  var  r2 = 49.0;
+  var  cx = 50.0;
+  var  cy = 50.0;
+  var  a  = 270.0 * (PI/180.0);
   var  da = PI / 25;
   var  x1 = cos(a) * r1 + cx;
   var  y1 = sin(a) * r1 + cy;

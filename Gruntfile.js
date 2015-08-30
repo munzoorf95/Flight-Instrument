@@ -36,16 +36,22 @@ module.exports = function(grunt) {
     execute: {
       examples: {
         options: {
-          args: ['example/gg.template', 'example/gg.html']
+          args: ['example/altimeter.template', 'example/altimeter.html']
         },
         src: ['lib/preprocess.js']
       }
     },
     watch : {
+      options: {
+        livereload: true
+      },
       files: ['!.git/**','!node_modules/**'],
       js: {
         files: ['../Gruntfile.js', '*.js','lib/*.js'],
-        tasks: ['eslint']
+        tasks: ['eslint','babel','build']
+      },
+      html : {
+        files:['example/*.html']
       }
     }
   });
@@ -55,5 +61,5 @@ module.exports = function(grunt) {
   });
 
   grunt.registerTask('build',['execute:examples']);
-  grunt.registerTask('default', ['eslint','babel']);
+  grunt.registerTask('default', ['eslint','babel','build']);
 };

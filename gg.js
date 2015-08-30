@@ -212,16 +212,13 @@
       ['id','gg145-altimeter-needle']
     ]
   };
-
+  
   var l1 = {
-    name : 'line',
+    name : 'path',
     attr : [
       ['stroke','#fff'],
       ['stroke-width','2'],
-      ['x1','0'],
-      ['y1','0'],
-      ['x2','45'],
-      ['y2','0']
+      ['d','M0,0 L0,0.5 L40,1 L45,0 L40,-1 L0,-0.5 L0.0 z']
     ]
   };
 
