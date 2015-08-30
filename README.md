@@ -13,10 +13,10 @@ SVG images have some of advantages over jpeg or ping images for us on web pages:
 * xml text rather than complex binary
 * discrete parts of the image can be manipulated on a web page using the browser SVG API and Javascript.
 * scales cleanly when resized, either up or down.
- 
+
 An SVG image can be included on a web page in a couple of ways. The image can be specified using an 'img' tag, or the xml text of the image can be included inline in the HTML. If all you need is to have an image that will be resized, then using the 'img' tag is a simple way to go. However, including using 'img' limits the modifications your javascript can make to the image. Basically the same set of attributes as any other image. The discrete parts of the image cannot be referenced. [Restrictions](https://developer.mozilla.org/en-US/docs/Web/SVG/SVG_as_an_Image)
 
-If the actual svg xml is included inline in the HTML, then its global and discrete components can be referenced using the DOM API and Javascript. That's the approach this tutorial takes. 
+If the actual svg xml is included inline in the HTML, then its global and discrete components can be referenced using the DOM API and Javascript. That's the approach this tutorial takes.
 
 ### Simple Example
 
@@ -24,7 +24,7 @@ The following html code draws a 100x100 pixel black box with a white circle in i
 * start with an svg tag
 * include the namespace definition (xmlns attribute) required for svg images
 * set a width and height
- 
+
     <!doctype html>
     <html>
     <body>
@@ -87,18 +87,15 @@ Now the resize works. Try it [here](https://jsbin.com/foqiyu/edit?html,output). 
 it would be pixelated.
 
 ### Aircraft Altimeter
-Ok, now that we can include an svg on a page and do something with it, lets get a little more complex. How about drawing
-a representation of an aircraft altimeter? An aircraft altimeter has a static background and some moving parts, the
-needle and the altitude readout (the 'drum'). [Here is an example](https://en.wikipedia.org/wiki/Altimeter#Use_in_aircraft).
+Ok, now that we can include an svg on a page and do something with it, lets get a little more complex. How about drawing a representation of an aircraft altimeter? An aircraft altimeter has a static background and some moving parts, the needle and the altitude readout (the 'drum'). [Here is an example](https://en.wikipedia.org/wiki/Altimeter#Use_in_aircraft).
 Some altimeters have 2 needles so we will leave that as an exercise for the reader.
 
 We will explore two approaches to rendering the svg:
-* construct the svg offline using an editor or graphics program like [Inkscape](https://inkscape.org) and include the
- svg xml inline in the HTML document on the server side.
+* construct the svg offline using an editor or graphics program like [Inkscape](https://inkscape.org) and include the svg xml inline in the HTML document on the server side.
 * construct the svg from scratch on the client using javascript.
 
 In both cases, once the svg is available, we will then manipulate the altimeter to vary the altitude and see how that works.
 
 #### Aircraft Altitmeter : static svg in the HTML
- 
+
 #### Aircraft Altimeter  : generate the svg image on the client
