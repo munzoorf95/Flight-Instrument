@@ -103,11 +103,29 @@
     if (id) {
       e.setAttribute('id',id);
     }
+
     attr.forEach(function(v) {
       e.setAttribute(v[0],v[1]);
     });
     return e;
   }
+/*
+  <text x="50.00" y="16.75" text-anchor="middle">0</text>
+  <text x="71" y="22.5" text-anchor="middle">1</text>
+  <text x="85" y="41" text-anchor="middle">2</text>
+  <text x="85" y="65" text-anchor="middle">3</text>
+  <text x="70.5" y="82" text-anchor="middle">4</text>
+  <text x="50" y="88" text-anchor="middle">5</text>
+  <text x="29" y="82" text-anchor="middle">6</text>
+  <text x="15" y="65" text-anchor="middle">7</text>
+  <text x="15" y="41" text-anchor="middle">8</text>
+  <text x="29" y="22.75" text-anchor="middle">9</text>
+*/
+
+// x
+  var tx=[ 50,71,85,85,70.5,50,29,15,15,29];
+// y
+  var ty=[16.75,22.5,41,65,82,88,82,65,41,22.75];
 
   function gg_ticks(global,ns,parent) {
     "use strict";
@@ -123,11 +141,22 @@
     var  x2;
     var  y2;
     var  index;
+    var  alt;
     var  e;
+    var g;
 
+    g = global.createElementNS(ns,'g');
+    g.setAttribute('stroke','#fff');
+    g.setAttribute('fill','#fff');
+    g.setAttribute('font-family','sans-serif');
+    g.setAttribute('font-size','8');
+    parent.appendChild(g);
+
+    alt   = 0;
     index = 0;
     for(var i=0;i<50;++i) {
       if ((i % 5) == 0) {
+        // bold tick with number
         x1 = Math.cos(a) * r1 + cx;
         y1 = Math.sin(a) * r1 + cy;
         x2 = Math.cos(a) * r2 + cx;
@@ -138,9 +167,18 @@
         e.setAttribute('y1',y1);
         e.setAttribute('x2',x2);
         e.setAttribute('y2',y2);
+        g.appendChild(e);
+        e = global.createElementNS(ns,'text');
+        e.setAttribute('x',tx[alt].toFixed(1));
+        e.setAttribute('y',ty[alt].toFixed(1));
+        e.setAttribute('text-anchor','middle');
+        e.innerHTML = alt.toFixed(0);
+        g.appendChild(e);
+        alt++;
         index++;
       }
       else {
+        // thin tick
         x1 = Math.cos(a) * r3 + cx;
         y1 = Math.sin(a) * r3 + cy;
         x2 = Math.cos(a) * r2 + cx;
@@ -151,8 +189,8 @@
         e.setAttribute('y1',y1);
         e.setAttribute('x2',x2);
         e.setAttribute('y2',y2);
+        g.appendChild(e);
       }
-      parent.appendChild(e);
       a += da;
     }
   }
@@ -194,7 +232,6 @@
   var t1 = {
     name : 'text',
     attr : [
-      ['id','gg145-altimeter-drum'],
       ["stroke" ,'#000'],
       ['stroke-width','0.1'],
       ["fill","#fff"],
@@ -208,17 +245,17 @@
 
   var g1 = {
     name : 'g',
-    attr : [
-      ['id','gg145-altimeter-needle']
+    attr: [
+
     ]
   };
-  
+
   var l1 = {
     name : 'path',
     attr : [
+      ['d',"M0,0 L0,0.5 L40,1 L45,0 L40,-1 L0,-0.5 L0,0 z"],
       ['stroke','#fff'],
-      ['stroke-width','2'],
-      ['d','M0,0 L0,0.5 L40,1 L45,0 L40,-1 L0,-0.5 L0.0 z']
+      ['fill','#fff']
     ]
   };
 
@@ -259,13 +296,13 @@
     e = gg_createElementNS(global,ns,e1.name,e1.attr);
     svg.appendChild(e);
 
-    e = gg_createElementNS(global,ns,t1.name,t1.attr);
+    e = gg_createElementNS(global,ns,t1.name,t1.attr,id + '-drum');
     svg.appendChild(e);
 
-    g = gg_createElementNS(global,ns,g1.name,g1.attr,id + '-drum');
+    g = gg_createElementNS(global,ns,g1.name,g1.attr,id + '-needle');
     svg.appendChild(g);
 
-    l = gg_createElementNS(global,ns,l1.name,l1.attr,id + '-needle');
+    l = gg_createElementNS(global,ns,l1.name,l1.attr);
     g.appendChild(l);
 
     e = gg_createElementNS(global,ns,e2.name,e2.attr);

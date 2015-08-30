@@ -36,7 +36,7 @@ module.exports = function(grunt) {
     execute: {
       examples: {
         options: {
-          args: ['example/altimeter.template', 'example/altimeter.html']
+          args: ['example/static/altimeter.template', 'example/static/altimeter.html']
         },
         src: ['lib/preprocess.js']
       }
@@ -51,7 +51,7 @@ module.exports = function(grunt) {
         tasks: ['eslint','babel','build']
       },
       html : {
-        files:['example/*.html']
+        files:['example/static/*.html','example/client/*.html']
       }
     }
   });

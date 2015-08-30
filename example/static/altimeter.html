@@ -81,9 +81,10 @@
 
   <input type='button' id='btn' value='zoom'></input>
 
-  <script src="../gg.js"></script>
+  <script src="/gg.js"></script>
 
   <script>
+  <!-- instantiate the altimeter, give it the name that matches the template -->
   var altimeter = gg.Altimeter(document,document.querySelector("#altimeter"),"gg145-altimeter",false);
   var altitude=0.0;
   function rotate(timestamp) {
