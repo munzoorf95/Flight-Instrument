@@ -9,7 +9,7 @@ is a file format for rendering images using vectors rather than a bitmap. This t
 how to construct an image using svg, than it is how to use svg with javascript on a web page. [Go here to
 learn more about the svg file format](https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial).
 
-SVG images have some of advantages over jpeg or ping images for us on web pages:
+SVG images have some of advantages over jpeg or ping images for use on web pages:
 * xml text rather than complex binary
 * discrete parts of the image can be manipulated on a web page using the browser SVG API and Javascript.
 * scales cleanly when resized, either up or down.
@@ -95,6 +95,8 @@ We will explore two approaches to rendering the svg:
 * construct the svg from scratch on the client using javascript.
 
 In both cases, once the svg is available, we will then manipulate the altimeter to vary the altitude and see how that works.
+
+(for now, compare the html code example/static/altimeter.html vs example/client/altimeter.html)
 
 #### Aircraft Altitmeter : static svg in the HTML
 
