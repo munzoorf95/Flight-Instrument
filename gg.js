@@ -2,25 +2,41 @@
 (function() {
   'use strict';
 
-  function pad(f, size){ return ('000000000' + f.toFixed(0)).substr(-size); }
+  function pad(f, size,fract){ return ('000000000' + f.toFixed(fract)).substr(-size); }
 
-  // create altimeter
+
+  /**
+    create an altimeter
+    @param global reference to global object (usually document)
+    @param parent reference to parent element, such as a div
+    @param altimeterID id to attach or reference to existing svg
+    @param draw true = draw the altimeter, false = assume static draw
+    @return reference to altimeter object
+  */
   function Altimeter(global,parent,altimeterId,draw) {
     var altimeter;
     var needle;
     var drum;
+    var pwindow;
 
     if (draw) {
       drawAltimeter(global, parent, altimeterId);
     }
     altimeter = global.querySelector('#' + altimeterId);
-    needle    = global.querySelector( '#' + altimeterId + '-needle');
-    drum      = global.querySelector( '#' + altimeterId + '-drum');
+    needle    = global.querySelector('#' + altimeterId + '-needle');
+    drum      = global.querySelector('#' + altimeterId + '-drum');
+    pwindow   = global.querySelector('#' + altimeterId + '-pwin');
     return {
       set : function(altitude) {
+        if (altitude >= 999999) {
+          altitude = 999999;
+        }
         var d = (altitude % 1000) * (360.0 / 1000.0) - 90;
-        drum.innerHTML = pad(altitude,6);
+        drum.innerHTML = pad(altitude,6,0);
         needle.setAttribute('transform','translate(50,50),rotate(' + d + ')');
+      },
+      setPressure : function(pressure) {
+        pwindow.innerHtml = pad(pressure,5,2);
       },
       resize : function(size) {
         var s = size.toString();
@@ -109,22 +125,10 @@
     });
     return e;
   }
-/*
-  <text x="50.00" y="16.75" text-anchor="middle">0</text>
-  <text x="71" y="22.5" text-anchor="middle">1</text>
-  <text x="85" y="41" text-anchor="middle">2</text>
-  <text x="85" y="65" text-anchor="middle">3</text>
-  <text x="70.5" y="82" text-anchor="middle">4</text>
-  <text x="50" y="88" text-anchor="middle">5</text>
-  <text x="29" y="82" text-anchor="middle">6</text>
-  <text x="15" y="65" text-anchor="middle">7</text>
-  <text x="15" y="41" text-anchor="middle">8</text>
-  <text x="29" y="22.75" text-anchor="middle">9</text>
-*/
 
-// x
+  // x position for altitude numbers
   var tx=[ 50,71,85,85,70.5,50,29,15,15,29];
-// y
+  // y position for altitude numbers
   var ty=[16.75,22.5,41,65,82,88,82,65,41,22.75];
 
   function gg_ticks(global,ns,parent) {
@@ -281,6 +285,18 @@
     ]
   };
 
+  var t2 = {
+    name : 'text',
+    attr : [
+      ["fill","#fff"],
+      ['x','50'],
+      ['y','66'],
+      ["font-family",'sans-serif'],
+      ['font-size','6'],
+      ['text-anchor','middle']
+    ]
+  };
+
   function drawAltimeter(global,parent,id) {
     var ns = "http://www.w3.org/2000/svg";
     var e;
@@ -297,6 +313,10 @@
     svg.appendChild(e);
 
     e = gg_createElementNS(global,ns,t1.name,t1.attr,id + '-drum');
+    svg.appendChild(e);
+
+    e = gg_createElementNS(global,ns,t2.name,t2.attr,id + '-pwin');
+    e.innerHTML = pad(29.92,5,2);
     svg.appendChild(e);
 
     g = gg_createElementNS(global,ns,g1.name,g1.attr,id + '-needle');

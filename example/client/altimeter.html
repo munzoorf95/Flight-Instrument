@@ -5,9 +5,11 @@
 </head>
 <body>
   <div id='gg'></div>
+  <input type='button' id='btn' value='zoom'></input>
   <script>
   var parent = document.querySelector('#gg');
   var altimeter = gg.Altimeter(document,parent,"gg145-altimeter",true);
+  altimeter.setPressure(29.92);
   var altitude=0.0;
   function rotate(timestamp) {
       altimeter.set(altitude);
@@ -15,6 +17,23 @@
       requestAnimationFrame(rotate);
     }
   requestAnimationFrame(rotate);
+
+  var btn=document.querySelector('#btn');
+  btn.onclick = (function() {
+    var state = 0;
+    return function() {
+      switch(state) {
+      case 0:
+        altimeter.resize(600);
+        state = 1;
+        break;
+      case 1:
+        altimeter.resize(400);
+        state = 0;
+        break;
+    }
+  }
+  })();
 
   </script>
 </body>
