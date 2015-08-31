@@ -46,11 +46,16 @@
     };
   }
 
-  function Airspeed(airspeedId) {
+  function Airspeed(global,parent,airspeedId,draw) {
     var airspeed = document.querySelector('#' + airspeedId);
-    var needle = document.querySelector( '#' + airspeedId + '-needle');
+    var needle   = document.querySelector('#' + airspeedId + '-needle');
     return {
       set : function(knots) {
+        if (knots >= 230) {
+          knots = 230;
+        }
+        var d = knots * (360.0 / 230.0)-90.0;
+        needle.setAttribute('transform','translate(50,50),rotate(' + d + ')');
       },
       resize : function(size) {
         var s = size.toString();
