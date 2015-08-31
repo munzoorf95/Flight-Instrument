@@ -1,5 +1,40 @@
 "use strict";
 
+// polynomial to genertae X position for altitude tick labels
+function txc(v) {
+  var a = 49.93776 ;
+  var b = 20.80345 ;
+  var c = 3.488636 ;
+  var d = -3.47244 ;
+  var e = 0.485256 ;
+  var f = -0.01936 ;
+  var r = a +
+          b * v +
+          c * v * v +
+          d * v * v *v +
+          e * v * v * v * v +
+          f * v * v * v * v * v;
+  return r;
+}
+
+// polynomial curve fit to generate y positions for altitude labels
+function tyc(v) {
+  var a = 16.81014 ;
+  var b = -6.0395  ;
+  var c = 13.69799 ;
+  var d = -2.39376 ;
+  var e = 0.078351 ;
+  var f = 0.003077 ;
+  var r = a +
+          b * v +
+          c * v * v +
+          d * v * v *v +
+          e * v * v * v * v +
+          f * v * v * v * v * v;
+  return r;
+}
+
+// generate static tick elements
 function ticks(parent) {
   "use strict";
   var  r3 = 45.0;
