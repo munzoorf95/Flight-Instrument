@@ -46,9 +46,30 @@
     };
   }
 
-  function Airspeed(global,parent,airspeedId,draw) {
-    var airspeed = document.querySelector('#' + airspeedId);
-    var needle   = document.querySelector('#' + airspeedId + '-needle');
+  /**
+  @param global global object, usually 'document'
+  @param parent parent element, such as a div
+  @param airspeedId element id of airspeed object
+  @param draw true to draw on client, false to use static svg with same id
+  @param options object with airspeed options (for client side draw)
+    {
+      range  : 1,        // range index, 1 = 220
+      green  :[80,140],  // green arc from clean stall to max cruisegg_ticks
+      yellow :[140,160]  // yellow arc from max cruise to never-exceed
+      red    :[160,160]  // red arc from never-exceed to never-exceed
+      white  :[50,100]   // white arc for stall-flaps to max-flaps
+    }
+  */
+  function Airspeed(global,parent,airspeedId,draw,options) {
+    var airspeed;
+    var needle  ;
+
+    if (draw) {
+      drawAirspeed(global, parent, airspeedId);
+    }
+    airspeed = global.querySelector('#' + airspeedId);
+    needle    = global.querySelector('#' + airspeedId + '-needle');
+
     return {
       set : function(knots) {
         if (knots >= 230) {
@@ -136,7 +157,7 @@
   // y position for altitude numbers
   var ty=[16.75,22.5,41,65,82,88,82,65,41,22.75];
 
-  function gg_ticks(global,ns,parent) {
+  function gg_altimeterTicks(global,ns,parent) {
     "use strict";
     var  r3 = 45.0;
     var  r1 = 40.0;
@@ -147,7 +168,7 @@
     var  da = Math.PI / 25;
     var  x1;
     var  y1;
-    var  x2;
+    var  x2;gg_ticks
     var  y2;
     var  index;
     var  alt;
@@ -204,17 +225,22 @@
     }
   }
 
+
+
+
+
+  // svg element header
   var svg = {
     name : 'svg',
     attr : [
       ['xmlns'  ,'http://www.w3.org/2000/svg'],
-      ["id"     ,"gg145-altimeter"],
       ["width"  ,"400"],
       ["height" ,"400"],
       ["viewBox","0 0 100 100"]
     ]
   };
 
+  // background rect
   var r1 = {
     name : 'rect',
     attr : [
@@ -226,6 +252,7 @@
     ]
   };
 
+  // dial rect
   var e1 = {
     name : 'ellipse',
     attr : [
@@ -238,6 +265,58 @@
     ]
   };
 
+  // =============================
+  // needle
+  // =============================
+
+  // needle indicator line
+  var n1 = {
+    name : 'path',
+    attr : [
+      ['d',"M0,0 L0,0.5 L40,1 L45,0 L40,-1 L0,-0.5 L0,0 z"],
+      ['stroke','#fff'],
+      ['fill','#fff']
+    ]
+  };
+
+  // needle center
+  var n2 = {
+    name : 'ellipse',
+    attr : [
+      ['cx','0'],
+      ['cy','0'],
+      ['rx','4'],
+      ['ry','4'],
+      ['fill','#444']
+    ]
+  };
+
+  // needle tail line
+  var n3 = {
+    name : 'line',
+    attr : [
+      ['stroke-width','3.0'],
+      ['stroke','#444'],
+      ['x1','-10.0'],
+      ['y1','0.0'],
+      ['x2','0.0'],
+      ['y1','0.0']
+    ]
+  };
+
+  // needle tail circle
+  var n4 = {
+    name : 'ellipse',
+    attr : [
+      ['cx','-10.0'],
+      ['cy','0'],
+      ['rx','3'],
+      ['ry','3'],
+      ['fill','#444']
+    ]
+  };
+
+  // altimeter drum text
   var t1 = {
     name : 'text',
     attr : [
@@ -252,33 +331,18 @@
     ]
   };
 
+  // generic group
   var g1 = {
+    speed  = dspeed;
+    for(var i=0;i<44;++i) {
+      if ((i == 0)||(i==2)) {
     name : 'g',
     attr: [
 
     ]
   };
 
-  var l1 = {
-    name : 'path',
-    attr : [
-      ['d',"M0,0 L0,0.5 L40,1 L45,0 L40,-1 L0,-0.5 L0,0 z"],
-      ['stroke','#fff'],
-      ['fill','#fff']
-    ]
-  };
-
-  var e2 = {
-    name : 'ellipse',
-    attr : [
-      ['cx','50'],
-      ['cy','50'],
-      ['rx','4'],
-      ['ry','4'],
-      ['fill','#444']
-    ]
-  };
-
+  // altimeter tick group
   var g2 = {
     name : 'g',
     attr : [
@@ -290,6 +354,7 @@
     ]
   };
 
+  // altimeter pressure setting text
   var t2 = {
     name : 'text',
     attr : [
@@ -306,37 +371,104 @@
     var ns = "http://www.w3.org/2000/svg";
     var e;
     var g;
-    var l;
+    var p;
 
+    // svg element
     svg = gg_createElementNS(global,ns,svg.name,svg.attr,id);
     parent.appendChild(svg);
 
+    // background rect
     e = gg_createElementNS(global,ns,r1.name,r1.attr);
     svg.appendChild(e);
 
+    // dial circle
     e = gg_createElementNS(global,ns,e1.name,e1.attr);
     svg.appendChild(e);
 
+    // drum text
     e = gg_createElementNS(global,ns,t1.name,t1.attr,id + '-drum');
     svg.appendChild(e);
 
+    // pressure text
     e = gg_createElementNS(global,ns,t2.name,t2.attr,id + '-pwin');
     e.innerHTML = pad(29.92,5,2);
     svg.appendChild(e);
 
+    // needle
     g = gg_createElementNS(global,ns,g1.name,g1.attr,id + '-needle');
     svg.appendChild(g);
 
-    l = gg_createElementNS(global,ns,l1.name,l1.attr);
-    g.appendChild(l);
+    e = gg_createElementNS(global,ns,n1.name,n1.attr);
+    g.appendChild(e);
 
-    e = gg_createElementNS(global,ns,e2.name,e2.attr);
+    e = gg_createElementNS(global,ns,n3.name,n3.attr);
+    g.appendChild(e);
+
+    e = gg_createElementNS(global,ns,n4.name,n4.attr
+    name : 'g',
+    attr: [
+
+    ]
+  };
+);
+    g.appendChild(e);
+
+    e = gg_createElementNS(global,ns,n2.name,n2.attr);
+    g.appendChild(e);
+
+    gg_altimeterticks(global,ns,svg);
+
+  }
+
+  var airspeed_options =
+    {
+      range  : 1,        // range index, 1 = 220
+      green  :[80,140],  // green arc from clean stall to max cruise
+      yellow :[140,160], // yellow arc from max cruise to never-exceed
+      red    :[160,160], // red arc from never-exceed to never-exceed
+      white  :[50,100]   // white arc for stall-flaps to max-flaps
+    };
+
+  function drawAirspeed(global,parent,id)
+  {
+    var ns = "http://www.w3.org/2000/svg";
+    var e;
+    var g;
+    var p;
+
+    // svg element
+    svg = gg_createElementNS(global,ns,svg.name,svg.attr,id);
+    parent.appendChild(svg);
+
+    // background rect
+    e = gg_createElementNS(global,ns,r1.name,r1.attr);
     svg.appendChild(e);
 
-    g = gg_createElementNS(global,ns,g2.name,g2.attr);
+    // dial circle
+    e = gg_createElementNS(global,ns,e1.name,e1.attr);
+    svg.appendChild(e);
+
+    // needle group
+    g = gg_createElementNS(global,ns,g1.name,g1.attr,id + '-needle');
     svg.appendChild(g);
 
-    gg_ticks(global,ns,g);
+    // needle
+    g = gg_createElementNS(global,ns,g1.name,g1.attr,id + '-needle');
+    svg.appendChild(g);
+
+    e = gg_createElementNS(global,ns,n1.name,n1.attr);
+    g.appendChild(e);
+
+    e = gg_createElementNS(global,ns,n2.name,n2.attr);
+    g.appendChild(e);
+
+    e = gg_createElementNS(global,ns,n3.name,n3.attr);
+    g.appendChild(e);
+
+    e = gg_createElementNS(global,ns,n4.name,n4.attr);
+    g.appendChild(e);
+
+    gg_airspeedTicks(global,ns,svg);
   }
 
   // exports

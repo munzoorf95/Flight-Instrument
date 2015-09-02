@@ -34,9 +34,15 @@ module.exports = function(grunt) {
       }
     },
     execute: {
-      examples: {
+      altimeter: {
         options: {
           args: ['example/static/altimeter.template', 'example/static/altimeter.html']
+        },
+        src: ['lib/preprocess.js']
+      },
+      airspeed: {
+        options: {
+          args: ['example/static/airspeed.template', 'example/static/airspeed.html']
         },
         src: ['lib/preprocess.js']
       }
@@ -60,6 +66,6 @@ module.exports = function(grunt) {
     grunt.log.writeln(target + ':' + filepath + ':' + action);
   });
 
-  grunt.registerTask('build',['execute:examples']);
+  grunt.registerTask('build',['execute:altimeter','execute:airspeed']);
   grunt.registerTask('default', ['eslint','babel','build']);
 };

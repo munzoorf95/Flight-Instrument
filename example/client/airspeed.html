@@ -1,23 +1,18 @@
 <!doctype html>
 <html>
 <head>
+  <script src='/gg.js'></script>
 </head>
 <body>
-  <div id="airspeed">
-  <!-- @include airspeed.svg -->
-  </div>
-
+  <div id='gg'></div>
   <input type='button' id='btn' value='zoom'></input>
-
-  <script src="/gg.js"></script>
-
   <script>
-  <!-- instantiate the altimeter, give it the name that matches the template -->
-  var airspeed = gg.Airspeed(document,document.querySelector("#airspeed"),"gg145-airspeed",false);
-  var speed = 0;
+  var parent = document.querySelector('#gg');
+  var airspeed = gg.Airspeed(document,parent,"gg145-airspeed",true);
+  var knots=0.0;
   function rotate(timestamp) {
-      airspeed.set(speed);
-      speed+=1.0;
+      airspeed.set(knots);
+      knots+=1.0;
       requestAnimationFrame(rotate);
     }
   requestAnimationFrame(rotate);
@@ -28,17 +23,17 @@
     return function() {
       switch(state) {
       case 0:
-        altimeter.resize(600);
+        airspeed.resize(600);
         state = 1;
         break;
       case 1:
-        altimeter.resize(400);
+        airspeed.resize(400);
         state = 0;
         break;
     }
   }
-})();
-  </script>
+  })();
 
+  </script>
 </body>
 </html>
