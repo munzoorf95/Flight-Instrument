@@ -5,12 +5,23 @@
 </head>
 <body>
   <div id='gg'></div>
-  <input type='button' id='btn' value='zoom'></input>
+  <input type='button' id='btn' value='zoom'/>
   <script>
   var parent = document.querySelector('#gg');
-  var airspeed = gg.Airspeed(document,parent,"gg145-airspeed",true);
+
+  var airspeed_options =
+  {
+    range  : 220,        // range index, 1 = 220
+    green  :[80,140],  // green arc from clean stall to max cruise
+    yellow :[140,160], // yellow arc from max cruise to never-exceed
+    red    :160, // red arc from never-exceed to never-exceed
+    white  :[50,100]   // white arc for stall-flaps to max-flaps
+  };
+
+  var airspeed = gg.Airspeed(document,parent,"gg145-airspeed",true,airspeed_options);
   var knots=0.0;
-  function rotate(timestamp) {
+
+  function rotate() {
       airspeed.set(knots);
       knots+=1.0;
       requestAnimationFrame(rotate);
