@@ -6,8 +6,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-eslint');
-  grunt.loadNpmTasks('grunt-babel');
   grunt.loadNpmTasks('grunt-execute');
+  grunt.loadNpmTasks('grunt-jsdoc');
 
   grunt.initConfig({
     // Configure a mochaTest task
@@ -23,16 +23,6 @@ module.exports = function(grunt) {
       // define the files to lint
       target: ['lib/*.js','*.js']
     },
-    babel: {
-      options: {
-        sourceMap:true
-      },
-      dist: {
-        files: {
-          'dist/makeAltimeter.js' : 'lib/makeAltimeterES6.js'
-        }
-      }
-    },
     execute: {
       altimeter: {
         options: {
@@ -45,6 +35,18 @@ module.exports = function(grunt) {
           args: ['example/static/airspeed.template', 'example/static/airspeed.html']
         },
         src: ['lib/preprocess.js']
+      },
+      heading: {
+        options: {
+          args: ['example/static/heading.template', 'example/static/heading.html']
+        },
+        src: ['lib/preprocess.js']
+      },
+      jsdoc: {
+        options: {
+          args: ['-d','./doc','gg.js']
+        },
+        src: ['node_modules/jsdoc/jsdoc.js']
       }
     },
     watch : {
@@ -54,10 +56,15 @@ module.exports = function(grunt) {
       files: ['!.git/**','!node_modules/**'],
       js: {
         files: ['../Gruntfile.js', '*.js','lib/*.js'],
-        tasks: ['eslint','babel','build']
+        tasks: ['eslint']
       },
       html : {
-        files:['example/static/*.html','example/client/*.html']
+        files:['example/static/*.template','example/static/*.svg'],
+        tasks:['build']
+      },
+      jsdoc: {
+        files: ['gg.js'],
+        tasks: ['execute:jsdoc']
       }
     }
   });
@@ -66,6 +73,6 @@ module.exports = function(grunt) {
     grunt.log.writeln(target + ':' + filepath + ':' + action);
   });
 
-  grunt.registerTask('build',['execute:altimeter','execute:airspeed']);
-  grunt.registerTask('default', ['eslint','babel','build']);
+  grunt.registerTask('build',['execute:altimeter','execute:airspeed','execute:heading']);
+  grunt.registerTask('default', ['eslint','build']);
 };

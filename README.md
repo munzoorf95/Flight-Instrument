@@ -1,8 +1,6 @@
 # gg - geezer-x Gauges
 
-SVG based aircraft gauges
-
-## A beginner tutorial on using SVG images + javascript to make a dynamic image on a web page
+## SVG based aircraft gauges
 
 [Scalable Vector Graphics (SVG)](https://en.wikipedia.org/wiki/Scalable_Vector_Graphics)
 is a file format for rendering images using vectors rather than a bitmap. This tutorial is less about
@@ -83,21 +81,18 @@ Note MDN describes the viewbox a little differently but the effect is the same.
     </body>
     </html>
 
-Now the resize works. Try it [here](https://jsbin.com/foqiyu/edit?html,output). Notice how cleanly the image appears after zooming. If you zoomed a single jpg or png image
-it would be pixelated.
+Now the resize works. Try it [here](https://jsbin.com/foqiyu/edit?html,output). Notice how cleanly the image appears after zooming. If you zoomed a single jpg or png image it would be pixelated.
 
-### Aircraft Altimeter
-Ok, now that we can include an svg on a page and do something with it, lets get a little more complex. How about drawing a representation of an aircraft altimeter? An aircraft altimeter has a static background and some moving parts, the needle and the altitude readout (the 'drum'). [Here is an example](https://en.wikipedia.org/wiki/Altimeter#Use_in_aircraft).
-Some altimeters have 2 needles so we will leave that as an exercise for the reader.
+### Aircraft Gauges
 
-We will explore two approaches to rendering the svg:
-* construct the svg offline using an editor or graphics program like [Inkscape](https://inkscape.org) and include the svg xml inline in the HTML document on the server side.
-* construct the svg from scratch on the client using javascript.
-
-In both cases, once the svg is available, we will then manipulate the altimeter to vary the altitude and see how that works.
-
-(for now, compare the html code example/static/altimeter.html vs example/client/altimeter.html)
+The implementations of the gauges in this collection have two options: include the svg element for the gauge in the html and attach to it, or
+generate the svg on the client side. In both cases, once the svg is loaded or generated, the javascript to control them are the same. Each gauge
+has some functions in common and some functions unique to the gauge type.
 
 #### Aircraft Altitmeter : static svg in the HTML
 
-#### Aircraft Altimeter  : generate the svg image on the client
+#### Aircraft Altimeter  : client side draw
+
+#### Aircraft Airspeed Indicator : static svg in the HTML
+
+#### Aircraft Airspeed Indicator : client side draw
