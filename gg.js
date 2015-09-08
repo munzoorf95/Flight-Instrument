@@ -126,10 +126,22 @@ var gg = (function() {
   /**
    * generic group
    */
-  var needle_def = {
+  var needle_group_def = {
     name : 'g',
     attr: [
 
+    ]
+  };
+
+  var standard_group_def = {
+    name : 'g',
+    attr : [
+      ["fill","#fff"],
+      ["stroke" ,'#fff'],
+      ['stroke-width','0.5'],
+      ["font-family",'sans-serif'],
+      ['font-size','8'],
+      ['text-anchor','middle']
     ]
   };
 
@@ -200,6 +212,20 @@ var gg = (function() {
     return e;
   }
 
+  function drawLine(global,ns,x1,y1,x2,y2,stroke_width) {
+    var e;
+    e = global.createElementNS(ns,'line');
+    if (stroke_width) {
+      e.setAttribute('stroke-width',stroke_width);
+    }
+    e.setAttribute('x1',x1);
+    e.setAttribute('y1',y1);
+    e.setAttribute('x2',x2);
+    e.setAttribute('y2',y2);
+
+    return e;
+  }
+
   // x position for altitude numbers
   var tx=[ 50,71,85,85,70.5,50,29,15,15,29];
   // y position for altitude numbers
@@ -231,12 +257,7 @@ var gg = (function() {
     var  e;
     var  g;
 
-    g = global.createElementNS(ns,'g');
-    g.setAttribute('stroke-width','0.5');
-    g.setAttribute('stroke','#fff');
-    g.setAttribute('fill','#fff');
-    g.setAttribute('font-family','sans-serif');
-    g.setAttribute('font-size','8');
+    g = gg_createElementNS(global,ns,standard_group_def.name,standard_group_def.attr);
     parent.appendChild(g);
 
     alt   = 0;
@@ -248,21 +269,16 @@ var gg = (function() {
         y1 = Math.sin(a) * r1 + cy;
         x2 = Math.cos(a) * r2 + cx;
         y2 = Math.sin(a) * r2 + cy;
-        e = global.createElementNS(ns,'line');
-        e.setAttribute('stroke-width','1');
-        e.setAttribute('x1',x1);
-        e.setAttribute('y1',y1);
-        e.setAttribute('x2',x2);
-        e.setAttribute('y2',y2);
+
+        e = drawLine(global,ns,x1,y1,x2,y2,1);
         g.appendChild(e);
+
         e = global.createElementNS(ns,'text');
         e.setAttribute('x',tx[alt].toFixed(1));
         e.setAttribute('y',ty[alt].toFixed(1));
         e.setAttribute('text-anchor','middle');
         e.innerHTML = alt.toFixed(0);
         g.appendChild(e);
-
-
         alt++;
         index++;
       }
@@ -272,12 +288,8 @@ var gg = (function() {
         y1 = Math.sin(a) * r3 + cy;
         x2 = Math.cos(a) * r2 + cx;
         y2 = Math.sin(a) * r2 + cy;
-        e = global.createElementNS(ns,'line');
-        e.setAttribute('stroke-width','0.5');
-        e.setAttribute('x1',x1);
-        e.setAttribute('y1',y1);
-        e.setAttribute('x2',x2);
-        e.setAttribute('y2',y2);
+
+        e = drawLine(global,ns,x1,y1,x2,y2,0.5);
         g.appendChild(e);
       }
       a += da;
@@ -316,12 +328,7 @@ var gg = (function() {
     var e;
     var g;
 
-    g = global.createElementNS(ns,'g');
-    g.setAttribute('stroke','#fff');
-    g.setAttribute('stroke-width','0.5');
-    g.setAttribute('fill','#fff');
-    g.setAttribute('font-family','sans-serif');
-    g.setAttribute('font-size','8');
+    g = gg_createElementNS(global,ns,standard_group_def.name,standard_group_def.attr);
     parent.appendChild(g);
 
     speed = dspeed;
@@ -336,12 +343,7 @@ var gg = (function() {
         y1 = Math.sin(a) * r1 + cy;
         x2 = Math.cos(a) * r2 + cx;
         y2 = Math.sin(a) * r2 + cy;
-        e = global.createElementNS(ns,'line');
-        e.setAttribute('stroke-width','1');
-        e.setAttribute('x1',x1);
-        e.setAttribute('y1',y1);
-        e.setAttribute('x2',x2);
-        e.setAttribute('y2',y2);
+        e = drawLine(global,ns,x1,y1,x2,y2,1.0);
         g.appendChild(e);
         e = global.createElementNS(ns,'text');
         e.setAttribute('x',txc2[index]);
@@ -357,12 +359,7 @@ var gg = (function() {
         y1 = Math.sin(a) * r1 + cy;
         x2 = Math.cos(a) * r2 + cx;
         y2 = Math.sin(a) * r2 + cy;
-        e = global.createElementNS(ns,'line');
-        e.setAttribute('stroke-width','1');
-        e.setAttribute('x1',x1);
-        e.setAttribute('y1',y1);
-        e.setAttribute('x2',x2);
-        e.setAttribute('y2',y2);
+        e = drawLine(global,ns,x1,y1,x2,y2,1.0);
         g.appendChild(e);
       }
       else {
@@ -371,12 +368,7 @@ var gg = (function() {
         y1 = Math.sin(a) * r3 + cy;
         x2 = Math.cos(a) * r2 + cx;
         y2 = Math.sin(a) * r2 + cy;
-        e = global.createElementNS(ns,'line');
-        e.setAttribute('stroke-width','0.5');
-        e.setAttribute('x1',x1);
-        e.setAttribute('y1',y1);
-        e.setAttribute('x2',x2);
-        e.setAttribute('y2',y2);
+        e = drawLine(global,ns,x1,y1,x2,y2,0.5);
         g.appendChild(e);
       }
       a += da;
@@ -404,12 +396,7 @@ var gg = (function() {
     var e;
     var g;
 
-    g = global.createElementNS(ns,'g');
-    g.setAttribute('stroke','#fff');
-    g.setAttribute('stroke-width','0.5');
-    g.setAttribute('fill','#fff');
-    g.setAttribute('font-family','sans-serif');
-    g.setAttribute('font-size','8');
+    g = gg_createElementNS(global,ns,standard_group_def.name,standard_group_def.attr);
     parent.appendChild(g);
 
     index = 0;
@@ -419,12 +406,7 @@ var gg = (function() {
         y1 = Math.sin(a) * r1 + cy;
         x2 = Math.cos(a) * r2 + cx;
         y2 = Math.sin(a) * r2 + cy;
-        e = global.createElementNS(ns,'line');
-        e.setAttribute('stroke-width','1.0');
-        e.setAttribute('x1',x1);
-        e.setAttribute('y1',y1);
-        e.setAttribute('x2',x2);
-        e.setAttribute('y2',y2);
+        e = drawLine(global,ns,x1,y1,x2,y2,1.0);
         g.appendChild(e);
       }
       else if (i==10) {
@@ -442,12 +424,7 @@ var gg = (function() {
         x2 = Math.cos(a) * r2 + cx;
         y2 = Math.sin(a) * r2 + cy;
 
-        e = global.createElementNS(ns,'line');
-        e.setAttribute('stroke-width','1.0');
-        e.setAttribute('x1',x1);
-        e.setAttribute('y1',y1);
-        e.setAttribute('x2',x2);
-        e.setAttribute('y2',y2);
+        e = drawLine(global,ns,x1,y1,x2,y2,1.0);
         g.appendChild(e);
 
         e = global.createElementNS(ns,'text');
@@ -463,13 +440,88 @@ var gg = (function() {
         y1 = Math.sin(a) * r3 + cy;
         x2 = Math.cos(a) * r2 + cx;
         y2 = Math.sin(a) * r2 + cy;
-        e = global.createElementNS(ns,'line');
-        e.setAttribute('x1',x1);
-        e.setAttribute('y1',y1);
-        e.setAttribute('x2',x2);
-        e.setAttribute('y2',y2);
+        e = drawLine(global,ns,x1,y1,x2,y2);
         g.appendChild(e);
       }
+      a += da;
+    }
+  }
+
+  function headingDial(global,ns,parent,id)
+  {
+    "use strict";
+    var r3 = 45.0;
+    var r1 = 43.0;
+    var r2 = 49.0;
+    var r4 = 36.0;
+    var cx = 0.0;
+    var cy = 0.0;
+    var a  = 270.0 * (Math.PI/180.0);
+    var da = Math.PI / 36;
+    var x1;
+    var y1;
+    var x2;
+    var y2;
+    var x4;
+    var y4;
+    var index;
+    var d;
+    var line;
+    var e;
+    var g;
+    var t;
+
+    //   <g id="gg145-heading-dial" stroke="#fff" fill="#fff" stroke-width="0.5" font-family="sans-serif" font-size="8" transform="translate(50 50) rotate(0)">
+    g = gg_createElementNS(global,ns,standard_group_def.name,standard_group_def.attr,id + '-dial');
+    g.setAttribute('transform','translate(50 50) rotate(0)');
+    parent.appendChild(g);
+
+    index = 0;
+    d = 0;
+    for(var i=0;i<72;++i) {
+      if ((i % 6) == 0) {
+        x1 = Math.cos(a) * r1 + cx;
+        y1 = Math.sin(a) * r1 + cy;
+        x2 = Math.cos(a) * r2 + cx;
+        y2 = Math.sin(a) * r2 + cy;
+        x4 = Math.cos(a) * r4 + cx;
+        y4 = Math.sin(a) * r4 + cy;
+
+        // <line stroke-width='1.0' x1='-0.00' y1='-43.00' x2='-0.00' y2='-49.00' />
+        e = drawLine(global,ns,x1,y1,x2,y2,1.0);
+        g.appendChild(e);
+
+        // <text transform='translate(-0.00 -36.00) rotate(0)' >0</text>
+        t  = "translate(";
+        t += x4.toFixed(2) + " " + y4.toFixed(2);
+        t += ") ";
+        t += "rotate(";
+        t += d.toFixed(0);
+        t += ")";
+        e = global.createElementNS(ns,'text');
+        e.innerHTML = (d / 10).toFixed(0);
+        e.setAttribute('transform',t);
+        g.appendChild(e);
+
+        d += 30.0;
+      }
+      else if ((i % 2) == 0) {
+        x1 = Math.cos(a) * r1 + cx;
+        y1 = Math.sin(a) * r1 + cy;
+        x2 = Math.cos(a) * r2 + cx;
+        y2 = Math.sin(a) * r2 + cy;
+        e = drawLine(global,ns,x1,y1,x2,y2,1.0);
+        g.appendChild(e);
+      }
+      else {
+        x1 = Math.cos(a) * r3 + cx;
+        y1 = Math.sin(a) * r3 + cy;
+        x2 = Math.cos(a) * r2 + cx;
+        y2 = Math.sin(a) * r2 + cy;
+        e = drawLine(global,ns,x1,y1,x2,y2);
+        g.appendChild(e);
+      }
+
       a += da;
     }
   }
@@ -720,7 +772,7 @@ var gg = (function() {
     svg.appendChild(e);
 
     // needle
-    g = gg_createElementNS(global,ns,needle_def.name,needle_def.attr,id + '-needle');
+    g = gg_createElementNS(global,ns,needle_group_def.name,needle_group_def.attr,id + '-needle');
     svg.appendChild(g);
 
     e = gg_createElementNS(global,ns,needle_path_def.name,needle_path_def.attr);
@@ -776,7 +828,7 @@ var gg = (function() {
     svg.appendChild(e);
 
     // needle group
-    g = gg_createElementNS(global,ns,needle_def.name,needle_def.attr,id + '-needle');
+    g = gg_createElementNS(global,ns,needle_group_def.name,needle_group_def.attr,id + '-needle');
     svg.appendChild(g);
 
     e = gg_createElementNS(global,ns,needle_path_def.name,needle_path_def.attr);
@@ -846,7 +898,7 @@ var gg = (function() {
     svg.appendChild(e);
 
     // needle
-    g = gg_createElementNS(global,ns,needle_def.name,needle_def.attr,id + '-vsi-needle');
+    g = gg_createElementNS(global,ns,needle_group_def.name,needle_group_def.attr,id + '-needle');
     svg.appendChild(g);
 
     e = gg_createElementNS(global,ns,needle_path_def.name,needle_path_def.attr);
@@ -866,6 +918,63 @@ var gg = (function() {
 
     // ticks
     vsiTicks(global,ns,svg);
+  }
+
+  /**
+   * draw a VSI
+   * @param global reference to global object (usually document)
+   * @param parent reference to parent element, such as a div
+   * @param id     id to attach or reference to existing svg
+   * @memberof gg
+   * @inner
+   */
+  function drawHeading(global,parent,id) {
+    var ns = "http://www.w3.org/2000/svg";
+    var e;
+    var g;
+    var svg;
+
+    var hdg_l1_def = {
+      name: 'line',
+      attr: [
+          ['stroke','#fff'],
+          ['stroke-width','0.5'],
+          ['x1','50'],
+          ['y1','5'],
+          ['x2','50'],
+          ['y2','20']
+      ]
+    };
+    //<path stroke='#fff' stroke-width='0.5' d="M30,58 L30,50 L46,34 L46,26 L50,16.4 L54,26 L54,34 L70,50 L70,58 L54,50 L54,66 L62,70 L62,76.4 L50,71.6 L38,76.4 L38,70 L46,66 L46,50 L30,58"/>
+    var hdg_ac_def = {
+      name: 'path',
+      attr: [
+        ['stroke','#fff'],
+        ['stroke-width','0.5'],
+        ['d','M30,58 L30,50 L46,34 L46,26 L50,16.4 L54,26 L54,34 L70,50 L70,58 L54,50 L54,66 L62,70 L62,76.4 L50,71.6 L38,76.4 L38,70 L46,66 L46,50 L30,58']
+      ]
+    };
+
+    // svg element
+    svg = gg_createElementNS(global,ns,svg_def.name,svg_def.attr,id);
+    parent.appendChild(svg);
+
+    // background rect
+    e = gg_createElementNS(global,ns,background_def.name,background_def.attr);
+    svg.appendChild(e);
+
+    // dial circle
+    e = gg_createElementNS(global,ns,dial_def.name,dial_def.attr);
+    svg.appendChild(e);
+
+    e = gg_createElementNS(global,ns,hdg_l1_def.name,hdg_l1_def.attr);
+    svg.appendChild(e);
+
+    e = gg_createElementNS(global,ns,hdg_ac_def.name,hdg_ac_def.attr);
+    svg.appendChild(e);
+
+    // draw the dial
+    headingDial(global,ns,svg,id);
   }
 
   /**
@@ -964,12 +1073,13 @@ var gg = (function() {
    * @global
    */
   function Heading(global,parent,id,draw) {
-    var heading = global.querySelector('#' + id);
-    var dial    = global.querySelector( '#' + id + '-dial');
 
     if (draw) {
-      drawAirspeed(global, parent, id);
+      drawHeading(global, parent, id);
     }
+
+    var heading = global.querySelector('#' + id);
+    var dial    = global.querySelector('#' + id + '-dial');
 
     return {
       set : function(degrees) {
@@ -1048,7 +1158,7 @@ var gg = (function() {
     }
 
     var vsi    = global.querySelector('#' + id);
-    var needle = global.querySelector('#' + id + '-vsi-needle');
+    var needle = global.querySelector('#' + id + '-needle');
 
     return {
       set : function(vertical_speed) {
