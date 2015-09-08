@@ -829,6 +829,14 @@ var gg = (function() {
     var needle = global.querySelector('#' + id + '-needle');
     return {
       set : function(vertical_speed) {
+        if (vertical_speed >= 2000) {
+          vertical_speed = 2000;
+        }
+        else if (vertical_speed <= -2000) {
+          vertical_speed = -2000;
+        }
+        var d = vertical_speed * (360.0 / 4000)-180.0;
+        needle.setAttribute('transform','translate(50,50),rotate(' + d + ')');
       },
       resize : function(size) {
         var s = size.toString();

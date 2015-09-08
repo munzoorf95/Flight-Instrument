@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+</head>
+<body>
+  <div id="turn">
+  <!-- ID = gg145- -->
+  <svg id="gg145-turn" xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 100 100">
+    <rect x="0" y="0" width="100" height="100" fill="#000"/>
+    <ellipse stroke-width="1.0" cx="50" cy="50" rx="49" ry="49" stroke="#fff"/>
+  </svg>
+  
+  </div>
+
+  <input type='button' id='btn' value='zoom'></input>
+
+  <script src="/gg.js"></script>
+
+  <script>
+  <!-- instantiate the turn, give it the name that matches the template -->
+  var turn = gg.Turn(document,document.querySelector("#turn"),"gg145-turn",false);
+  var degrees = 0;
+
+  var btn=document.querySelector('#btn');
+  btn.onclick = (function() {
+    var state = 0;
+    return function() {
+      switch(state) {
+      case 0:
+        turn.resize(600);
+        state = 1;
+        break;
+      case 1:
+        turn.resize(400);
+        state = 0;
+        break;
+    }
+  }
+})();
+  </script>
+
+</body>
+</html>

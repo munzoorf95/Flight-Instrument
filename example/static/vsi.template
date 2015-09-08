@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+</head>
+<body>
+  <div id="vsi">
+  <!-- @include vsi.svg -->
+  </div>
+
+  <input type='button' id='btn' value='zoom'></input>
+
+  <script src="/gg.js"></script>
+
+  <script>
+
+  <!-- instantiate the vsi, give it the name that matches the template -->
+  var vsi = gg.VSI(document,document.querySelector("#vsi"),"gg145-vsi",false);
+
+  vsi.set(0);
+
+  var btn=document.querySelector('#btn');
+  btn.onclick = (function() {
+    var state = 0;
+    return function() {
+      switch(state) {
+      case 0:
+        vsi.resize(600);
+        state = 1;
+        break;
+      case 1:
+        vsi.resize(400);
+        state = 0;
+        break;
+    }
+  }
+})();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+<head>
+  <style>
+  .container {
+    display: flex; /* or inline-flex */
+    flex-direction:column;
+    background-color: #000;
+  }
+  .row {
+    display:flex;
+    flex-direction:row;
+    justify-content: center;
+  }
+  </style>
+</head>
+<body>
+
+<div class='container'>
+  <div class='row'>
+    <div>  <!-- @include airspeed.svg --></div>
+    <div>  <!-- @include attitude.svg --></div>
+    <div>  <!-- @include altimeter.svg --></div>
+  </div>
+  <div class='row'>
+    <div>  <!-- @include turn.svg -->    </div>
+    <div>  <!-- @include heading.svg --> </div>
+    <div>  <!-- @include vsi.svg -->     </div>
+  </div>
+</div>
+<script src="/gg.js"></script>
+<script>
+<!-- instantiate the heading, give it the name that matches the template -->
+var heading = gg.Heading(document,document.querySelector("#heading"),"gg145-heading",false);
+var degrees = 0;
+
+var altimeter = gg.Altimeter(document,document.querySelector("#altimeter"),"gg145-altimeter",false);
+var altitude=0.0;
+var pressure = 29.92;
+altimeter.setPressure(pressure);
+
+var airspeed = gg.Airspeed(document,document.querySelector("#airspeed"),"gg145-airspeed",false);
+var speed = 0;
+
+var vsi = gg.VSI(document,document.querySelector("#vsi"),"gg145-vsi",false);
+var vspeed = -2000;
+
+function rotate(timestamp) {
+    heading.set(degrees);
+    airspeed.set(speed);
+    altimeter.set(altitude);
+    vsi.set(vspeed);
+
+
+    vspeed+=1.0;
+    if (vspeed >= 2000) {
+      vspeed = -2000;
+    }
+
+    degrees+=1.0;
+    altitude+=1.0;
+    speed+= 1.0;
+    if (speed > 220.0) speed = 0;
+
+    requestAnimationFrame(rotate);
+  }
+requestAnimationFrame(rotate);
+</script>
+</body>
+</html>

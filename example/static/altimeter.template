@@ -17,7 +17,7 @@
   var altitude=0.0;
   var pressure = 29.92;
   altimeter.setPressure(pressure);
-  
+
   function rotate(timestamp) {
       altimeter.set(altitude);
       altitude+=1.0;

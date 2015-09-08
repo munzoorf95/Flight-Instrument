@@ -1,0 +1,69 @@
+<!-- ID = gg145- -->
+<svg id="gg145-vsi" xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 100 100">
+  <rect x="0" y="0" width="100" height="100" fill="#000"/>
+  <ellipse stroke-width="1.0" cx="50" cy="50" rx="49" ry="49" stroke="#fff"/>
+  <g id="gg145-vsi-needle" >
+    <path d="M0,0 L0,0.5 L40,1 L45,0 L40,-1 L0,-0.5 L0,0 z" stroke="#fff" fill="#fff"></path>
+    <line stroke-width='3.0' stroke="#444" x1='-10.0' y1='0.0' x2='0.0'  y2='0.0'/>
+    <ellipse cx='-10.0' cy='0.0' rx='3' ry='3' fill='#444'/>
+  </g>
+  <ellipse cx="50" cy="50" rx="4" ry="4" fill="#444"/>
+  <g fill='#fff' stroke='#fff' stroke-width='0.3' font-family='courier new' font-size='6'>
+    <text text-anchor='middle' x='50' y='37' >VERTICAL</text>
+    <text text-anchor='middle' x='50' y='43'>SPEED</text>
+    <text text-anchor='left' x='14' y='43'>up</text>
+    <text text-anchor='left' x='14' y='61'>down</text>
+    <text text-anchor='middle' x='50' y='67'>100 ft</text>
+    <text text-anchor='middle' x='50' y='72'>per min</text>
+  </g>
+
+  <g fill='#fff' stroke-width='0.5' stroke='#fff' font-family='sans serif' font-size='8'>
+    <line stroke-width='1.0' x1='50.00' y1='10.00' x2='50.00' y2='1.00' />
+    <text text-anchor='middle' x='50.00' y='18.00' >10</text>
+    <line x1='57.04' y1='5.55' x2='57.67' y2='1.60' />
+    <line x1='63.91' y1='7.20' x2='65.14' y2='3.40' />
+    <line x1='70.43' y1='9.90' x2='72.25' y2='6.34' />
+    <line x1='76.45' y1='13.59' x2='78.80' y2='10.36' />
+    <line stroke-width='1.0' x1='78.28' y1='21.72' x2='84.65' y2='15.35' />
+    <text text-anchor='middle' x='73' y='29' >15</text>
+    <line x1='86.41' y1='23.55' x2='89.64' y2='21.20' />
+    <line x1='90.10' y1='29.57' x2='93.66' y2='27.75' />
+    <line x1='92.80' y1='36.09' x2='96.60' y2='34.86' />
+    <line stroke-width='1.0' x1='89.51' y1='43.74' x2='98.40' y2='42.33' />
+    <text text-anchor='middle' x='82' y='52' >20</text>
+    <line stroke-width='1.0' x1='89.51' y1='56.26' x2='98.40' y2='57.67' />
+    <line x1='92.80' y1='63.91' x2='96.60' y2='65.14' />
+    <line x1='90.10' y1='70.43' x2='93.66' y2='72.25' />
+    <line x1='86.41' y1='76.45' x2='89.64' y2='78.80' />
+    <line stroke-width='1.0' x1='78.28' y1='78.28' x2='84.65' y2='84.65' />
+    <text text-anchor='middle' x='73' y='78' >15</text>
+    <line x1='76.45' y1='86.41' x2='78.80' y2='89.64' />
+    <line x1='70.43' y1='90.10' x2='72.25' y2='93.66' />
+    <line x1='63.91' y1='92.80' x2='65.14' y2='96.60' />
+    <line x1='57.04' y1='94.45' x2='57.67' y2='98.40' />
+    <line stroke-width='1.0' x1='50.00' y1='90.00' x2='50.00' y2='99.00' />
+    <text text-anchor='middle' x='50.00' y='88.00' >10</text>
+    <line x1='42.96' y1='94.45' x2='42.33' y2='98.40' />
+    <line x1='36.09' y1='92.80' x2='34.86' y2='96.60' />
+    <line x1='29.57' y1='90.10' x2='27.75' y2='93.66' />
+    <line x1='23.55' y1='86.41' x2='21.20' y2='89.64' />
+    <line stroke-width='1.0' x1='21.72' y1='78.28' x2='15.35' y2='84.65' />
+    <text text-anchor='middle' x='25' y='78' >5</text>
+    <line x1='13.59' y1='76.45' x2='10.36' y2='78.80' />
+    <line x1='9.90' y1='70.43' x2='6.34' y2='72.25' />
+    <line x1='7.20' y1='63.91' x2='3.40' y2='65.14' />
+    <line x1='5.55' y1='57.04' x2='1.60' y2='57.67' />
+    <line stroke-width='1.0' x1='10.00' y1='50.00' x2='1.00' y2='50.00' />
+    <text text-anchor='middle' x='14.00' y='52.5' >0</text>
+    <line x1='5.55' y1='42.96' x2='1.60' y2='42.33' />
+    <line x1='7.20' y1='36.09' x2='3.40' y2='34.86' />
+    <line x1='9.90' y1='29.57' x2='6.34' y2='27.75' />
+    <line x1='13.59' y1='23.55' x2='10.36' y2='21.20' />
+    <line stroke-width='1.0' x1='21.72' y1='21.72' x2='15.35' y2='15.35' />
+    <text text-anchor='middle' x='25' y='27' >5</text>
+    <line x1='23.55' y1='13.59' x2='21.20' y2='10.36' />
+    <line x1='29.57' y1='9.90' x2='27.75' y2='6.34' />
+    <line x1='36.09' y1='7.20' x2='34.86' y2='3.40' />
+    <line x1='42.96' y1='5.55' x2='42.33' y2='1.60' />
+</g>
+</svg>

@@ -42,6 +42,30 @@ module.exports = function(grunt) {
         },
         src: ['lib/preprocess.js']
       },
+      turn: {
+        options: {
+          args: ['example/static/turn.template', 'example/static/turn.html']
+        },
+        src: ['lib/preprocess.js']
+      },
+      vsi: {
+        options: {
+          args: ['example/static/vsi.template', 'example/static/vsi.html']
+        },
+        src: ['lib/preprocess.js']
+      },
+      attitude: {
+        options: {
+          args: ['example/static/attitude.template', 'example/static/attitude.html']
+        },
+        src: ['lib/preprocess.js']
+      },
+      panel: {
+        options: {
+          args: ['example/static/panel.template', 'example/static/panel.html']
+        },
+        src: ['lib/preprocess.js']
+      },
       jsdoc: {
         options: {
           args: ['-d','./doc','gg.js']
@@ -53,7 +77,7 @@ module.exports = function(grunt) {
       options: {
         livereload: true
       },
-      files: ['!.git/**','!node_modules/**'],
+      files: ['example/static/*.html','example/client/*.html','!.git/**','!node_modules/**'],
       js: {
         files: ['../Gruntfile.js', '*.js','lib/*.js'],
         tasks: ['eslint']
@@ -73,6 +97,15 @@ module.exports = function(grunt) {
     grunt.log.writeln(target + ':' + filepath + ':' + action);
   });
 
-  grunt.registerTask('build',['execute:altimeter','execute:airspeed','execute:heading']);
+  grunt.registerTask('build',
+    ['execute:altimeter',
+     'execute:airspeed',
+     'execute:heading',
+     'execute:turn',
+     'execute:attitude',
+     'execute:vsi',
+     'execute:panel'
+   ]);
+
   grunt.registerTask('default', ['eslint','build']);
 };
