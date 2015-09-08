@@ -3,9 +3,10 @@
 /**
  * @namespace gg
  */
-var gg = (function() {
+var gg = (function(global) {
   'use strict';
 
+  var ns = 'http://www.w3.org/2000/svg';
 
   // svg element header
   var svg_def = {
@@ -200,19 +201,24 @@ var gg = (function() {
    * @memberof gg
    * @inner
    */
-  function gg_createElementNS(global,ns,name,attr,id) {
+  function _createElementSvg(name,attr,id) {
+    // create the element with the specified name
     var e = global.createElementNS(ns,name);
+
+    // add an id if specified
     if (id) {
       e.setAttribute('id',id);
     }
 
+    // add any attributes specified
     attr.forEach(function(v) {
       e.setAttribute(v[0],v[1]);
     });
+
     return e;
   }
 
-  function drawLine(global,ns,x1,y1,x2,y2,stroke_width) {
+  function drawLine(x1,y1,x2,y2,stroke_width) {
     var e;
     e = global.createElementNS(ns,'line');
     if (stroke_width) {
@@ -239,7 +245,7 @@ var gg = (function() {
    * @memberof gg
    * @inner
    */
-  function altimeterTicks(global,ns,parent) {
+  function altimeterTicks(parent) {
     "use strict";
     var  r3 = 45.0;
     var  r1 = 40.0;
@@ -257,7 +263,7 @@ var gg = (function() {
     var  e;
     var  g;
 
-    g = gg_createElementNS(global,ns,standard_group_def.name,standard_group_def.attr);
+    g = _createElementSvg(standard_group_def.name,standard_group_def.attr);
     parent.appendChild(g);
 
     alt   = 0;
@@ -270,7 +276,7 @@ var gg = (function() {
         x2 = Math.cos(a) * r2 + cx;
         y2 = Math.sin(a) * r2 + cy;
 
-        e = drawLine(global,ns,x1,y1,x2,y2,1);
+        e = drawLine(x1,y1,x2,y2,1);
         g.appendChild(e);
 
         e = global.createElementNS(ns,'text');
@@ -289,7 +295,7 @@ var gg = (function() {
         x2 = Math.cos(a) * r2 + cx;
         y2 = Math.sin(a) * r2 + cy;
 
-        e = drawLine(global,ns,x1,y1,x2,y2,0.5);
+        e = drawLine(x1,y1,x2,y2,0.5);
         g.appendChild(e);
       }
       a += da;
@@ -309,7 +315,7 @@ var gg = (function() {
    * @memberof gg
    * @inner
    */
-  function airspeedTicks(global,ns,parent,dspeed) {
+  function airspeedTicks(parent,dspeed) {
     "use strict";
     var r3 = 45.0;
     var r1 = 42.0;
@@ -328,7 +334,7 @@ var gg = (function() {
     var e;
     var g;
 
-    g = gg_createElementNS(global,ns,standard_group_def.name,standard_group_def.attr);
+    g = _createElementSvg(standard_group_def.name,standard_group_def.attr);
     parent.appendChild(g);
 
     speed = dspeed;
@@ -343,7 +349,7 @@ var gg = (function() {
         y1 = Math.sin(a) * r1 + cy;
         x2 = Math.cos(a) * r2 + cx;
         y2 = Math.sin(a) * r2 + cy;
-        e = drawLine(global,ns,x1,y1,x2,y2,1.0);
+        e = drawLine(x1,y1,x2,y2,1.0);
         g.appendChild(e);
         e = global.createElementNS(ns,'text');
         e.setAttribute('x',txc2[index]);
@@ -359,7 +365,7 @@ var gg = (function() {
         y1 = Math.sin(a) * r1 + cy;
         x2 = Math.cos(a) * r2 + cx;
         y2 = Math.sin(a) * r2 + cy;
-        e = drawLine(global,ns,x1,y1,x2,y2,1.0);
+        e = drawLine(x1,y1,x2,y2,1.0);
         g.appendChild(e);
       }
       else {
@@ -368,7 +374,7 @@ var gg = (function() {
         y1 = Math.sin(a) * r3 + cy;
         x2 = Math.cos(a) * r2 + cx;
         y2 = Math.sin(a) * r2 + cy;
-        e = drawLine(global,ns,x1,y1,x2,y2,0.5);
+        e = drawLine(x1,y1,x2,y2,0.5);
         g.appendChild(e);
       }
       a += da;
@@ -378,7 +384,7 @@ var gg = (function() {
   var vsi_y = [18,29,52,78,88,78,52.5,27];
   var vsi_x = [50,73,82,73,50,25,14,25];
   var vsi_t = ['10','15','20','15','10','5','0','5'];
-  function vsiTicks(global,ns,parent) {
+  function vsiTicks(parent) {
     "use strict";
     var r3 = 45.0;
     var r1 = 40.0;
@@ -396,7 +402,7 @@ var gg = (function() {
     var e;
     var g;
 
-    g = gg_createElementNS(global,ns,standard_group_def.name,standard_group_def.attr);
+    g = _createElementSvg(standard_group_def.name,standard_group_def.attr);
     parent.appendChild(g);
 
     index = 0;
@@ -406,7 +412,7 @@ var gg = (function() {
         y1 = Math.sin(a) * r1 + cy;
         x2 = Math.cos(a) * r2 + cx;
         y2 = Math.sin(a) * r2 + cy;
-        e = drawLine(global,ns,x1,y1,x2,y2,1.0);
+        e = drawLine(x1,y1,x2,y2,1.0);
         g.appendChild(e);
       }
       else if (i==10) {
@@ -424,7 +430,7 @@ var gg = (function() {
         x2 = Math.cos(a) * r2 + cx;
         y2 = Math.sin(a) * r2 + cy;
 
-        e = drawLine(global,ns,x1,y1,x2,y2,1.0);
+        e = drawLine(x1,y1,x2,y2,1.0);
         g.appendChild(e);
 
         e = global.createElementNS(ns,'text');
@@ -440,14 +446,14 @@ var gg = (function() {
         y1 = Math.sin(a) * r3 + cy;
         x2 = Math.cos(a) * r2 + cx;
         y2 = Math.sin(a) * r2 + cy;
-        e = drawLine(global,ns,x1,y1,x2,y2);
+        e = drawLine(x1,y1,x2,y2);
         g.appendChild(e);
       }
       a += da;
     }
   }
 
-  function headingDial(global,ns,parent,id)
+  function headingDial(parent,id)
   {
     "use strict";
     var r3 = 45.0;
@@ -472,7 +478,7 @@ var gg = (function() {
     var t;
 
     //   <g id="gg145-heading-dial" stroke="#fff" fill="#fff" stroke-width="0.5" font-family="sans-serif" font-size="8" transform="translate(50 50) rotate(0)">
-    g = gg_createElementNS(global,ns,standard_group_def.name,standard_group_def.attr,id + '-dial');
+    g = _createElementSvg(standard_group_def.name,standard_group_def.attr,id + '-dial');
     g.setAttribute('transform','translate(50 50) rotate(0)');
     parent.appendChild(g);
 
@@ -488,7 +494,7 @@ var gg = (function() {
         y4 = Math.sin(a) * r4 + cy;
 
         // <line stroke-width='1.0' x1='-0.00' y1='-43.00' x2='-0.00' y2='-49.00' />
-        e = drawLine(global,ns,x1,y1,x2,y2,1.0);
+        e = drawLine(x1,y1,x2,y2,1.0);
         g.appendChild(e);
 
         // <text transform='translate(-0.00 -36.00) rotate(0)' >0</text>
@@ -510,7 +516,7 @@ var gg = (function() {
         y1 = Math.sin(a) * r1 + cy;
         x2 = Math.cos(a) * r2 + cx;
         y2 = Math.sin(a) * r2 + cy;
-        e = drawLine(global,ns,x1,y1,x2,y2,1.0);
+        e = drawLine(x1,y1,x2,y2,1.0);
         g.appendChild(e);
       }
       else {
@@ -518,7 +524,7 @@ var gg = (function() {
         y1 = Math.sin(a) * r3 + cy;
         x2 = Math.cos(a) * r2 + cx;
         y2 = Math.sin(a) * r2 + cy;
-        e = drawLine(global,ns,x1,y1,x2,y2);
+        e = drawLine(x1,y1,x2,y2);
         g.appendChild(e);
       }
 
@@ -526,52 +532,52 @@ var gg = (function() {
     }
   }
 
-  function vsiAnnotation(global,ns,svg)
+  function vsiAnnotation(svg)
   {
     var g;
     var e;
 
     // <g fill='#fff' stroke='#fff' stroke-width='0.3' font-family='courier new' font-size='6'>
-    g = gg_createElementNS(global,ns,vsi_group6_def.name,vsi_group6_def.attr);
+    g = _createElementSvg(vsi_group6_def.name,vsi_group6_def.attr);
     svg.appendChild(g);
 
     // <text text-anchor='middle' x='50' y='37' >VERTICAL</text>
-    e = gg_createElementNS(global,ns,vsi_annotation_def.name,vsi_annotation_def.attr);
+    e = _createElementSvg(vsi_annotation_def.name,vsi_annotation_def.attr);
     e.setAttribute('x',50);
     e.setAttribute('y',37);
     e.innerHTML = 'VERTICAL';
     g.appendChild(e);
 
     // <text text-anchor='middle' x='50' y='43'>SPEED</text>
-    e = gg_createElementNS(global,ns,vsi_annotation_def.name,vsi_annotation_def.attr);
+    e = _createElementSvg(vsi_annotation_def.name,vsi_annotation_def.attr);
     e.setAttribute('x',50);
     e.setAttribute('y',43);
     e.innerHTML = 'SPEED';
     g.appendChild(e);
 
     // <text text-anchor='left' x='14' y='43'>up</text>
-    e = gg_createElementNS(global,ns,vsi_annotation_def.name,vsi_annotation_def.attr);
+    e = _createElementSvg(vsi_annotation_def.name,vsi_annotation_def.attr);
     e.setAttribute('x',14);
     e.setAttribute('y',43);
     e.innerHTML = 'up';
     g.appendChild(e);
 
     // <text text-anchor='left' x='14' y='61'>down</text>
-    e = gg_createElementNS(global,ns,vsi_annotation_def.name,vsi_annotation_def.attr);
+    e = _createElementSvg(vsi_annotation_def.name,vsi_annotation_def.attr);
     e.setAttribute('x',14);
     e.setAttribute('y',61);
     e.innerHTML = 'down';
     g.appendChild(e);
 
     // <text text-anchor='middle' x='50' y='67'>100 ft</text>
-    e = gg_createElementNS(global,ns,vsi_annotation_def.name,vsi_annotation_def.attr);
+    e = _createElementSvg(vsi_annotation_def.name,vsi_annotation_def.attr);
     e.setAttribute('x',50);
     e.setAttribute('y',67);
     e.innerHTML = '100 ft';
     g.appendChild(e);
 
     // <text text-anchor='middle' x='50' y='72'>per min</text>
-    e = gg_createElementNS(global,ns,vsi_annotation_def.name,vsi_annotation_def.attr);
+    e = _createElementSvg(vsi_annotation_def.name,vsi_annotation_def.attr);
     e.setAttribute('x',50);
     e.setAttribute('y',72);
     e.innerHTML = 'per min';
@@ -744,50 +750,50 @@ var gg = (function() {
    * @memberof gg
    * @inner
    */
-  function drawAltimeter(global,parent,id) {
+  function drawAltimeter(parent,id) {
     var ns = "http://www.w3.org/2000/svg";
     var e;
     var g;
     var svg;
 
     // svg element
-    svg = gg_createElementNS(global,ns,svg_def.name,svg_def.attr,id);
+    svg = _createElementSvg(svg_def.name,svg_def.attr,id);
     parent.appendChild(svg);
 
     // background rect
-    e = gg_createElementNS(global,ns,background_def.name,background_def.attr);
+    e = _createElementSvg(background_def.name,background_def.attr);
     svg.appendChild(e);
 
     // dial circle
-    e = gg_createElementNS(global,ns,dial_def.name,dial_def.attr);
+    e = _createElementSvg(dial_def.name,dial_def.attr);
     svg.appendChild(e);
 
     // drum text
-    e = gg_createElementNS(global,ns,alt_drum_text_def.name,alt_drum_text_def.attr,id + '-drum');
+    e = _createElementSvg(alt_drum_text_def.name,alt_drum_text_def.attr,id + '-drum');
     svg.appendChild(e);
 
     // pressure text
-    e = gg_createElementNS(global,ns,alt_pressure_text_def.name,alt_pressure_text_def.attr,id + '-pwin');
+    e = _createElementSvg(alt_pressure_text_def.name,alt_pressure_text_def.attr,id + '-pwin');
     e.innerHTML = pad(29.92,5,2);
     svg.appendChild(e);
 
     // needle
-    g = gg_createElementNS(global,ns,needle_group_def.name,needle_group_def.attr,id + '-needle');
+    g = _createElementSvg(needle_group_def.name,needle_group_def.attr,id + '-needle');
     svg.appendChild(g);
 
-    e = gg_createElementNS(global,ns,needle_path_def.name,needle_path_def.attr);
+    e = _createElementSvg(needle_path_def.name,needle_path_def.attr);
     g.appendChild(e);
 
-    e = gg_createElementNS(global,ns,needle_tail_def.name,needle_tail_def.attr);
+    e = _createElementSvg(needle_tail_def.name,needle_tail_def.attr);
     g.appendChild(e);
 
-    e = gg_createElementNS(global,ns,needle_center_def.name,needle_center_def.attr);
+    e = _createElementSvg(needle_center_def.name,needle_center_def.attr);
     g.appendChild(e);
 
-    e = gg_createElementNS(global,ns,needle_tail2_def.name,needle_tail2_def.attr);
+    e = _createElementSvg(needle_tail2_def.name,needle_tail2_def.attr);
     g.appendChild(e);
 
-    altimeterTicks(global,ns,svg);
+    altimeterTicks(svg);
   }
 
   /**
@@ -804,7 +810,7 @@ var gg = (function() {
    * @memberof gg
    * @inner
    */
-  function drawAirspeed(global,parent,id,options)
+  function drawAirspeed(parent,id,options)
   {
     var ns = "http://www.w3.org/2000/svg";
     var e;
@@ -816,56 +822,56 @@ var gg = (function() {
     arcs = airspeedArcs(options);
 
     // svg element
-    svg = gg_createElementNS(global,ns,svg_def.name,svg_def.attr,id);
+    svg = _createElementSvg(svg_def.name,svg_def.attr,id);
     parent.appendChild(svg);
 
     // background rect
-    e = gg_createElementNS(global,ns,background_def.name,background_def.attr);
+    e = _createElementSvg(background_def.name,background_def.attr);
     svg.appendChild(e);
 
     // dial circle
-    e = gg_createElementNS(global,ns,dial_def.name,dial_def.attr);
+    e = _createElementSvg(dial_def.name,dial_def.attr);
     svg.appendChild(e);
 
     // needle group
-    g = gg_createElementNS(global,ns,needle_group_def.name,needle_group_def.attr,id + '-needle');
+    g = _createElementSvg(needle_group_def.name,needle_group_def.attr,id + '-needle');
     svg.appendChild(g);
 
-    e = gg_createElementNS(global,ns,needle_path_def.name,needle_path_def.attr);
+    e = _createElementSvg(needle_path_def.name,needle_path_def.attr);
     g.appendChild(e);
 
-    e = gg_createElementNS(global,ns,airspeed_arc_def.name,airspeed_arc_def.attr);
+    e = _createElementSvg(airspeed_arc_def.name,airspeed_arc_def.attr);
     g.appendChild(e);
 
-    e = gg_createElementNS(global,ns,needle_tail_def.name,needle_tail_def.attr);
+    e = _createElementSvg(needle_tail_def.name,needle_tail_def.attr);
     g.appendChild(e);
 
-    e = gg_createElementNS(global,ns,needle_tail2_def.name,needle_tail2_def.attr);
+    e = _createElementSvg(needle_tail2_def.name,needle_tail2_def.attr);
     g.appendChild(e);
     // ===== end of needle
 
     // green,yellow and white are behind ticks
-    e = gg_createElementNS(global,ns,airspeed_arc_def.name,airspeed_arc_def.attr);
+    e = _createElementSvg(airspeed_arc_def.name,airspeed_arc_def.attr);
     e.setAttribute('stroke','#0f0');
     e.setAttribute('d',arcs.green);
     svg.appendChild(e);
 
     // green,yellow and white are behind ticks
-    e = gg_createElementNS(global,ns,airspeed_arc_def.name,airspeed_arc_def.attr);
+    e = _createElementSvg(airspeed_arc_def.name,airspeed_arc_def.attr);
     e.setAttribute('stroke','#ff0');
     e.setAttribute('d',arcs.yellow);
     svg.appendChild(e);
 
     // green,yellow and white are behind ticks
-    e = gg_createElementNS(global,ns,airspeed_arc_def.name,airspeed_arc_def.attr);
+    e = _createElementSvg(airspeed_arc_def.name,airspeed_arc_def.attr);
     e.setAttribute('stroke','#fff');
     e.setAttribute('d',arcs.white);
     svg.appendChild(e);
 
-    airspeedTicks(global,ns,svg,20);
+    airspeedTicks(svg,20);
 
     // red is on top of ticks
-    e = gg_createElementNS(global,ns,airspeed_arc_def.name,airspeed_arc_def.attr);
+    e = _createElementSvg(airspeed_arc_def.name,airspeed_arc_def.attr);
     e.setAttribute('stroke','#f00');
     e.setAttribute('d',arcs.red);
     svg.appendChild(e);
@@ -879,45 +885,45 @@ var gg = (function() {
    * @memberof gg
    * @inner
    */
-  function drawVSI(global,parent,id) {
+  function drawVSI(parent,id) {
     var ns = "http://www.w3.org/2000/svg";
     var e;
     var g;
     var svg;
 
     // svg element
-    svg = gg_createElementNS(global,ns,svg_def.name,svg_def.attr,id);
+    svg = _createElementSvg(svg_def.name,svg_def.attr,id);
     parent.appendChild(svg);
 
     // background rect
-    e = gg_createElementNS(global,ns,background_def.name,background_def.attr);
+    e = _createElementSvg(background_def.name,background_def.attr);
     svg.appendChild(e);
 
     // dial circle
-    e = gg_createElementNS(global,ns,dial_def.name,dial_def.attr);
+    e = _createElementSvg(dial_def.name,dial_def.attr);
     svg.appendChild(e);
 
     // needle
-    g = gg_createElementNS(global,ns,needle_group_def.name,needle_group_def.attr,id + '-needle');
+    g = _createElementSvg(needle_group_def.name,needle_group_def.attr,id + '-needle');
     svg.appendChild(g);
 
-    e = gg_createElementNS(global,ns,needle_path_def.name,needle_path_def.attr);
+    e = _createElementSvg(needle_path_def.name,needle_path_def.attr);
     g.appendChild(e);
 
-    e = gg_createElementNS(global,ns,needle_tail_def.name,needle_tail_def.attr);
+    e = _createElementSvg(needle_tail_def.name,needle_tail_def.attr);
     g.appendChild(e);
 
-    e = gg_createElementNS(global,ns,needle_center_def.name,needle_center_def.attr);
+    e = _createElementSvg(needle_center_def.name,needle_center_def.attr);
     g.appendChild(e);
 
-    e = gg_createElementNS(global,ns,needle_tail2_def.name,needle_tail2_def.attr);
+    e = _createElementSvg(needle_tail2_def.name,needle_tail2_def.attr);
     g.appendChild(e);
 
     // text annotation
-    vsiAnnotation(global,ns,svg);
+    vsiAnnotation(svg);
 
     // ticks
-    vsiTicks(global,ns,svg);
+    vsiTicks(svg);
   }
 
   /**
@@ -928,7 +934,7 @@ var gg = (function() {
    * @memberof gg
    * @inner
    */
-  function drawHeading(global,parent,id) {
+  function drawHeading(parent,id) {
     var ns = "http://www.w3.org/2000/svg";
     var e;
     var g;
@@ -956,25 +962,25 @@ var gg = (function() {
     };
 
     // svg element
-    svg = gg_createElementNS(global,ns,svg_def.name,svg_def.attr,id);
+    svg = _createElementSvg(svg_def.name,svg_def.attr,id);
     parent.appendChild(svg);
 
     // background rect
-    e = gg_createElementNS(global,ns,background_def.name,background_def.attr);
+    e = _createElementSvg(background_def.name,background_def.attr);
     svg.appendChild(e);
 
     // dial circle
-    e = gg_createElementNS(global,ns,dial_def.name,dial_def.attr);
+    e = _createElementSvg(dial_def.name,dial_def.attr);
     svg.appendChild(e);
 
-    e = gg_createElementNS(global,ns,hdg_l1_def.name,hdg_l1_def.attr);
+    e = _createElementSvg(hdg_l1_def.name,hdg_l1_def.attr);
     svg.appendChild(e);
 
-    e = gg_createElementNS(global,ns,hdg_ac_def.name,hdg_ac_def.attr);
+    e = _createElementSvg(hdg_ac_def.name,hdg_ac_def.attr);
     svg.appendChild(e);
 
     // draw the dial
-    headingDial(global,ns,svg,id);
+    headingDial(svg,id);
   }
 
   /**
@@ -987,14 +993,14 @@ var gg = (function() {
    * @memberof gg
    * @global
    */
-  function Altimeter(global,parent,id,draw) {
+  function Altimeter(parent,id,draw) {
     var altimeter;
     var needle;
     var drum;
     var pwindow;
 
     if (draw) {
-      drawAltimeter(global, parent, id);
+      drawAltimeter( parent, id);
     }
     altimeter = global.querySelector('#' + id);
     needle    = global.querySelector('#' + id + '-needle');
@@ -1036,12 +1042,12 @@ var gg = (function() {
    * @memberof gg
    * @global
    */
-  function Airspeed(global,parent,id,draw,options) {
+  function Airspeed(parent,id,draw,options) {
     var airspeed;
     var needle  ;
 
     if (draw) {
-      drawAirspeed(global, parent, id,options);
+      drawAirspeed( parent, id,options);
     }
     airspeed = global.querySelector('#' + id);
     needle   = global.querySelector('#' + id + '-needle');
@@ -1072,10 +1078,10 @@ var gg = (function() {
    * @memberof gg
    * @global
    */
-  function Heading(global,parent,id,draw) {
+  function Heading(parent,id,draw) {
 
     if (draw) {
-      drawHeading(global, parent, id);
+      drawHeading( parent, id);
     }
 
     var heading = global.querySelector('#' + id);
@@ -1104,7 +1110,7 @@ var gg = (function() {
    * @memberof gg
    * @global
    */
-  function Attitude(global,parent,id,draw) {
+  function Attitude(parent,id,draw) {
     var attitude = global.querySelector('#' + id);
 
 
@@ -1129,7 +1135,7 @@ var gg = (function() {
    * @memberof gg
    * @global
    */
-  function Turn(global,parent,id,draw) {
+  function Turn(parent,id,draw) {
     var turn = global.querySelector('#' + id);
     return {
       set : function(bank,lateral_acceleration) {
@@ -1152,9 +1158,9 @@ var gg = (function() {
    * @memberof gg
    * @global
    */
-  function VSI(global,parent,id,draw) {
+  function VSI(parent,id,draw) {
     if (draw) {
-      drawVSI(global, parent, id);
+      drawVSI( parent, id);
     }
 
     var vsi    = global.querySelector('#' + id);
@@ -1191,4 +1197,4 @@ var gg = (function() {
     VSI:VSI
   };
 
-}());
+}(document));

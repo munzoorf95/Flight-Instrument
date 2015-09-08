@@ -8,6 +8,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-eslint');
   grunt.loadNpmTasks('grunt-execute');
   grunt.loadNpmTasks('grunt-jsdoc');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
 
   grunt.initConfig({
     // Configure a mochaTest task
@@ -21,7 +22,7 @@ module.exports = function(grunt) {
     },
     eslint: {
       // define the files to lint
-      target: ['lib/*.js','*.js']
+      target: ['lib/*.js','gg.js']
     },
     execute: {
       altimeter: {
@@ -73,6 +74,13 @@ module.exports = function(grunt) {
         src: ['node_modules/jsdoc/jsdoc.js']
       }
     },
+    uglify : {
+      my_target: {
+        files: {
+          'gg.min.js': ['gg.js']
+        }
+      }
+    },
     watch : {
       options: {
         livereload: true
@@ -80,7 +88,7 @@ module.exports = function(grunt) {
       files: ['example/static/*.html','example/client/*.html','!.git/**','!node_modules/**'],
       js: {
         files: ['../Gruntfile.js', '*.js','lib/*.js'],
-        tasks: ['eslint']
+        tasks: ['eslint','uglify']
       },
       html : {
         files:['example/static/*.template','example/static/*.svg'],
@@ -93,9 +101,11 @@ module.exports = function(grunt) {
     }
   });
 
+  /*
   grunt.event.on('watch',function(action,filepath,target) {
     grunt.log.writeln(target + ':' + filepath + ':' + action);
   });
+  */
 
   grunt.registerTask('build',
     ['execute:altimeter',

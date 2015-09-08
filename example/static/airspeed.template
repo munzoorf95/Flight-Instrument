@@ -13,7 +13,7 @@
 
   <script>
   <!-- instantiate the altimeter, give it the name that matches the template -->
-  var airspeed = gg.Airspeed(document,document.querySelector("#airspeed"),"gg145-airspeed",false);
+  var airspeed = gg.Airspeed(document.querySelector("#airspeed"),"gg145-airspeed",false);
   var speed = 0;
   function rotate(timestamp) {
       airspeed.set(speed);

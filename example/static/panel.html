@@ -349,21 +349,21 @@
                 </div>
   </div>
 </div>
-<script src="/gg.js"></script>
+<script src="/gg.min.js"></script>
 <script>
 <!-- instantiate the heading, give it the name that matches the template -->
-var heading = gg.Heading(document,document.querySelector("#heading"),"gg145-heading",false);
+var heading = gg.Heading(document.querySelector("#heading"),"gg145-heading",false);
 var degrees = 0;
 
-var altimeter = gg.Altimeter(document,document.querySelector("#altimeter"),"gg145-altimeter",false);
+var altimeter = gg.Altimeter(document.querySelector("#altimeter"),"gg145-altimeter",false);
 var altitude=0.0;
 var pressure = 29.92;
 altimeter.setPressure(pressure);
 
-var airspeed = gg.Airspeed(document,document.querySelector("#airspeed"),"gg145-airspeed",false);
+var airspeed = gg.Airspeed(document.querySelector("#airspeed"),"gg145-airspeed",false);
 var speed = 0;
 
-var vsi = gg.VSI(document,document.querySelector("#vsi"),"gg145-vsi",false);
+var vsi = gg.VSI(document.querySelector("#vsi"),"gg145-vsi",false);
 var vspeed = -2000;
 
 function rotate(timestamp) {

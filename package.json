@@ -11,6 +11,7 @@
     "eslint": "^1.1.0",
     "grunt": "^0.4.5",
     "grunt-babel": "^5.0.1",
+    "grunt-contrib-uglify": "^0.9.2",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-eslint": "^17.1.0",
     "grunt-execute": "^0.2.2",
@@ -18,7 +19,8 @@
     "grunt-mocha-test": "^0.12.7",
     "jsdoc": "^3.3.2",
     "mocha": "^2.2.5",
-    "preprocess": "^3.0.2"
+    "preprocess": "^3.0.2",
+    "uglify-js": "^2.4.24"
   },
   "description": "svg based aircraft gauges",
   "dependencies": {}
