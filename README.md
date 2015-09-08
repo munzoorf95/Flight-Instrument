@@ -1,6 +1,4 @@
-# gg - geezer-x Gauges
-
-## SVG based aircraft gauges
+# SVG Based Aircraft Gauges
 
 [Scalable Vector Graphics (SVG)](https://en.wikipedia.org/wiki/Scalable_Vector_Graphics)
 is a file format for rendering images using vectors rather than a bitmap. This tutorial is less about
