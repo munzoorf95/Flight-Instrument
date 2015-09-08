@@ -108,6 +108,632 @@
 
     
 
+    <h4 class="name" id="~airspeedArcs"><span class="type-signature">(inner) </span>airspeedArcs<span class="signature">(options)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    generate the airspeed arc parameters
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">for client side draw
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>range</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">range index, 1 = 220</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>green</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">[80,140]  green arc from clean stall to max cruise</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>yellow</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">[140,160] yellow arc from max cruise to never-exceed</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>red</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">[160,160] red arc from never-exceed to never-exceed</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>white</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">[50,100]  white arc for stall-flaps to max-flaps</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="gg.js.html">gg.js</a>, <a href="gg.js.html#line649">line 649</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~airspeedTicks"><span class="type-signature">(inner) </span>airspeedTicks<span class="signature">(global, ns, parent)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    generate the ticks for airspeed dial
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>global</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">usually 'document'</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>ns</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">namespace of svg</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>parent</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">element that ticks will be attached to</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="gg.js.html">gg.js</a>, <a href="gg.js.html#line300">line 300</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="~altimeterTicks"><span class="type-signature">(inner) </span>altimeterTicks<span class="signature">(global, ns, parent)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    generate the ticks for the altimeter
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>global</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">usually 'document'</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>ns</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">namespace of svg</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>parent</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">element that ticks will be attached to</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="gg.js.html">gg.js</a>, <a href="gg.js.html#line216">line 216</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
     <h4 class="name" id="~arc"><span class="type-signature">(inner) </span>arc<span class="signature">(start_speed, end_speed, range, radius)</span><span class="type-signature"> &rarr; {object}</span></h4>
 
     
@@ -277,7 +903,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="gg.js.html">gg.js</a>, <a href="gg.js.html#line238">line 238</a>
+        <a href="gg.js.html">gg.js</a>, <a href="gg.js.html#line539">line 539</a>
     </li></ul></dd>
     
 
@@ -430,7 +1056,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="gg.js.html">gg.js</a>, <a href="gg.js.html#line269">line 269</a>
+        <a href="gg.js.html">gg.js</a>, <a href="gg.js.html#line570">line 570</a>
     </li></ul></dd>
     
 
@@ -778,7 +1404,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="gg.js.html">gg.js</a>, <a href="gg.js.html#line594">line 594</a>
+        <a href="gg.js.html">gg.js</a>, <a href="gg.js.html#line755">line 755</a>
     </li></ul></dd>
     
 
@@ -940,7 +1566,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="gg.js.html">gg.js</a>, <a href="gg.js.html#line535">line 535</a>
+        <a href="gg.js.html">gg.js</a>, <a href="gg.js.html#line695">line 695</a>
     </li></ul></dd>
     
 
@@ -971,286 +1597,14 @@
 
     
 
-    <h4 class="name" id="~gg_airspeedArcs"><span class="type-signature">(inner) </span>gg_airspeedArcs<span class="signature">(options)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~drawVSI"><span class="type-signature">(inner) </span>drawVSI<span class="signature">(global, parent, id)</span><span class="type-signature"></span></h4>
 
     
 
 
 
 <div class="description">
-    generate the airspeed arc parameters
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>options</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">for client side draw
-                <h6>Properties</h6>
-                
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>range</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">range index, 1 = 220</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>green</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">array</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">[80,140]  green arc from clean stall to max cruise</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>yellow</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">array</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">[140,160] yellow arc from max cruise to never-exceed</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>red</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">array</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">[160,160] red arc from never-exceed to never-exceed</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>white</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">array</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">[50,100]  white arc for stall-flaps to max-flaps</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-            </td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="gg.js.html">gg.js</a>, <a href="gg.js.html#line348">line 348</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="~gg_airspeedTicks"><span class="type-signature">(inner) </span>gg_airspeedTicks<span class="signature">(global, ns, parent)</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-<div class="description">
-    generate the ticks for airspeed dial
+    draw a VSI
 </div>
 
 
@@ -1291,41 +1645,13 @@
 
             <td class="type">
             
-                
-<span class="param-type">object</span>
-
-
-            
             </td>
 
             
 
             
 
-            <td class="description last">usually 'document'</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>ns</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">namespace of svg</td>
+            <td class="description last">reference to global object (usually document)</td>
         </tr>
 
     
@@ -1337,10 +1663,23 @@
 
             <td class="type">
             
-                
-<span class="param-type">object</span>
+            </td>
 
+            
 
+            
+
+            <td class="description last">reference to parent element, such as a div</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
             
             </td>
 
@@ -1348,7 +1687,7 @@
 
             
 
-            <td class="description last">element that ticks will be attached to</td>
+            <td class="description last">id to attach or reference to existing svg</td>
         </tr>
 
     
@@ -1389,184 +1728,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="gg.js.html">gg.js</a>, <a href="gg.js.html#line141">line 141</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="~gg_altimeterTicks"><span class="type-signature">(inner) </span>gg_altimeterTicks<span class="signature">(global, ns, parent)</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-<div class="description">
-    generate the ticks for the altimeter
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>global</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">usually 'document'</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>ns</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">namespace of svg</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>parent</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">element that ticks will be attached to</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="gg.js.html">gg.js</a>, <a href="gg.js.html#line57">line 57</a>
+        <a href="gg.js.html">gg.js</a>, <a href="gg.js.html#line830">line 830</a>
     </li></ul></dd>
     
 
@@ -1789,7 +1951,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="gg.js.html">gg.js</a>, <a href="gg.js.html#line32">line 32</a>
+        <a href="gg.js.html">gg.js</a>, <a href="gg.js.html#line191">line 191</a>
     </li></ul></dd>
     
 
@@ -2126,7 +2288,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="gg.js.html">gg.js</a>, <a href="gg.js.html#line299">line 299</a>
+        <a href="gg.js.html">gg.js</a>, <a href="gg.js.html#line600">line 600</a>
     </li></ul></dd>
     
 
@@ -2325,7 +2487,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="gg.js.html">gg.js</a>, <a href="gg.js.html#line18">line 18</a>
+        <a href="gg.js.html">gg.js</a>, <a href="gg.js.html#line177">line 177</a>
     </li></ul></dd>
     
 
@@ -2395,7 +2557,7 @@
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.2</a> on Mon Sep 07 2015 22:05:53 GMT-0700 (Pacific Daylight Time)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.2</a> on Tue Sep 08 2015 08:46:24 GMT-0700 (Pacific Daylight Time)
 </footer>
 
 <script> prettyPrint(); </script>
