@@ -1,14 +1,14 @@
 # SVG Based Aircraft Gauges
 
 [Scalable Vector Graphics (SVG)](https://en.wikipedia.org/wiki/Scalable_Vector_Graphics)
-is a file format for rendering images using vectors rather than a bitmap. This tutorial is less about
+is a file format for rendering images using vectors rather than a bitmap. This repo is less about
 how to construct an image using svg, than it is how to use svg with javascript on a web page. [Go here to
 learn more about the svg file format](https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial).
 
 SVG images have some of advantages over jpeg or ping images for use on web pages:
 * xml text rather than complex binary
 * discrete parts of the image can be manipulated on a web page using the browser SVG API and Javascript.
-* scales cleanly when resized, either up or down.
+* scales cleanly when resized, either up or down, vs an image resize which can be pixelated or blurry
 
 An SVG image can be included on a web page in a couple of ways. The image can be specified using an 'img' tag, or the xml text of the image can be included inline in the HTML. If all you need is to have an image that will be resized, then using the 'img' tag is a simple way to go. However, including using 'img' limits the modifications your javascript can make to the image. Basically the same set of attributes as any other image. The discrete parts of the image cannot be referenced. [Restrictions](https://developer.mozilla.org/en-US/docs/Web/SVG/SVG_as_an_Image)
 
@@ -83,14 +83,29 @@ Now the resize works. Try it [here](https://jsbin.com/foqiyu/edit?html,output). 
 
 ### Aircraft Gauges
 
-The implementations of the gauges in this collection have two options: include the svg element for the gauge in the html and attach to it, or
-generate the svg on the client side. In both cases, once the svg is loaded or generated, the javascript to control them are the same. Each gauge
-has some functions in common and some functions unique to the gauge type.
+The implementations of the gauges in this collection have two options: include the svg element for the gauge in the html and attach to it, or generate the svg on the client side. In both cases, once the svg is loaded or generated, the javascript to control them are the same. Each gauge has some functions in common and some functions unique to the gauge type.
 
-#### Aircraft Altitmeter : static svg in the HTML
+#### Aircraft Altitmeter
+##### static svg in the HTML
+##### client side draw
 
-#### Aircraft Altimeter  : client side draw
+#### Aircraft Airspeed Indicator
+##### static svg in the HTML
+##### client side draw
 
-#### Aircraft Airspeed Indicator : static svg in the HTML
+#### Aircraft Attitude Indicator
+##### static svg in the HTML
+##### client side draw
 
-#### Aircraft Airspeed Indicator : client side draw
+#### Aircraft Vertical Speed Indicator 
+##### static svg in the HTML
+##### client side draw
+
+#### Aircraft Heading Indicator 
+##### static svg in the HTML
+##### client side draw
+
+#### Aircraft Turn Rate Indicator 
+##### static svg in the HTML
+##### client side draw
+
