@@ -1,5 +1,5 @@
 <!-- ID = gg145- -->
-<svg id="gg145-turn" xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 100 100">
+<svg id="gg145-turn" xmlns="http://www.w3.org/2000/svg" width="200px" height="200px" viewBox="0 0 100 100">
   <rect x="0" y="0" width="100" height="100" fill="#000"/>
   <ellipse stroke-width="1.0" cx="50" cy="50" rx="49" ry="49" stroke="#fff"/>
 </svg>

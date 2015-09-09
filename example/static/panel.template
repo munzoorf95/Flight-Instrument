@@ -1,9 +1,12 @@
 <!doctype html>
 <html>
 <head>
-  <style>
+  <style>/* this styling works on Chrome */
+  html,body {
+      overflow:hidden; /* no scrollbars, they make the resizing more complicated */
+  }
   .container {
-    display: flex; /* or inline-flex */
+    display: flex;
     flex-direction:column;
     background-color: #000;
   }
@@ -18,9 +21,9 @@
 
 <div class='container'>
   <div class='row'>
-    <div>  <!-- @include airspeed.svg --></div>
-    <div>  <!-- @include attitude.svg --></div>
-    <div>  <!-- @include altimeter.svg --></div>
+    <div>  <!-- @include airspeed.svg -->  </div>
+    <div>  <!-- @include attitude.svg -->  </div>
+    <div>  <!-- @include altimeter.svg --> </div>
   </div>
   <div class='row'>
     <div>  <!-- @include turn.svg -->    </div>
@@ -28,29 +31,57 @@
     <div>  <!-- @include vsi.svg -->     </div>
   </div>
 </div>
-<script src="/gg.min.js"></script>
+<script src="/gg.js"></script>
 <script>
-<!-- instantiate the heading, give it the name that matches the template -->
+
+<!-- instantiate the heading indicator, give it the name that matches the template -->
 var heading = gg.Heading(document.querySelector("#heading"),"gg145-heading",false);
 var degrees = 0;
 
+<!-- instantiate the altimeter, give it the name that matches the template -->
 var altimeter = gg.Altimeter(document.querySelector("#altimeter"),"gg145-altimeter",false);
 var altitude=0.0;
 var pressure = 29.92;
 altimeter.setPressure(pressure);
 
+<!-- instantiate the airspeed indicator, give it the name that matches the template -->
 var airspeed = gg.Airspeed(document.querySelector("#airspeed"),"gg145-airspeed",false);
 var speed = 0;
 
+<!-- instantiate the VSI, give it the name that matches the template -->
 var vsi = gg.VSI(document.querySelector("#vsi"),"gg145-vsi",false);
 var vspeed = -2000;
 
-function rotate(timestamp) {
+<!-- instantiate the attitude indicator, give it the name that matches the template -->
+var attitude = gg.Attitude(document.querySelector('#attitude'),"gg145-attitude",false);
+var turn     = gg.Turn(document.querySelector('#turn'),"gg145-turn",false);
+
+// simple resize that uses window size minus some border
+function panel_onResize() {
+    var cw = window.innerWidth  - 20;
+    var ch = window.innerHeight - 20;
+    var w = cw  / 3;
+    var h = ch / 2;
+    // use smaller of h and w so all 6 instruments will fit on the screen
+    var s = (h < w) ? h : w;
+    console.log(cw,ch,w,h,s);
+    heading.resize(s);
+    altimeter.resize(s);
+    airspeed.resize(s);
+    vsi.resize(s);
+    attitude.resize(s);
+    turn.resize(s);
+}
+
+function panel_onReady() {
+    panel_onResize();
+}
+
+function run(timestamp) {
     heading.set(degrees);
     airspeed.set(speed);
     altimeter.set(altitude);
     vsi.set(vspeed);
-
 
     vspeed+=1.0;
     if (vspeed >= 2000) {
@@ -62,9 +93,16 @@ function rotate(timestamp) {
     speed+= 1.0;
     if (speed > 220.0) speed = 0;
 
-    requestAnimationFrame(rotate);
+    requestAnimationFrame(run);
   }
-requestAnimationFrame(rotate);
+
+// add event listeners
+window.addEventListener('resize',panel_onResize);
+window.addEventListener('load',panel_onReady);
+
+// start gauges running
+requestAnimationFrame(run);
+
 </script>
 </body>
 </html>

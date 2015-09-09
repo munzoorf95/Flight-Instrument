@@ -13,8 +13,8 @@ var gg = (function(global) {
     name : 'svg',
     attr : [
       ['xmlns'  ,'http://www.w3.org/2000/svg'],
-      ["width"  ,"400"],
-      ["height" ,"400"],
+      ["width"  ,"200px"],
+      ["height" ,"200px"],
       ["viewBox","0 0 100 100"]
     ]
   };
@@ -1019,7 +1019,7 @@ var gg = (function(global) {
         pwindow.innerHtml = pad(pressure,5,2);
       },
       resize : function(size) {
-        var s = size.toString();
+        var s = size.toString() + 'px';
         altimeter.setAttribute('width' ,s);
         altimeter.setAttribute('height',s);
       }
@@ -1061,7 +1061,7 @@ var gg = (function(global) {
         needle.setAttribute('transform','translate(50,50),rotate(' + d + ')');
       },
       resize : function(size) {
-        var s = size.toString();
+        var s = size.toString() + 'px';
         airspeed.setAttribute('width' ,s);
         airspeed.setAttribute('height',s);
       }
@@ -1093,7 +1093,7 @@ var gg = (function(global) {
         dial.setAttribute('transform','translate(50 50) rotate(' + degrees.toFixed(0) + ')');
       },
       resize : function(size) {
-        var s = size.toString();
+        var s = size.toString() + 'px';
         heading.setAttribute('width' ,s);
         heading.setAttribute('height',s);
       }
@@ -1113,12 +1113,11 @@ var gg = (function(global) {
   function Attitude(parent,id,draw) {
     var attitude = global.querySelector('#' + id);
 
-
     return {
       set : function(pitch,roll) {
       },
       resize : function(size) {
-        var s = size.toString();
+        var s = size.toString() + 'px';
         attitude.setAttribute('width' ,s);
         attitude.setAttribute('height',s);
       }
@@ -1141,7 +1140,7 @@ var gg = (function(global) {
       set : function(bank,lateral_acceleration) {
       },
       resize : function(size) {
-        var s = size.toString();
+        var s = size.toString() + 'px';
         turn.setAttribute('width' ,s);
         turn.setAttribute('height',s);
       }
@@ -1178,7 +1177,7 @@ var gg = (function(global) {
         needle.setAttribute('transform','translate(50,50),rotate(' + d + ')');
       },
       resize : function(size) {
-        var s = size.toString();
+        var s = size.toString() + 'px';
         vsi.setAttribute('width' ,s);
         vsi.setAttribute('height',s);
       }

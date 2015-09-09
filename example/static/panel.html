@@ -1,9 +1,12 @@
 <!doctype html>
 <html>
 <head>
-  <style>
+  <style>/* this styling works on Chrome */
+  html,body {
+      overflow:hidden; /* no scrollbars, they make the resizing more complicated */
+  }
   .container {
-    display: flex; /* or inline-flex */
+    display: flex;
     flex-direction:column;
     background-color: #000;
   }
@@ -18,7 +21,7 @@
 
 <div class='container'>
   <div class='row'>
-    <div>  <svg id="gg145-airspeed" xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 100 100">
+    <div>  <svg id="gg145-airspeed" xmlns="http://www.w3.org/2000/svg" width="200px" height="200px" viewBox="0 0 100 100">
              <rect x="0" y="0" width="100" height="100" fill="#000"/>
              <ellipse stroke-width="1.0" cx="50" cy="50" rx="49" ry="49" stroke="#fff"/>
            
@@ -90,15 +93,15 @@
              </g>
              <path stroke-width="3" stroke="#f00" d="M2.31 55.47 A 48.00 48.00 0 0 0 2.70 58.19"/>
            </svg>
-           </div>
+             </div>
     <div>  <!-- ID = gg145- -->
-           <svg id="gg145-attitude" xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 100 100">
+           <svg id="gg145-attitude" xmlns="http://www.w3.org/2000/svg" width="200px" height="200ox" viewBox="0 0 100 100">
              <rect x="0" y="0" width="100" height="100" fill="#000"/>
              <ellipse stroke-width="1.0" cx="50" cy="50" rx="49" ry="49" stroke="#fff"/>
            </svg>
-           </div>
+             </div>
     <div>  <!-- ID = gg145- -->
-           <svg id="gg145-altimeter" xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 100 100">
+           <svg id="gg145-altimeter" xmlns="http://www.w3.org/2000/svg" width="200px" height="200px" viewBox="0 0 100 100">
              <rect x="0" y="0" width="100" height="100" fill="#000"/>
              <ellipse stroke-width="1.0" cx="50" cy="50" rx="49" ry="49" stroke="#fff"/>
              <g id="gg145-altimeter-needle" >
@@ -173,17 +176,17 @@
                <text x="29" y="22.75" text-anchor="middle">9</text>
              </g>
            </svg>
-           </div>
+            </div>
   </div>
   <div class='row'>
     <div>  <!-- ID = gg145- -->
-           <svg id="gg145-turn" xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 100 100">
+           <svg id="gg145-turn" xmlns="http://www.w3.org/2000/svg" width="200px" height="200px" viewBox="0 0 100 100">
              <rect x="0" y="0" width="100" height="100" fill="#000"/>
              <ellipse stroke-width="1.0" cx="50" cy="50" rx="49" ry="49" stroke="#fff"/>
            </svg>
                </div>
     <div>  <!-- ID = gg145- -->
-           <svg id="gg145-heading" xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 100 100">
+           <svg id="gg145-heading" xmlns="http://www.w3.org/2000/svg" width="200px" height="200px" viewBox="0 0 100 100">
              <rect x="0" y="0" width="100" height="100" fill="#000"/>
              <ellipse stroke-width="0.5" cx="50" cy="50" rx="49" ry="49" stroke="#fff"/>
              <line stroke='#fff' stroke-width='0.5' x1='50' y1='5' x2='50' y2='20'/>
@@ -277,7 +280,7 @@
            </svg>
             </div>
     <div>  <!-- ID = gg145- -->
-           <svg id="gg145-vsi" xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 100 100">
+           <svg id="gg145-vsi" xmlns="http://www.w3.org/2000/svg" width="200px" height="200px" viewBox="0 0 100 100">
              <rect x="0" y="0" width="100" height="100" fill="#000"/>
              <ellipse stroke-width="1.0" cx="50" cy="50" rx="49" ry="49" stroke="#fff"/>
              <g id="gg145-vsi-needle" >
@@ -349,29 +352,57 @@
                 </div>
   </div>
 </div>
-<script src="/gg.min.js"></script>
+<script src="/gg.js"></script>
 <script>
-<!-- instantiate the heading, give it the name that matches the template -->
+
+<!-- instantiate the heading indicator, give it the name that matches the template -->
 var heading = gg.Heading(document.querySelector("#heading"),"gg145-heading",false);
 var degrees = 0;
 
+<!-- instantiate the altimeter, give it the name that matches the template -->
 var altimeter = gg.Altimeter(document.querySelector("#altimeter"),"gg145-altimeter",false);
 var altitude=0.0;
 var pressure = 29.92;
 altimeter.setPressure(pressure);
 
+<!-- instantiate the airspeed indicator, give it the name that matches the template -->
 var airspeed = gg.Airspeed(document.querySelector("#airspeed"),"gg145-airspeed",false);
 var speed = 0;
 
+<!-- instantiate the VSI, give it the name that matches the template -->
 var vsi = gg.VSI(document.querySelector("#vsi"),"gg145-vsi",false);
 var vspeed = -2000;
 
-function rotate(timestamp) {
+<!-- instantiate the attitude indicator, give it the name that matches the template -->
+var attitude = gg.Attitude(document.querySelector('#attitude'),"gg145-attitude",false);
+var turn     = gg.Turn(document.querySelector('#turn'),"gg145-turn",false);
+
+// simple resize that uses window size minus some border
+function panel_onResize() {
+    var cw = window.innerWidth  - 20;
+    var ch = window.innerHeight - 20;
+    var w = cw  / 3;
+    var h = ch / 2;
+    // use smaller of h and w so all 6 instruments will fit on the screen
+    var s = (h < w) ? h : w;
+    console.log(cw,ch,w,h,s);
+    heading.resize(s);
+    altimeter.resize(s);
+    airspeed.resize(s);
+    vsi.resize(s);
+    attitude.resize(s);
+    turn.resize(s);
+}
+
+function panel_onReady() {
+    panel_onResize();
+}
+
+function run(timestamp) {
     heading.set(degrees);
     airspeed.set(speed);
     altimeter.set(altitude);
     vsi.set(vspeed);
-
 
     vspeed+=1.0;
     if (vspeed >= 2000) {
@@ -383,9 +414,16 @@ function rotate(timestamp) {
     speed+= 1.0;
     if (speed > 220.0) speed = 0;
 
-    requestAnimationFrame(rotate);
+    requestAnimationFrame(run);
   }
-requestAnimationFrame(rotate);
+
+// add event listeners
+window.addEventListener('resize',panel_onResize);
+window.addEventListener('load',panel_onReady);
+
+// start gauges running
+requestAnimationFrame(run);
+
 </script>
 </body>
 </html>
