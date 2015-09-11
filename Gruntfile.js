@@ -87,7 +87,7 @@ module.exports = function(grunt) {
       },
       files: ['example/static/*.html','example/client/*.html','!.git/**','!node_modules/**'],
       js: {
-        files: ['../Gruntfile.js', '*.js','lib/*.js'],
+        files: ['../Gruntfile.js', 'gg.js','lib/*.js'],
         tasks: ['eslint','uglify']
       },
       html : {

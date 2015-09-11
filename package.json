@@ -1,5 +1,5 @@
 {
-  "name": "geezer-gauges",
+  "name": "svg-aircraft-instruments",
   "version": "0.0.0",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -22,6 +22,6 @@
     "preprocess": "^3.0.2",
     "uglify-js": "^2.4.24"
   },
-  "description": "svg based aircraft gauges",
+  "description": "svg based aircraft instruments",
   "dependencies": {}
 }

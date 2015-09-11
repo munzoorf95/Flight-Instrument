@@ -1135,9 +1135,24 @@ var gg = (function(global) {
    * @global
    */
   function Turn(parent,id,draw) {
-    var turn = global.querySelector('#' + id);
+    var turn  = global.querySelector('#' + id);
+    var plane = global.querySelector('#' + id + '-plane');
+    var ball  = global.querySelector('#' + id + '-ball');
     return {
-      set : function(bank,lateral_acceleration) {
+      set : function(rate,accel) {
+        var x;
+        var y;
+        var r  = 119.0;
+        var cx =  50;
+        var cy = -50;
+        // plane
+        plane.setAttribute('transform','translate(50,50) rotate(' + (rate*5.3).toFixed(0) + ')');
+        // ball
+        accel += 90.0;
+        x = Math.cos(accel * (Math.PI / 180.0)) * r + cx;
+        y = Math.sin(accel * (Math.PI / 180.0)) * r + cy;
+        ball.setAttribute('cx',x);
+        ball.setAttribute('cy',y);
       },
       resize : function(size) {
         var s = size.toString() + 'px';

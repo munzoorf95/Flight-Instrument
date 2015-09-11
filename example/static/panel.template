@@ -54,8 +54,13 @@ var vspeed = -2000;
 
 <!-- instantiate the attitude indicator, give it the name that matches the template -->
 var attitude = gg.Attitude(document.querySelector('#attitude'),"gg145-attitude",false);
-var turn     = gg.Turn(document.querySelector('#turn'),"gg145-turn",false);
 
+<!-- instantiate the turn coordinator, give it the name that matches the template -->
+var turn = gg.Turn(document.querySelector('#turn'),"gg145-turn",false);
+var turn_rate=-3.0;
+var db=0.1;
+var accel = 0.0;
+var da    = 0.2;
 // simple resize that uses window size minus some border
 function panel_onResize() {
     var cw = window.innerWidth  - 20;
@@ -82,10 +87,19 @@ function run(timestamp) {
     airspeed.set(speed);
     altimeter.set(altitude);
     vsi.set(vspeed);
-
+    turn.set(turn_rate,accel);
     vspeed+=1.0;
     if (vspeed >= 2000) {
       vspeed = -2000;
+    }
+
+    turn_rate += db;
+    if (Math.abs(turn_rate) >= 3.0) {
+      db *= -1.0;
+    }
+    accel += da;
+    if (Math.abs(accel) >= 12.0) {
+      da *= -1.0;
     }
 
     degrees+=1.0;

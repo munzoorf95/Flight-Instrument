@@ -30,7 +30,7 @@
     <line stroke-width='1.0' x1='91.57' y1='55.98' x2='98.50' y2='56.97' />
     <text x='85.90' y='58.74' text-anchor='middle'>60</text>
     <line x1='93.18' y1='62.68' x2='97.02' y2='63.80' />
-    <line stroke-wid<path stroke-width="2" stroke="#0f0" d="M13.72 81.43 A 48.00 48.00 0 0 0 86.28 81.43"/>th='1.0' x1='88.20' y1='67.45' x2='94.57' y2='70.36' />
+    <line stroke-width='1.0' x1='88.20' y1='67.45' x2='94.57' y2='70.36' />
     <line x1='87.86' y1='74.33' x2='91.22' y2='76.49' />
     <line stroke-width='1.0' x1='81.74' y1='77.50' x2='87.03' y2='82.09' />
     <text x='77.18' y='77.73' text-anchor='middle'>80</text>
