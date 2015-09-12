@@ -1,9 +1,9 @@
 ; /*eslint no-extra-semi:0 */
 
 /**
- * @namespace gg
+ * @namespace svg_ac_inst
  */
-var gg = (function(global) {
+var svg_ac_inst = (function(global) {
   'use strict';
 
   var ns = 'http://www.w3.org/2000/svg';
@@ -184,7 +184,7 @@ var gg = (function(global) {
    * @param {number} size width of field
    * @param {number} number of fractional digits
    * @return {string} padded string
-   * @memberof gg
+   * @memberof svg_ac_inst
    * @inner
    */
   function pad(f, size,fract){ return ('000000000' + f.toFixed(fract)).substr(-size); }
@@ -198,7 +198,7 @@ var gg = (function(global) {
    * @param {object} attr array of pairs of attributes
    * @param {string} id id of element if any (may be omitted)
    * @return {object} constructed element
-   * @memberof gg
+   * @memberof svg_ac_inst
    * @inner
    */
   function _createElementSvg(name,attr,id) {
@@ -228,7 +228,18 @@ var gg = (function(global) {
     e.setAttribute('y1',y1);
     e.setAttribute('x2',x2);
     e.setAttribute('y2',y2);
+    return e;
+  }
 
+  function drawText(x,y,text,font_size) {
+    var e;
+    e = global.createElementNS(ns,'text');
+    e.setAttribute('x',x);
+    e.setAttribute('y',y);
+    if (font_size) {
+      e.setAttribute('font-size',font_size);
+    }
+    e.innerHTML = text;
     return e;
   }
 
@@ -242,7 +253,7 @@ var gg = (function(global) {
    * @param {object} global usually 'document'
    * @param {string} ns namespace of svg
    * @param {object} parent element that ticks will be attached to
-   * @memberof gg
+   * @memberof svg_ac_inst
    * @inner
    */
   function altimeterTicks(parent) {
@@ -312,7 +323,7 @@ var gg = (function(global) {
    * @param {object} global usually 'document'
    * @param {string} ns namespace of svg
    * @param {object} parent element that ticks will be attached to
-   * @memberof gg
+   * @memberof svg_ac_inst
    * @inner
    */
   function airspeedTicks(parent,dspeed) {
@@ -591,7 +602,7 @@ var gg = (function(global) {
    * @param {number} range total range of airspeed dial
    * @param {number} radius of arc
    * @return {object} contains parameters for drawing the arc
-   * @memberof gg
+   * @memberof svg_ac_inst
    * @inner
    */
   function arc(start_speed,end_speed,range,radius) {
@@ -622,7 +633,7 @@ var gg = (function(global) {
    * create the path spec for an arc starting at a specified position
    * @param {object} arc parameters describing the arc (from function arc)
    * @return {string} 'd' spec for arc element
-   * @memberof gg
+   * @memberof svg_ac_inst
    * @inner
    */
   function arc_path(arc)
@@ -652,7 +663,7 @@ var gg = (function(global) {
    * @param {number} max_caution
    * @param {number} never_exceed
    * @return {object} specs for all 4 arcs on the airspeed dial
-   * @memberof gg
+   * @memberof svg_ac_inst
    * @inner
    */
   function makeLimitArcs(
@@ -701,7 +712,7 @@ var gg = (function(global) {
   * @param {array}   options.yellow  - [140,160] yellow arc from max cruise to never-exceed
   * @param {array}   options.red     - [160,160] red arc from never-exceed to never-exceed
   * @param {array}   options.white   - [50,100]  white arc for stall-flaps to max-flaps
-  * @memberof gg
+  * @memberof svg_ac_inst
   * @inner
   */
   function airspeedArcs(options) {
@@ -747,7 +758,148 @@ var gg = (function(global) {
    * @param global reference to global object (usually document)
    * @param parent reference to parent element, such as a div
    * @param id     id to attach or reference to existing svg
-   * @memberof gg
+   * @memberof svg_ac_inst
+   * @inner
+   */
+  function drawTurn(parent,id) {
+    var ns = "http://www.w3.org/2000/svg";
+    var e;
+    var g;
+    var svg;
+
+    var turn_path_def = {
+      name : 'path',
+      attr : [
+        ['d',"M20 65 A 120.00 120.00 0 0 0 80 65"],
+        ['stroke-width','10'],
+        ['fill','#000']
+      ]
+    };
+
+    var turn_e1_def = {
+      name : 'ellipse',
+      attr : [
+        ["fill" ,'#000'],
+        ['stroke-width','0.5'],
+        ['cx','50'],
+        ['cy','69'],
+        ['rx','5.5'],
+        ['ry','5.5']
+      ]
+    };
+
+    var turn_e2_def = {
+      name : 'ellipse',
+      attr : [
+        ['cx','0'],
+        ['cy','0'],
+        ['rx','4'],
+        ['ry','4']
+      ]
+    };
+
+    // svg element
+    svg = _createElementSvg(svg_def.name,svg_def.attr,id);
+    parent.appendChild(svg);
+
+    // background rect
+    e = _createElementSvg(background_def.name,background_def.attr);
+    svg.appendChild(e);
+
+    // dial circle
+    e = _createElementSvg(dial_def.name,dial_def.attr);
+    svg.appendChild(e);
+
+    g = _createElementSvg(standard_group_def.name,standard_group_def.attr);
+    g.setAttribute('stroke-width','2.0');
+    g.setAttribute('stroke','#fff');
+    svg.appendChild(g);
+
+    e = drawLine(90.00,50.00,99.00,50.00);
+    g.appendChild(e);
+    e = drawLine(88.45,61.03,97.10,63.51);
+    g.appendChild(e);
+    e = drawLine(11.55,61.03, 2.90,63.51);
+    g.appendChild(e);
+    e = drawLine(10.00,50.00, 1.00,50.00);
+    g.appendChild(e);
+
+    g = _createElementSvg(standard_group_def.name,standard_group_def.attr);
+    g.setAttribute('stroke-width','0.5');
+    g.setAttribute('stroke','#fff');
+    g.setAttribute('fill','#fff');
+    g.setAttribute('font-family','sans-serif');
+    g.setAttribute('font-size','6');
+    g.setAttribute('text-anchor','middle');
+    svg.appendChild(g);
+
+    e = drawText(12,72,'L');
+    g.appendChild(e);
+
+    e = drawText(88,72,'R');
+    g.appendChild(e);
+
+    g = _createElementSvg(standard_group_def.name,standard_group_def.attr);
+    g.setAttribute('stroke-width','0.1');
+    g.setAttribute('stroke','#fff');
+    g.setAttribute('fill','#fff');
+    g.setAttribute('font-family','sans-serif');
+    g.setAttribute('text-anchor','middle');
+    svg.appendChild(g);
+
+    e = drawText(50,60,'TURN COORDINATOR',3);
+    g.appendChild(e);
+
+    e = drawText(50,80,'2 MIN',4);
+    g.appendChild(e);
+
+    e = drawText(50,88,'NO PITCH',3);
+    g.appendChild(e);
+
+    e = drawText(50,93,'INFORMATION',3);
+    g.appendChild(e);
+
+    e = _createElementSvg(turn_path_def.name,turn_path_def.attr);
+    g.appendChild(e);
+
+    e = drawLine(44,63,44,80,0.5);
+    e.setAttribute('stroke','#000');
+    g.appendChild(e);
+
+    e = drawLine(56,63,56,80,0.5);
+    e.setAttribute('stroke','#000');
+    g.appendChild(e);
+
+    //  <ellipse id="gg145-turn-ball" fill='#000' cx='50' cy='69' rx='5.5' ry='5.5'/>
+    e = _createElementSvg(turn_e1_def.name,turn_e1_def.attr,id + '-ball');
+    svg.appendChild(e);
+
+    g = _createElementSvg(standard_group_def.name,standard_group_def.attr,id + '-plane');
+    g.setAttribute('stroke-width','1');
+    g.setAttribute('stroke','#fff');
+    g.setAttribute('fill','#fff');
+    svg.appendChild(g);
+
+    //  <ellipse id="gg145-turn-ball" fill='#000' cx='50' cy='69' rx='5.5' ry='5.5'/>
+    e = _createElementSvg(turn_e2_def.name,turn_e2_def.attr);
+    g.appendChild(e);
+
+    e = drawLine(-38,0,38,0,2);
+    g.appendChild(e);
+
+    e = drawLine(-10,-5,10,-5);
+    g.appendChild(e);
+
+    e = drawLine(0,-10,0,0);
+    g.appendChild(e);
+  }
+
+  /**
+   * draw an altimeter
+   * @param global reference to global object (usually document)
+   * @param parent reference to parent element, such as a div
+   * @param id     id to attach or reference to existing svg
+   * @memberof svg_ac_inst
    * @inner
    */
   function drawAltimeter(parent,id) {
@@ -807,7 +959,7 @@ var gg = (function(global) {
    * @param {array}   options.yellow  - [140,160] yellow arc from max cruise to never-exceed
    * @param {array}   options.red     - [160,160] red arc from never-exceed to never-exceed
    * @param {array}   options.white   - [50,100]  white arc for stall-flaps to max-flaps
-   * @memberof gg
+   * @memberof svg_ac_inst
    * @inner
    */
   function drawAirspeed(parent,id,options)
@@ -882,7 +1034,7 @@ var gg = (function(global) {
    * @param global reference to global object (usually document)
    * @param parent reference to parent element, such as a div
    * @param id     id to attach or reference to existing svg
-   * @memberof gg
+   * @memberof svg_ac_inst
    * @inner
    */
   function drawVSI(parent,id) {
@@ -927,11 +1079,38 @@ var gg = (function(global) {
   }
 
   /**
-   * draw a VSI
+   * draw an attitude indicator
    * @param global reference to global object (usually document)
    * @param parent reference to parent element, such as a div
    * @param id     id to attach or reference to existing svg
-   * @memberof gg
+   * @memberof svg_ac_inst
+   * @inner
+   */
+  function drawAttitude(parent,id) {
+    var ns = "http://www.w3.org/2000/svg";
+    var e;
+    var g;
+    var svg;
+
+    // svg element
+    svg = _createElementSvg(svg_def.name,svg_def.attr,id);
+    parent.appendChild(svg);
+
+    // background rect
+    e = _createElementSvg(background_def.name,background_def.attr);
+    svg.appendChild(e);
+
+    // dial circle
+    e = _createElementSvg(dial_def.name,dial_def.attr);
+    svg.appendChild(e);
+  }
+
+  /**
+   * draw a heading indicator
+   * @param global reference to global object (usually document)
+   * @param parent reference to parent element, such as a div
+   * @param id     id to attach or reference to existing svg
+   * @memberof svg_ac_inst
    * @inner
    */
   function drawHeading(parent,id) {
@@ -990,7 +1169,7 @@ var gg = (function(global) {
    * @param altimeterId id to attach or reference to existing svg
    * @param draw true = draw the altimeter, false = assume static draw
    * @return {object} reference to altimeter object
-   * @memberof gg
+   * @memberof svg_ac_inst
    * @global
    */
   function Altimeter(parent,id,draw) {
@@ -1039,7 +1218,7 @@ var gg = (function(global) {
    * @param {array}   options.red     - [160,160] red arc from never-exceed to never-exceed
    * @param {array}   options.white   - [50,100]  white arc for stall-flaps to max-flaps
    * @return {object} reference to an airspeed object
-   * @memberof gg
+   * @memberof svg_ac_inst
    * @global
    */
   function Airspeed(parent,id,draw,options) {
@@ -1075,7 +1254,7 @@ var gg = (function(global) {
    * @param id element id of airspeed object
    * @param draw true to draw on client, false to use static svg with same id
    * @return {object} reference to a heading indicator
-   * @memberof gg
+   * @memberof svg_ac_inst
    * @global
    */
   function Heading(parent,id,draw) {
@@ -1107,10 +1286,14 @@ var gg = (function(global) {
    * @param id element id of airspeed object
    * @param draw true to draw on client, false to use static svg with same id
    * @return {object} reference to an attitude indicator
-   * @memberof gg
+   * @memberof svg_ac_inst
    * @global
    */
   function Attitude(parent,id,draw) {
+
+    if (draw) {
+      drawAttitude( parent, id);
+    }
     var attitude = global.querySelector('#' + id);
 
     return {
@@ -1131,10 +1314,14 @@ var gg = (function(global) {
    * @param id element id of airspeed object
    * @param draw true to draw on client, false to use static svg with same id
    * @return {object} reference to a turn and bank object
-   * @memberof gg
+   * @memberof svg_ac_inst
    * @global
    */
   function Turn(parent,id,draw) {
+    if (draw) {
+      drawTurn(parent,id);
+    }
+
     var turn  = global.querySelector('#' + id);
     var plane = global.querySelector('#' + id + '-plane');
     var ball  = global.querySelector('#' + id + '-ball');
@@ -1169,7 +1356,7 @@ var gg = (function(global) {
    * @param id element id of airspeed object
    * @param draw true to draw on client, false to use static svg with same id
    * @return {object} reference to a VSI
-   * @memberof gg
+   * @memberof svg_ac_inst
    * @global
    */
   function VSI(parent,id,draw) {

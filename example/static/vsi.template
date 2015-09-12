@@ -14,7 +14,7 @@
   <script>
 
   <!-- instantiate the vsi, give it the name that matches the template -->
-  var vsi = gg.VSI(document.querySelector("#vsi"),"gg145-vsi",false);
+  var vsi = svg_ac_inst.VSI(document.querySelector("#vsi"),"gg145-vsi",false);
 
   vsi.set(0);
 

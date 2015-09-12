@@ -382,28 +382,28 @@
 <script>
 
 <!-- instantiate the heading indicator, give it the name that matches the template -->
-var heading = gg.Heading(document.querySelector("#heading"),"gg145-heading",false);
+var heading = svg_ac_inst.Heading(document.querySelector("#heading"),"gg145-heading",false);
 var degrees = 0;
 
 <!-- instantiate the altimeter, give it the name that matches the template -->
-var altimeter = gg.Altimeter(document.querySelector("#altimeter"),"gg145-altimeter",false);
+var altimeter = svg_ac_inst.Altimeter(document.querySelector("#altimeter"),"gg145-altimeter",false);
 var altitude=0.0;
 var pressure = 29.92;
 altimeter.setPressure(pressure);
 
 <!-- instantiate the airspeed indicator, give it the name that matches the template -->
-var airspeed = gg.Airspeed(document.querySelector("#airspeed"),"gg145-airspeed",false);
+var airspeed = svg_ac_inst.Airspeed(document.querySelector("#airspeed"),"gg145-airspeed",false);
 var speed = 0;
 
 <!-- instantiate the VSI, give it the name that matches the template -->
-var vsi = gg.VSI(document.querySelector("#vsi"),"gg145-vsi",false);
+var vsi = svg_ac_inst.VSI(document.querySelector("#vsi"),"gg145-vsi",false);
 var vspeed = -2000;
 
 <!-- instantiate the attitude indicator, give it the name that matches the template -->
-var attitude = gg.Attitude(document.querySelector('#attitude'),"gg145-attitude",false);
+var attitude = svg_ac_inst.Attitude(document.querySelector('#attitude'),"gg145-attitude",false);
 
 <!-- instantiate the turn coordinator, give it the name that matches the template -->
-var turn = gg.Turn(document.querySelector('#turn'),"gg145-turn",false);
+var turn = svg_ac_inst.Turn(document.querySelector('#turn'),"gg145-turn",false);
 var turn_rate=-3.0;
 var db=0.1;
 var accel = 0.0;

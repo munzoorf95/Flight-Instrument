@@ -13,7 +13,7 @@
 
   <script>
   <!-- instantiate the heading, give it the name that matches the template -->
-  var heading = gg.Heading(document.querySelector("#heading"),"gg145-heading",false);
+  var heading = svg_ac_inst.Heading(document.querySelector("#heading"),"gg145-heading",false);
   var degrees = 0;
 
   function rotate(timestamp) {

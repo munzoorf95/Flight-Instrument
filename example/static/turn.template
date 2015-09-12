@@ -13,7 +13,7 @@
 
   <script>
   <!-- instantiate the turn, give it the name that matches the template -->
-  var turn = gg.Turn(document.querySelector("#turn"),"gg145-turn",false);
+  var turn = svg_ac_inst.Turn(document.querySelector("#turn"),"gg145-turn",false);
   var degrees = 0;
 
   var btn=document.querySelector('#btn');
