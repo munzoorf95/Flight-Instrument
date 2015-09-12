@@ -1,4 +1,4 @@
-# SVG Based Aircraft Gauges
+# SVG Based Aircraft Instruments
 
 [Scalable Vector Graphics (SVG)](https://en.wikipedia.org/wiki/Scalable_Vector_Graphics)
 is a file format for rendering images using vectors rather than a bitmap. This repo is less about
