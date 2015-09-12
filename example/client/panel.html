@@ -84,7 +84,6 @@ function panel_onResize() {
     var h = ch / 2;
     // use smaller of h and w so all 6 instruments will fit on the screen
     var s = (h < w) ? h : w;
-    console.log(cw,ch,w,h,s);
     heading.resize(s);
     altimeter.resize(s);
     airspeed.resize(s);

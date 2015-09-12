@@ -24,7 +24,7 @@
     <div>  <svg id="gg145-airspeed" xmlns="http://www.w3.org/2000/svg" width="200px" height="200px" viewBox="0 0 100 100">
              <rect x="0" y="0" width="100" height="100" fill="#000"/>
              <ellipse stroke-width="1.0" cx="50" cy="50" rx="49" ry="49" stroke="#fff"/>
-           
+
              <path stroke-width="3" stroke="#0f0" d="M13.72 81.43 A 48.00 48.00 0 0 0 86.28 81.43"/>
              <path stroke-width="3" stroke="#ff0" d="M2.49 56.83 A 48.00 48.00 0 0 0 13.72 81.43"/>
              <path stroke-width="3" stroke="#fff" d="M62.68 93.18 A 45.00 45.00 0 0 0 94.54 43.60"/>
@@ -323,7 +323,7 @@
                <text text-anchor='middle' x='50' y='67'>100 ft</text>
                <text text-anchor='middle' x='50' y='72'>per min</text>
              </g>
-           
+
              <g fill='#fff' stroke-width='0.5' stroke='#fff' font-family='sans serif' font-size='8'>
                <line stroke-width='1.0' x1='50.00' y1='10.00' x2='50.00' y2='1.00' />
                <line x1='57.04' y1='5.55' x2='57.67' y2='1.60' />
@@ -364,7 +364,7 @@
                <line x1='29.57' y1='9.90' x2='27.75' y2='6.34' />
                <line x1='36.09' y1='7.20' x2='34.86' y2='3.40' />
                <line x1='42.96' y1='5.55' x2='42.33' y2='1.60' />
-           
+
                <text text-anchor='middle' x='50.00' y='18.00' >10</text>
                <text text-anchor='middle' x='73' y='29' >15</text>
                <text text-anchor='middle' x='82' y='52' >20</text>
@@ -416,7 +416,6 @@ function panel_onResize() {
     var h = ch / 2;
     // use smaller of h and w so all 6 instruments will fit on the screen
     var s = (h < w) ? h : w;
-    console.log(cw,ch,w,h,s);
     heading.resize(s);
     altimeter.resize(s);
     airspeed.resize(s);
