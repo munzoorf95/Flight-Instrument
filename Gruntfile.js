@@ -22,7 +22,7 @@ module.exports = function(grunt) {
     },
     eslint: {
       // define the files to lint
-      target: ['lib/*.js','gg.js']
+      target: ['lib/*.js','svg-ac-inst.js']
     },
     execute: {
       altimeter: {
@@ -69,7 +69,7 @@ module.exports = function(grunt) {
       },
       jsdoc: {
         options: {
-          args: ['-d','./doc','gg.js']
+          args: ['-d','./doc','svg-ac-inst.js']
         },
         src: ['node_modules/jsdoc/jsdoc.js']
       }
@@ -77,7 +77,7 @@ module.exports = function(grunt) {
     uglify : {
       my_target: {
         files: {
-          'gg.min.js': ['gg.js']
+          'svg-ac-inst.min.js': ['svg-ac-inst.js']
         }
       }
     },
@@ -87,7 +87,7 @@ module.exports = function(grunt) {
       },
       files: ['example/static/*.html','example/client/*.html','!.git/**','!node_modules/**'],
       js: {
-        files: ['../Gruntfile.js', 'gg.js','lib/*.js'],
+        files: ['../Gruntfile.js', 'svg-ac-inst.js','lib/*.js'],
         tasks: ['eslint','uglify']
       },
       html : {
@@ -95,7 +95,7 @@ module.exports = function(grunt) {
         tasks:['build']
       },
       jsdoc: {
-        files: ['gg.js'],
+        files: ['svg-ac-inst.js'],
         tasks: ['execute:jsdoc']
       }
     }

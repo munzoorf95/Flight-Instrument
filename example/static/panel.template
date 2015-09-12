@@ -31,7 +31,7 @@
     <div>  <!-- @include vsi.svg -->     </div>
   </div>
 </div>
-<script src="/gg.js"></script>
+<script src="/svg-ac-inst.js"></script>
 <script>
 
 <!-- instantiate the heading indicator, give it the name that matches the template -->
