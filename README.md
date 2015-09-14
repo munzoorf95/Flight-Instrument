@@ -225,5 +225,7 @@ This instance has two functions:
 ### Client Examples
 /examples/clientc has an example of handling each instrument type with client draw svg, plus an example, 'panel', that combines them all together in a simulated instrument panel
 
+_Note_ : the 'panel' example also has basic resizing in which the instruments are sized to fit the window size. Resizing the window will resize the instruments. It is a good example of how the svg image is sharp regardless of resizing.
+
 ## JSDoc
 JSDoc documentation of source code is in /doc/index.html. 
