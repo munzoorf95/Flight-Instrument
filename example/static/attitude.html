@@ -6,7 +6,7 @@
   <!-- ID = gg145- -->
   <svg id="gg145-attitude" xmlns="http://www.w3.org/2000/svg" width="200px" height="200px" viewBox="0 0 100 100">
     <g id="gg145-attitude-pos" stroke-width="1" stroke="#fff" fill="#fff"
-       transform="translate(50,50) rotate(02)"
+       transform="translate(50,50) rotate(0)"
        text-anchor='middle' text-font-family="sans-serif" font-size="6">
   
       <rect fill="#29B6F6" x="-100" y="-200" width="200" height="200"></rect>
@@ -87,29 +87,30 @@
   
     </g>
   
-    <g stroke-width="1" stroke="#fff">
-      <line stroke-width='2' x1='70.00' y1='15.36' x2='74.50' y2='7.56' />
-      <line stroke-width='2' x1='84.64' y1='30.00' x2='92.44' y2='25.50' />
-      <line stroke-width='2' x1='90.00' y1='50.00' x2='99.00' y2='50.00' />
-      <line stroke-width='2' x1='30.00' y1='15.36' x2='25.50' y2='7.56' />
-      <line stroke-width='2' x1='15.36' y1='30.00' x2='7.56' y2='25.50' />
-      <line stroke-width='2' x1='10.00' y1='50.00' x2='1.00' y2='50.00' />
-      <line x1='56.95' y1='10.61' x2='57.81' y2='5.68' />
-      <line x1='63.68' y1='12.41' x2='65.39' y2='7.71' />
-      <line x1='78.28' y1='21.72' x2='81.82' y2='18.18' />
-      <line x1='43.05' y1='10.61' x2='42.19' y2='5.68' />
-      <line x1='36.32' y1='12.41' x2='34.61' y2='7.71' />
-      <line x1='21.72' y1='21.72' x2='18.18' y2='18.18' />
+    <g id='gg145-attitude-dial' stroke-width="1" stroke="#fff">
+      <line stroke-width='2' x1='20.00' y1='-34.64' x2='24.50' y2='-42.44' />
+      <line stroke-width='2' x1='34.64' y1='-20.00' x2='42.44' y2='-24.50' />
+      <line stroke-width='2' x1='40.00' y1='0.00' x2='49.00' y2='0.00' />
+      <line stroke-width='2' x1='-20.00' y1='-34.64' x2='-24.50' y2='-42.44' />
+      <line stroke-width='2' x1='-34.64' y1='-20.00' x2='-42.44' y2='-24.50' />
+      <line stroke-width='2' x1='-40.00' y1='-0.00' x2='-49.00' y2='-0.00' />
+      <line x1='6.95' y1='-39.39' x2='7.81' y2='-44.32' />
+      <line x1='13.68' y1='-37.59' x2='15.39' y2='-42.29' />
+      <line x1='28.28' y1='-28.28' x2='31.82' y2='-31.82' />
+      <line x1='-6.95' y1='-39.39' x2='-7.81' y2='-44.32' />
+      <line x1='-13.68' y1='-37.59' x2='-15.39' y2='-42.29' />
+      <line x1='-28.28' y1='-28.28' x2='-31.82' y2='-31.82' />
+      <line x1='0.00' y1='-40.00' x2='0.00' y2='-45.00' />
   
-      <path fill="#fff" d="M44 0 L56 0 L 50 10 z"></path>
+      <path fill="#fff" d="M-4 -50 L4 -50 L 0 -40 z"></path>
     </g>
   
-    <g id="gg145-attitude-needle" stroke-width="1" stroke="#ff0" fill="#ff0">
-      <path d="M-3 16 L3 16 L0 10 z"></path>
+    <g stroke-width="1" stroke="#ff0" fill="#ff0">
+      <path d="M46 18 L54 18 L50 11 z"></path>
     </g>
   
   
-    <rect fill="transparent" stroke="#000" stroke-width="8" x="0" y="0" width="100" height="100"></rect>
+    <rect fill="transparent" stroke="#9E9E9E" stroke-width="8" x="0" y="0" width="100" height="100"></rect>
   </svg>
   
   </div>
@@ -118,8 +119,8 @@
 
 
 <script>
-  var id_roll  = document.querySelector('#gg145-attitude-pos');
-  var id_needle = document.querySelector('#gg145-attitude-needle');
+  var id_roll = document.querySelector('#gg145-attitude-pos');
+  var id_dial = document.querySelector('#gg145-attitude-dial');
   var roll = -15;
   var pitch= -15;
   var dr   =   0.2;
@@ -127,7 +128,7 @@
   var t;
   var p;
 
-  function needle(nid,roll) {
+  function dial(d,roll) {
     var r  = 48.0;
     var cx = 50.0;
     var cy = 50.0;
@@ -142,9 +143,10 @@
     v  =  (roll - 90) * (Math.PI / 180.0);
     x = Math.cos(v) * r + cx;
     y = Math.sin(v) * r + cy;
-
+    x = 50;
+    y = 50;
     t =  'translate(' + x + ',' + y + ')' + 'rotate(' + roll + ')';
-    nid.setAttribute('transform',t);
+    d.setAttribute('transform',t);
   }
 
   function rotate(timestamp) {
@@ -159,7 +161,7 @@
     p = (pitch * 1.25);
     t = 'translate(50,50) rotate(' + roll + ') translate(0,' + p + ')' ;
     id_roll.setAttribute('transform',t);
-    needle(id_needle,roll);
+    dial(id_dial,roll);
     requestAnimationFrame(rotate);
   }
 

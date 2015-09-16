@@ -1315,6 +1315,29 @@ var svg_ac_inst = (function(global) {
       drawAttitude( parent, id);
     }
     var attitude = global.querySelector('#' + id);
+    var pos      = global.querySelector('#' + id + '-pos');
+    var dial     = global.querySelector('#' + id + '-dial');
+
+    function setDial(d,roll) {
+      var r  = 48.0;
+      var cx = 50.0;
+      var cy = 50.0;
+      var x;
+      var y;
+      var t;
+      var v;
+      var w;
+
+      //     <path d="M47 16 L54 16 L50 10 z"></path>
+      w  =   roll;
+      v  =  (roll - 90) * (Math.PI / 180.0);
+      x = Math.cos(v) * r + cx;
+      y = Math.sin(v) * r + cy;
+      x = 50;
+      y = 50;
+      t =  'translate(' + x + ',' + y + ')' + 'rotate(' + roll + ')';
+      d.setAttribute('transform',t);
+    }
 
     /**
     * @global
@@ -1327,7 +1350,14 @@ var svg_ac_inst = (function(global) {
        * @inner
       */
       set : function(pitch,roll) {
+        var p;
+        var t;
+        p = (pitch * 1.25);
+        t = 'translate(50,50) rotate(' + roll + ') translate(0,' + p + ')' ;
+        pos.setAttribute('transform',t);
+        setDial(dial,roll);
       },
+
       /** @param size new size in pixels (square)
        * @inner
        */

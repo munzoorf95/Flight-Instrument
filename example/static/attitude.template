@@ -10,8 +10,8 @@
 
 
 <script>
-  var id_roll  = document.querySelector('#gg145-attitude-pos');
-  var id_needle = document.querySelector('#gg145-attitude-needle');
+  var id_roll = document.querySelector('#gg145-attitude-pos');
+  var id_dial = document.querySelector('#gg145-attitude-dial');
   var roll = -15;
   var pitch= -15;
   var dr   =   0.2;
@@ -19,7 +19,7 @@
   var t;
   var p;
 
-  function needle(nid,roll) {
+  function dial(d,roll) {
     var r  = 48.0;
     var cx = 50.0;
     var cy = 50.0;
@@ -34,9 +34,10 @@
     v  =  (roll - 90) * (Math.PI / 180.0);
     x = Math.cos(v) * r + cx;
     y = Math.sin(v) * r + cy;
-
+    x = 50;
+    y = 50;
     t =  'translate(' + x + ',' + y + ')' + 'rotate(' + roll + ')';
-    nid.setAttribute('transform',t);
+    d.setAttribute('transform',t);
   }
 
   function rotate(timestamp) {
@@ -51,7 +52,7 @@
     p = (pitch * 1.25);
     t = 'translate(50,50) rotate(' + roll + ') translate(0,' + p + ')' ;
     id_roll.setAttribute('transform',t);
-    needle(id_needle,roll);
+    dial(id_dial,roll);
     requestAnimationFrame(rotate);
   }
 
