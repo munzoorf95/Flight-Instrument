@@ -1,5 +1,108 @@
 <!-- ID = gg145- -->
 <svg id="gg145-attitude" xmlns="http://www.w3.org/2000/svg" width="200px" height="200px" viewBox="0 0 100 100">
-  <rect x="0" y="0" width="100" height="100" fill="#000"/>
-  <ellipse stroke-width="1.0" cx="50" cy="50" rx="49" ry="49" stroke="#fff"/>
+  <g id="gg145-attitude-pos" stroke-width="1" stroke="#fff" fill="#fff"
+     transform="translate(50,50) rotate(02)"
+     text-anchor='middle' text-font-family="sans-serif" font-size="6">
+
+    <rect fill="#29B6F6" x="-100" y="-200" width="200" height="200"></rect>
+    <rect fill="#8B4513" x="-100" y="0"  width="200" height="200"></rect>
+
+    <!-- pitch up -->
+    <line x1="-8"  y1="-6.25"   x2="8"  y2="-6.25"/>
+    <line x1="-16" y1="-12"     x2="-4" y2="-12"  />
+    <text stroke-width="0.1" x="0" y="-10">10</text>
+    <line x1="4"   y1="-12"     x2="16" y2="-12"  />
+
+    <line x1="-8"  y1="-18.75"  x2="8"  y2="-18.75"/>
+    <line x1="-16" y1="-24"     x2="-4" y2="-24"  />
+    <text stroke-width="0.1" x="0" y="-22">20</text>
+    <line x1="4"   y1="-24"     x2="16" y2="-24"  />
+
+    <line x1="-8"  y1="-31.25"   x2="8"  y2="-31.25"/>
+    <line x1="-16" y1="-37.5"    x2="-4" y2="-37.5"  />
+    <text stroke-width="0.1" x="0" y="-35">30</text>
+    <line x1="4"   y1="-37.5"    x2="16" y2="-37.5"  />
+
+    <line x1="-8"  y1="-43.75"   x2="8"  y2="-43.75"/>
+    <line x1="-16" y1="-50.0"    x2="-4" y2="-50.0"  />
+    <text stroke-width="0.1" x="0" y="-48">40</text>
+    <line x1="4"   y1="-50.0"    x2="16" y2="-50.0"  />
+
+    <line x1="-8"  y1="-56.25"   x2="8"  y2="-56.25"/>
+    <line x1="-16" y1="-62.5"    x2="-4" y2="-62.5"  />
+    <text stroke-width="0.1" x="0" y="-60.5">50</text>
+    <line x1="4"   y1="-62.5"    x2="16" y2="-62.5"  />
+
+    <line x1="-8"  y1="-68.75"   x2="8"  y2="-68.75"/>
+    <line x1="-16" y1="-75.0"    x2="-4" y2="-75.0" />
+    <text stroke-width="0.1" x="0" y="-73">60</text>
+    <line x1="4"   y1="-75.0"    x2="16" y2="-75.0" />
+
+    <!-- pitch down -->
+    <line x1="-8"  y1="6.25"   x2="8"  y2="6.25"/>
+    <line x1="-16" y1="12"     x2="-4" y2="12"  />
+    <text stroke-width="0.1" x="0" y="14">10</text>
+    <line x1="4"   y1="12"     x2="16" y2="12"  />
+
+    <line x1="-8"  y1="18.75"   x2="8"  y2="18.75"/>
+    <line x1="-16" y1="24"     x2="-4" y2="24"  />
+    <text stroke-width="0.1" x="0" y="26">20</text>
+    <line x1="4"   y1="24"     x2="16" y2="24"  />
+    pitch = -60;
+
+    <line x1="-8"  y1="31.25"   x2="8"  y2="31.25"/>
+    <line x1="-16" y1="37.5"    x2="-4" y2="37.5"  />
+    <text stroke-width="0.1" x="0" y="39">30</text>
+    <line x1="4"   y1="37.5"    x2="16" y2="37.5"  />
+
+    <line x1="-8"  y1="43.75"   x2="8"  y2="43.75"/>
+    <line x1="-16" y1="50.0"    x2="-4" y2="50.0"  />
+    <text stroke-width="0.1" x="0" y="52">40</text>
+    <line x1="4"   y1="50.0"    x2="16" y2="50.0"  />
+
+    <line x1="-8"  y1="56.25"   x2="8"  y2="56.25"/>
+    <line x1="-16" y1="62.5"    x2="-4" y2="62.5"  />
+    <text stroke-width="0.1" x="0" y="64.5">50</text>
+    <line x1="4"   y1="62.5"    x2="16" y2="62.5"  />
+
+    <line x1="-8"  y1="68.75"   x2="8"  y2="68.75"/>
+    <line x1="-16" y1="75.0"    x2="-4" y2="75.0" />
+    <text stroke-width="0.1" x="0" y="77">60</text>
+    <line x1="4"   y1="75.0"    x2="16" y2="75.0" />
+
+  </g>
+  <g stroke-width="2" stroke="#ff0">
+  <line x1="30" y1="50" x2="43" y2="50"></line>
+  <line x1="42" y1="50" x2="42" y2="53"></line>
+
+  <line  x1="49" y1="50" x2="51" y2="50"/>
+
+  <line x1="58" y1="53" x2="58" y2="50"></line>
+  <line x1="57" y1="50" x2="70" y2="50"></line>
+
+  </g>
+
+  <g stroke-width="1" stroke="#fff">
+    <line stroke-width='2' x1='70.00' y1='15.36' x2='74.50' y2='7.56' />
+    <line stroke-width='2' x1='84.64' y1='30.00' x2='92.44' y2='25.50' />
+    <line stroke-width='2' x1='90.00' y1='50.00' x2='99.00' y2='50.00' />
+    <line stroke-width='2' x1='30.00' y1='15.36' x2='25.50' y2='7.56' />
+    <line stroke-width='2' x1='15.36' y1='30.00' x2='7.56' y2='25.50' />
+    <line stroke-width='2' x1='10.00' y1='50.00' x2='1.00' y2='50.00' />
+    <line x1='56.95' y1='10.61' x2='57.81' y2='5.68' />
+    <line x1='63.68' y1='12.41' x2='65.39' y2='7.71' />
+    <line x1='78.28' y1='21.72' x2='81.82' y2='18.18' />
+    <line x1='43.05' y1='10.61' x2='42.19' y2='5.68' />
+    <line x1='36.32' y1='12.41' x2='34.61' y2='7.71' />
+    <line x1='21.72' y1='21.72' x2='18.18' y2='18.18' />
+
+    <path fill="#fff" d="M44 0 L56 0 L 50 10 z"></path>
+  </g>
+
+  <g id="gg145-attitude-needle" stroke-width="1" stroke="#ff0" fill="#ff0">
+    <path d="M-3 16 L3 16 L0 10 z"></path>
+  </g>
+
+
+  <rect fill="transparent" stroke="#000" stroke-width="8" x="0" y="0" width="100" height="100"></rect>
 </svg>

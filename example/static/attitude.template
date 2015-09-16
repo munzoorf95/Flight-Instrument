@@ -2,36 +2,62 @@
 <html>
 <head>
 </head>
-<body>
   <div id="attitude">
   <!-- @include attitude.svg -->
   </div>
 
   <input type='button' id='btn' value='zoom'></input>
 
-  <script src="/svg-ac-inst.js"></script>
 
-  <script>
-  <!-- instantiate the attitude, give it the name that matches the template -->
-  var attitude = svg_ac_inst.Attitude(document.querySelector("#attitude"),"gg145-attitude",false);
+<script>
+  var id_roll  = document.querySelector('#gg145-attitude-pos');
+  var id_needle = document.querySelector('#gg145-attitude-needle');
+  var roll = -15;
+  var pitch= -15;
+  var dr   =   0.2;
+  var dp   =   0.1;
+  var t;
+  var p;
 
-  var btn=document.querySelector('#btn');
-  btn.onclick = (function() {
-    var state = 0;
-    return function() {
-      switch(state) {
-      case 0:
-        attitude.resize(600);
-        state = 1;
-        break;
-      case 1:
-        attitude.resize(400);
-        state = 0;
-        break;
-    }
+  function needle(nid,roll) {
+    var r  = 48.0;
+    var cx = 50.0;
+    var cy = 50.0;
+    var x;
+    var y;
+    var t;
+    var v;
+    var w;
+
+    //     <path d="M47 16 L54 16 L50 10 z"></path>
+    w  =   roll;
+    v  =  (roll - 90) * (Math.PI / 180.0);
+    x = Math.cos(v) * r + cx;
+    y = Math.sin(v) * r + cy;
+
+    t =  'translate(' + x + ',' + y + ')' + 'rotate(' + roll + ')';
+    nid.setAttribute('transform',t);
   }
-})();
-  </script>
+
+  function rotate(timestamp) {
+    roll += dr;
+    if (Math.abs(roll) >= 45.0) {
+      dr *= -1;
+    }
+    pitch += dp;
+    if (Math.abs(pitch) >= 45) {
+      dp *= -1;
+    }
+    p = (pitch * 1.25);
+    t = 'translate(50,50) rotate(' + roll + ') translate(0,' + p + ')' ;
+    id_roll.setAttribute('transform',t);
+    needle(id_needle,roll);
+    requestAnimationFrame(rotate);
+  }
+
+  requestAnimationFrame(rotate);
+</script>
+
 
 </body>
 </html>
