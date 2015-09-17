@@ -1132,7 +1132,7 @@ var svg_ac_inst = (function(global) {
     e = drawLine( -8  ,-6.25   ,8  ,-6.25);
     g.appendChild(e);
     e = drawLine( -16 ,-12     ,-4 ,-12  );
-    g.appendChild(e);e = drawText( 0 ,-10,"10",0.1);
+    g.appendChild(e);e = drawText( 0 ,-10,"10",6);
     e = drawLine( 4   ,-12     ,16 ,-12  );
     g.appendChild(e);
 
@@ -1140,7 +1140,7 @@ var svg_ac_inst = (function(global) {
     g.appendChild(e);
     e = drawLine( -16 ,-24     ,-4 ,-24  );
     g.appendChild(e);
-    e = drawText( 0 ,-22,"20",0.1);
+    e = drawText( 0 ,-22,"20",6);
     g.appendChild(e);
     e = drawLine( 4   ,-24     ,16 ,-24  );
     g.appendChild(e);
@@ -1149,7 +1149,7 @@ var svg_ac_inst = (function(global) {
     g.appendChild(e);
     e = drawLine( -16 ,-37.5    ,-4 ,-37.5  );
     g.appendChild(e);
-    e = drawText( 0 ,-35,"30",0.1);
+    e = drawText( 0 ,-35,"30",6);
     g.appendChild(e);
     e = drawLine( 4   ,-37.5    ,16 ,-37.5  );
     g.appendChild(e);
@@ -1158,7 +1158,7 @@ var svg_ac_inst = (function(global) {
     g.appendChild(e);
     e = drawLine( -16 ,-50.0    ,-4 ,-50.0  );
     g.appendChild(e);
-    e = drawText( 0 ,-48,"40",0.1);
+    e = drawText( 0 ,-48,"40",6);
     g.appendChild(e);
     e = drawLine( 4   ,-50.0    ,16 ,-50.0  );
     g.appendChild(e);
@@ -1167,7 +1167,7 @@ var svg_ac_inst = (function(global) {
     g.appendChild(e);
     e = drawLine( -16 ,-62.5    ,-4 ,-62.5  );
     g.appendChild(e);
-    e = drawText( 0 ,-60.5,"50",0.1);
+    e = drawText( 0 ,-60.5,"50",6);
     g.appendChild(e);
     e = drawLine( 4   ,-62.5    ,16 ,-62.5  );
     g.appendChild(e);
@@ -1176,7 +1176,7 @@ var svg_ac_inst = (function(global) {
     g.appendChild(e);
     e = drawLine( -16 ,-75.0    ,-4 ,-75.0 );
     g.appendChild(e);
-    e = drawText( 0 ,-73,"60",0.1);
+    e = drawText( 0 ,-73,"60",6);
     g.appendChild(e);
     e = drawLine( 4   ,-75.0    ,16 ,-75.0 );
     g.appendChild(e);
@@ -1185,7 +1185,7 @@ var svg_ac_inst = (function(global) {
     g.appendChild(e);
     e = drawLine( -16 ,12     ,-4 ,12  );
     g.appendChild(e);
-    e = drawText( 0 ,14,"10",0.1);
+    e = drawText( 0 ,14,"10",6);
     g.appendChild(e);
     e = drawLine( 4   ,12     ,16 ,12  );
     g.appendChild(e);
@@ -1194,7 +1194,7 @@ var svg_ac_inst = (function(global) {
     g.appendChild(e);
     e = drawLine( -16 ,24     ,-4 ,24  );
     g.appendChild(e);
-    e = drawText( 0 ,26,"20",0.1);
+    e = drawText( 0 ,26,"20",6);
     g.appendChild(e);
     e = drawLine( 4   ,24     ,16 ,24  );
     g.appendChild(e);
@@ -1203,7 +1203,7 @@ var svg_ac_inst = (function(global) {
     g.appendChild(e);
     e = drawLine( -16 ,37.5    ,-4 ,37.5  );
     g.appendChild(e);
-    e = drawText( 0 ,39,"30",0.1);
+    e = drawText( 0 ,39,"30",6);
     g.appendChild(e);
     e = drawLine( 4   ,37.5    ,16 ,37.5  );
     g.appendChild(e);
@@ -1212,7 +1212,7 @@ var svg_ac_inst = (function(global) {
     g.appendChild(e);
     e = drawLine( -16 ,50.0    ,-4 ,50.0  );
     g.appendChild(e);
-    e = drawText( 0 ,52,"40",0.1);
+    e = drawText( 0 ,52,"40",6);
     g.appendChild(e);
     e = drawLine( 4   ,50.0    ,16 ,50.0  );
     g.appendChild(e);
@@ -1221,7 +1221,7 @@ var svg_ac_inst = (function(global) {
     g.appendChild(e);
     e = drawLine( -16 ,62.5    ,-4 ,62.5  );
     g.appendChild(e);
-    e = drawText( 0 ,64.5,"50",0.1);
+    e = drawText( 0 ,64.5,"50",6);
     g.appendChild(e);
     e = drawLine( 4   ,62.5    ,16 ,62.5  );
     g.appendChild(e);
@@ -1230,11 +1230,11 @@ var svg_ac_inst = (function(global) {
     g.appendChild(e);
     e = drawLine( -16 ,75.0    ,-4 ,75.0 );
     g.appendChild(e);
-    e = drawText( 0 ,77,"60",0.1);
+    e = drawText( 0 ,77,"60",6);
     g.appendChild(e);
     e = drawLine( 4   ,75.0    ,16 ,75.0 );
     g.appendChild(e);
-    
+
   }
 
   /**
