@@ -1080,17 +1080,161 @@ var svg_ac_inst = (function(global) {
     var g;
     var svg;
 
-    // svg element
+    var pos_group = {
+      name: 'g',
+      attr: [
+        ['stroke-width', '1'],
+        ['stroke' , '#fff'],
+        ['fill' , '#fff'],
+        ['transform' , 'translate(50,50) rotate(0)'],
+        ['font-family','sans-serif'],
+        ['text-anchor', 'middle'],
+        ['font-size', '6']
+      ]
+    };
+
+    var rectBlue = {
+      name: 'rect',
+      attr: [
+        ['fill','#29B6F6'],
+        ['x','-100'],
+        ['y','-200'],
+        ['width','200'],
+        ['height','200']
+      ]
+    };
+
+    var rectBrown = {
+      name: 'rect',
+      attr: [
+        ['fill','#8B4513'],
+        ['x','-100'],
+        ['y','0'],
+        ['width','200'],
+        ['height','200']
+      ]
+    };
+
+      // svg element
     svg = _createElementSvg(svg_def.name,svg_def.attr,id);
     parent.appendChild(svg);
 
-    // background rect
-    e = _createElementSvg(background_def.name,background_def.attr);
-    svg.appendChild(e);
+    g = _createElementSvg(pos_group.name,pos_group.attr,id + '-pos');
+    svg.appendChild(g);
 
-    // dial circle
-    e = _createElementSvg(dial_def.name,dial_def.attr);
-    svg.appendChild(e);
+    e = _createElementSvg(rectBlue.name,rectBlue.attr);
+    g.appendChild(e);
+
+    e = _createElementSvg(rectBrown.name,rectBrown.attr);
+    g.appendChild(e);
+
+    // TODO : these can be generated programmatically
+    e = drawLine( -8  ,-6.25   ,8  ,-6.25);
+    g.appendChild(e);
+    e = drawLine( -16 ,-12     ,-4 ,-12  );
+    g.appendChild(e);e = drawText( 0 ,-10,"10",0.1);
+    e = drawLine( 4   ,-12     ,16 ,-12  );
+    g.appendChild(e);
+
+    e = drawLine( -8  ,-18.75  ,8  ,-18.75);
+    g.appendChild(e);
+    e = drawLine( -16 ,-24     ,-4 ,-24  );
+    g.appendChild(e);
+    e = drawText( 0 ,-22,"20",0.1);
+    g.appendChild(e);
+    e = drawLine( 4   ,-24     ,16 ,-24  );
+    g.appendChild(e);
+
+    e = drawLine( -8  ,-31.25   ,8  ,-31.25);
+    g.appendChild(e);
+    e = drawLine( -16 ,-37.5    ,-4 ,-37.5  );
+    g.appendChild(e);
+    e = drawText( 0 ,-35,"30",0.1);
+    g.appendChild(e);
+    e = drawLine( 4   ,-37.5    ,16 ,-37.5  );
+    g.appendChild(e);
+
+    e = drawLine( -8  ,-43.75   ,8  ,-43.75);
+    g.appendChild(e);
+    e = drawLine( -16 ,-50.0    ,-4 ,-50.0  );
+    g.appendChild(e);
+    e = drawText( 0 ,-48,"40",0.1);
+    g.appendChild(e);
+    e = drawLine( 4   ,-50.0    ,16 ,-50.0  );
+    g.appendChild(e);
+
+    e = drawLine( -8  ,-56.25   ,8  ,-56.25);
+    g.appendChild(e);
+    e = drawLine( -16 ,-62.5    ,-4 ,-62.5  );
+    g.appendChild(e);
+    e = drawText( 0 ,-60.5,"50",0.1);
+    g.appendChild(e);
+    e = drawLine( 4   ,-62.5    ,16 ,-62.5  );
+    g.appendChild(e);
+
+    e = drawLine( -8  ,-68.75   ,8  ,-68.75);
+    g.appendChild(e);
+    e = drawLine( -16 ,-75.0    ,-4 ,-75.0 );
+    g.appendChild(e);
+    e = drawText( 0 ,-73,"60",0.1);
+    g.appendChild(e);
+    e = drawLine( 4   ,-75.0    ,16 ,-75.0 );
+    g.appendChild(e);
+
+    e = drawLine( -8  ,6.25   ,8  ,6.25);
+    g.appendChild(e);
+    e = drawLine( -16 ,12     ,-4 ,12  );
+    g.appendChild(e);
+    e = drawText( 0 ,14,"10",0.1);
+    g.appendChild(e);
+    e = drawLine( 4   ,12     ,16 ,12  );
+    g.appendChild(e);
+
+    e = drawLine( -8  ,18.75   ,8  ,18.75);
+    g.appendChild(e);
+    e = drawLine( -16 ,24     ,-4 ,24  );
+    g.appendChild(e);
+    e = drawText( 0 ,26,"20",0.1);
+    g.appendChild(e);
+    e = drawLine( 4   ,24     ,16 ,24  );
+    g.appendChild(e);
+
+    e = drawLine( -8  ,31.25   ,8  ,31.25);
+    g.appendChild(e);
+    e = drawLine( -16 ,37.5    ,-4 ,37.5  );
+    g.appendChild(e);
+    e = drawText( 0 ,39,"30",0.1);
+    g.appendChild(e);
+    e = drawLine( 4   ,37.5    ,16 ,37.5  );
+    g.appendChild(e);
+
+    e = drawLine( -8  ,43.75   ,8  ,43.75);
+    g.appendChild(e);
+    e = drawLine( -16 ,50.0    ,-4 ,50.0  );
+    g.appendChild(e);
+    e = drawText( 0 ,52,"40",0.1);
+    g.appendChild(e);
+    e = drawLine( 4   ,50.0    ,16 ,50.0  );
+    g.appendChild(e);
+
+    e = drawLine( -8  ,56.25   ,8  ,56.25);
+    g.appendChild(e);
+    e = drawLine( -16 ,62.5    ,-4 ,62.5  );
+    g.appendChild(e);
+    e = drawText( 0 ,64.5,"50",0.1);
+    g.appendChild(e);
+    e = drawLine( 4   ,62.5    ,16 ,62.5  );
+    g.appendChild(e);
+
+    e = drawLine( -8  ,68.75   ,8  ,68.75);
+    g.appendChild(e);
+    e = drawLine( -16 ,75.0    ,-4 ,75.0 );
+    g.appendChild(e);
+    e = drawText( 0 ,77,"60",0.1);
+    g.appendChild(e);
+    e = drawLine( 4   ,75.0    ,16 ,75.0 );
+    g.appendChild(e);
+    
   }
 
   /**

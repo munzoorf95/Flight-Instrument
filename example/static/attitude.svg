@@ -2,7 +2,7 @@
 <svg id="gg145-attitude" xmlns="http://www.w3.org/2000/svg" width="200px" height="200px" viewBox="0 0 100 100">
   <g id="gg145-attitude-pos" stroke-width="1" stroke="#fff" fill="#fff"
      transform="translate(50,50) rotate(0)"
-     text-anchor='middle' text-font-family="sans-serif" font-size="6">
+     text-anchor='middle' font-family="sans-serif" font-size="6">
 
     <rect fill="#29B6F6" x="-100" y="-200" width="200" height="200"></rect>
     <rect fill="#8B4513" x="-100" y="0"  width="200" height="200"></rect>
@@ -48,7 +48,6 @@
     <line x1="-16" y1="24"     x2="-4" y2="24"  />
     <text stroke-width="0.1" x="0" y="26">20</text>
     <line x1="4"   y1="24"     x2="16" y2="24"  />
-    pitch = -60;
 
     <line x1="-8"  y1="31.25"   x2="8"  y2="31.25"/>
     <line x1="-16" y1="37.5"    x2="-4" y2="37.5"  />
