@@ -1,85 +1,82 @@
 <!doctype html>
 <html>
 <head>
-  <style>/* this styling works on Chrome */
-  html,body {
-      overflow:hidden; /* no scrollbars, they make the resizing more complicated */
+  <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <style>
+  .blackBk {
+    background-color:black;
   }
-  .container {
-    display: flex;
-    flex-direction:column;
-    background-color: #000;
-  }
-  .row {
-    display:flex;
-    flex-direction:row;
-    justify-content: center;
+  .grayBk {
+    background-color: gray;
   }
   </style>
-    <script src="/svg-ac-inst.js"></script>
-    <script src="/lr.js"></script>
+  <script src="/svg-ac-inst.js"></script>
+  <script src="/lr.js"></script>
 </head>
 <body>
-
-<div class='container'>
-  <div class='row'>
-    <div>  <!-- @include airspeed.svg -->  </div>
-    <div>  <!-- @include attitude.svg -->  </div>
-    <div>  <!-- @include altimeter.svg --> </div>
+  <div id='panel' class='container grayBk'>
+    <div class="row">
+      &nbsp;
+    </div>
+    <div class="row">
+      <div id="a1" class="grayBk col-md-4 col-xs-4">
+        <!-- @include airspeed.svg -->
+      </div>
+      <div id='a2' class="grayBk col-md-4 col-xs-4">
+        <!-- @include attitude.svg -->
+      </div>
+      <div id='a3' class="grayBk col-md-4 col-xs-4">
+        <!-- @include altimeter.svg -->
+      </div>
+    </div>
+    <div class="row">
+      &nbsp;
+    </div>
+    <div class="row">
+      <div id="b1" class="grayBk col-md-4 col-xs-4">
+        <!-- @include turn.svg -->
+      </div>
+      <div id='b2' class="grayBk col-md-4 col-xs-4">
+        <!-- @include heading.svg -->
+      </div>
+      <div id='b3' class="grayBk col-md-4 col-xs-4">
+        <!-- @include vsi.svg -->
+      </div>
+    </div>
+    <div class="row">
+      &nbsp;
+    </div>
   </div>
-  <div class='row'>
-    <div>  <!-- @include turn.svg -->    </div>
-    <div>  <!-- @include heading.svg --> </div>
-    <div>  <!-- @include vsi.svg -->     </div>
-  </div>
-</div>
 
 <script>
 
-// instantiate the heading indicator, give it the name that matches the template -->
-var heading = svg_ac_inst.Heading(document.querySelector("#heading"),"gg145-heading",false);
+var module = (function() {
 
-// instantiate the altimeter, give it the name that matches the template -->
-var altimeter = svg_ac_inst.Altimeter(document.querySelector("#altimeter"),"gg145-altimeter",false);
-altimeter.setPressure(29.92);
+  // instantiate the airspeed indicator, give it the name that matches the template -->
+  var airspeed = svg_ac_inst.Airspeed(document.querySelector("#a1"),"gg145-airspeed",false);
 
-// instantiate the airspeed indicator, give it the name that matches the template -->
-var airspeed = svg_ac_inst.Airspeed(document.querySelector("#airspeed"),"gg145-airspeed",false);
+  //  instantiate the attitude indicator, give it the name that matches the template -->
+  var attitude = svg_ac_inst.Attitude(document.querySelector('#a2'),"gg145-attitude",false);
 
-// instantiate the VSI, give it the name that matches the template -->
-var vsi = svg_ac_inst.VSI(document.querySelector("#vsi"),"gg145-vsi",false);
+  // instantiate the altimeter, give it the name that matches the template -->
+  var altimeter = svg_ac_inst.Altimeter(document.querySelector("#a3"),"gg145-altimeter",false);
+  altimeter.setPressure(29.92);
 
-//  instantiate the attitude indicator, give it the name that matches the template -->
-var attitude = svg_ac_inst.Attitude(document.querySelector('#attitude'),"gg145-attitude",false);
+  // instantiate the turn coordinator, give it the name that matches the template -->
+  var turn = svg_ac_inst.Turn(document.querySelector('#b1'),"gg145-turn",false);
 
-// instantiate the turn coordinator, give it the name that matches the template -->
-var turn = svg_ac_inst.Turn(document.querySelector('#turn'),"gg145-turn",false);
+  // instantiate the heading indicator, give it the name that matches the template -->
+  var heading = svg_ac_inst.Heading(document.querySelector("#b2"),"gg145-heading",false);
 
-// simple resize that uses window size minus some border
-function panel_onResize() {
-    var cw = window.innerWidth  - 20;
-    var ch = window.innerHeight - 20;
-    var w = cw  / 3;
-    var h = ch / 2;
-    // use smaller of h and w so all 6 instruments will fit on the screen
-    var s = (h < w) ? h : w;
-    console.log(cw,ch,w,h,s);
-    heading.resize(s);
-    altimeter.resize(s);
-    airspeed.resize(s);
-    vsi.resize(s);
-    attitude.resize(s);
-    turn.resize(s);
-}
+  // instantiate the VSI, give it the name that matches the template -->
+  var vsi = svg_ac_inst.VSI(document.querySelector("#b3"),"gg145-vsi",false);
 
-function panel_onReady() {
-    panel_onResize();
-}
-
-var index = 0;
-var turn_rate = 0;
-var turn_alpha = 0.01;
-function run(timestamp) {
+  var index      = 0;
+  var turn_rate  = 0;
+  var turn_alpha = 0.01;
+  function run(timestamp) {
     var a = flight1[index];
 
     turn_rate = turn_rate + ((a[4] - turn_rate) * turn_alpha);
@@ -94,15 +91,48 @@ function run(timestamp) {
     if (index >= flight1.length) {
         index = 0;
     }
+
+    // start gauges running
     requestAnimationFrame(run);
   }
 
-// add event listeners
-window.addEventListener('resize',panel_onResize);
-window.addEventListener('load',panel_onReady);
+  var cols = ['a1','a2','a3','b1','b2','b3'];
+  var img  = [airspeed,attitude,altimeter,turn,heading,vsi];
+  function ready() {
+    var elements = [];
+    cols.forEach(function(v,i,a) {
+      var e = $('#' + v);
+      elements.push({div:e,svg:img[i]});
+    })
+    return elements;
+  }
 
-// start gauges running
-requestAnimationFrame(run);
+  function resize(elements) {
+    elements.forEach(function(v,i,a) {
+      var d = v.div;
+      var s = v.svg;
+      var w = d.width();
+      s.resize(w);
+    });
+  }
+
+  return {
+    resize : resize,
+    ready  : ready,
+    run    : run
+  };
+})();
+
+$(document).ready(function() {
+  var elements = module.ready();
+  module.resize(elements);
+  $(window).on('resize',function() {
+    module.resize(elements);
+  });
+
+  // start sim
+  requestAnimationFrame(module.run);
+});
 
 </script>
 </body>
