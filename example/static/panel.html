@@ -16,6 +16,8 @@
     justify-content: center;
   }
   </style>
+    <script src="/svg-ac-inst.js"></script>
+    <script src="/lr.js"></script>
 </head>
 <body>
 
@@ -481,40 +483,27 @@
                 </div>
   </div>
 </div>
-<script src="/svg-ac-inst.js"></script>
+
 <script>
 
-<!-- instantiate the heading indicator, give it the name that matches the template -->
+// instantiate the heading indicator, give it the name that matches the template -->
 var heading = svg_ac_inst.Heading(document.querySelector("#heading"),"gg145-heading",false);
-var degrees = 0;
 
-<!-- instantiate the altimeter, give it the name that matches the template -->
+// instantiate the altimeter, give it the name that matches the template -->
 var altimeter = svg_ac_inst.Altimeter(document.querySelector("#altimeter"),"gg145-altimeter",false);
-var altitude=0.0;
-var pressure = 29.92;
-altimeter.setPressure(pressure);
+altimeter.setPressure(29.92);
 
-<!-- instantiate the airspeed indicator, give it the name that matches the template -->
+// instantiate the airspeed indicator, give it the name that matches the template -->
 var airspeed = svg_ac_inst.Airspeed(document.querySelector("#airspeed"),"gg145-airspeed",false);
-var speed = 0;
 
-<!-- instantiate the VSI, give it the name that matches the template -->
+// instantiate the VSI, give it the name that matches the template -->
 var vsi = svg_ac_inst.VSI(document.querySelector("#vsi"),"gg145-vsi",false);
-var vspeed = -2000;
 
-<!-- instantiate the attitude indicator, give it the name that matches the template -->
+//  instantiate the attitude indicator, give it the name that matches the template -->
 var attitude = svg_ac_inst.Attitude(document.querySelector('#attitude'),"gg145-attitude",false);
 
-<!-- instantiate the turn coordinator, give it the name that matches the template -->
+// instantiate the turn coordinator, give it the name that matches the template -->
 var turn = svg_ac_inst.Turn(document.querySelector('#turn'),"gg145-turn",false);
-var turn_rate=-3.0;
-var db=0.1;
-var accel = 0.0;
-var da    = 0.2;
-var pitch = 0.0;
-var roll  = 0.0;
-var dr    = 0.2;
-var dp    = 0.1;
 
 // simple resize that uses window size minus some border
 function panel_onResize() {
@@ -537,42 +526,24 @@ function panel_onReady() {
     panel_onResize();
 }
 
+var index = 0;
+var turn_rate = 0;
+var turn_alpha = 0.01;
 function run(timestamp) {
-    heading.set(degrees);
-    airspeed.set(speed);
-    altimeter.set(altitude);
-    vsi.set(vspeed);
-    turn.set(turn_rate,accel);
-    attitude.set(pitch,roll);
+    var a = flight1[index];
 
-    vspeed+=1.0;
-    if (vspeed >= 2000) {
-      vspeed = -2000;
-    }
+    turn_rate = turn_rate + ((a[4] - turn_rate) * turn_alpha);
+    attitude.set(a[1],-a[2]);
+    heading.set(a[3]);
+    turn.set(turn_rate,a[5]);
+    altimeter.set(a[6]);
+    airspeed.set(a[7]* (3600/6076));
+    vsi.set(-a[8] * 60);
 
-    turn_rate += db;
-    if (Math.abs(turn_rate) >= 3.0) {
-      db *= -1.0;
+    index++;
+    if (index >= flight1.length) {
+        index = 0;
     }
-    accel += da;
-    if (Math.abs(accel) >= 12.0) {
-      da *= -1.0;
-    }
-
-    roll += dr;
-    if (Math.abs(roll) >= 45.0) {
-        dr *= -1;
-    }
-    pitch += dp;
-    if (Math.abs(pitch) >= 45) {
-        dp *= -1;
-    }
-
-    degrees+=1.0;
-    altitude+=1.0;
-    speed+= 1.0;
-    if (speed > 220.0) speed = 0;
-
     requestAnimationFrame(run);
   }
 
