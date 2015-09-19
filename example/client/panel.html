@@ -1,162 +1,145 @@
 <!doctype html>
 <html>
 <head>
-  <style>/* this styling works on Chrome */
-  html,body {
-      overflow:hidden; /* no scrollbars, they make the resizing more complicated */
-  }
-  .container {
-    display: flex;
-    flex-direction:column;
-    background-color: #000;
-  }
-  .row {
-    display:flex;
-    flex-direction:row;
-    justify-content: center;
-  }
+  <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <style>
+    .blackBk {
+      background-color:black;
+    }
+    .grayBk {
+      background-color: gray;
+    }
   </style>
+  <script src="/svg-ac-inst.js"></script>
+  <script src="/lr.js"></script>
 </head>
 <body>
-
-<div class='container'>
-  <div class='row'>
-    <div id='svg-airspeed'>
-   </div>
-    <div id='svg-attitude'>
+<div id='panel' class='container grayBk'>
+  <div class="row">
+    &nbsp;
+  </div>
+  <div class="row">
+    <div id="a1" class="grayBk col-md-4 col-xs-4">
+      <!-- @include airspeed.svg -->
     </div>
-    <div id='svg-altimeter'>
+    <div id='a2' class="grayBk col-md-4 col-xs-4">
+      <!-- @include attitude.svg -->
+    </div>
+    <div id='a3' class="grayBk col-md-4 col-xs-4">
+      <!-- @include altimeter.svg -->
     </div>
   </div>
-  <div class='row'>
-    <div id='svg-turn'>
+  <div class="row">
+    &nbsp;
+  </div>
+  <div class="row">
+    <div id="b1" class="grayBk col-md-4 col-xs-4">
+      <!-- @include turn.svg -->
     </div>
-    <div id='svg-heading'>
+    <div id='b2' class="grayBk col-md-4 col-xs-4">
+      <!-- @include heading.svg -->
     </div>
-    <div id='svg-vsi'>
-   </div>
+    <div id='b3' class="grayBk col-md-4 col-xs-4">
+      <!-- @include vsi.svg -->
+    </div>
+  </div>
+  <div class="row">
+    &nbsp;
   </div>
 </div>
-<script src="/svg-ac-inst.js"></script>
+
 <script>
+  var module = (function() {
 
-// instantiate the heading indicator
-var heading = svg_ac_inst.Heading(document.querySelector("#svg-heading"),"gg145-heading",true);
-var degrees = 0;
-var dhdg = 1.0;
+    // instantiate the airspeed indicator, give it the name that matches the template
+    var airspeed_options =
+    {
+      range  : 220,        // range index, 1 = 220
+      green  :[80,140],  // green arc from clean stall to max cruise
+      yellow :[140,160], // yellow arc from max cruise to never-exceed
+      red    :160, // red arc from never-exceed to never-exceed
+      white  :[50,100]   // white arc for stall-flaps to max-flaps
+    }
+    var airspeed = svg_ac_inst.Airspeed(document.querySelector("#a1"),"gg145-airspeed",true,airspeed_options);
 
-// instantiate the altimeter, give it the name that matches the template
-var altimeter = svg_ac_inst.Altimeter(document.querySelector("#svg-altimeter"),"gg145-altimeter",true);
-var altitude=0.0;
-var dalt = 1.0;
-var pressure = 29.92;
-altimeter.setPressure(pressure);
+    //  instantiate the attitude indicator, give it the name that matches the template -->
+    var attitude = svg_ac_inst.Attitude(document.querySelector('#a2'),"gg145-attitude",true);
 
-// instantiate the airspeed indicator, give it the name that matches the template
-var airspeed_options =
-{
-  range  : 220,        // range index, 1 = 220
-  green  :[80,140],  // green arc from clean stall to max cruise
-  yellow :[140,160], // yellow arc from max cruise to never-exceed
-  red    :160, // red arc from never-exceed to never-exceed
-  white  :[50,100]   // white arc for stall-flaps to max-flaps
-};
+    // instantiate the altimeter, give it the name that matches the template -->
+    var altimeter = svg_ac_inst.Altimeter(document.querySelector("#a3"),"gg145-altimeter",true);
+    altimeter.setPressure(29.92);
 
-var airspeed = svg_ac_inst.Airspeed(document.querySelector("#svg-airspeed"),"gg145-airspeed",true,airspeed_options);
-var speed = 0;
-var dspd  = 1.0;
+    // instantiate the turn coordinator, give it the name that matches the template -->
+    var turn = svg_ac_inst.Turn(document.querySelector('#b1'),"gg145-turn",true);
 
-// instantiate the VSI, give it the name that matches the template
-var vsi = svg_ac_inst.VSI(document.querySelector("#svg-vsi"),"gg145-vsi",true);
-var vspeed = -2000;
-var dv = 1.0;
+    // instantiate the heading indicator, give it the name that matches the template -->
+    var heading = svg_ac_inst.Heading(document.querySelector("#b2"),"gg145-heading",true);
 
-// instantiate the attitude indicator, give it the name that matches the template
-var attitude = svg_ac_inst.Attitude(document.querySelector('#svg-attitude'),"gg145-attitude",true);
-var pitch = 0.0;
-var roll = 0.0;
-var dp = 0.1;
-var dr = 0.1;
+    // instantiate the VSI, give it the name that matches the template -->
+    var vsi = svg_ac_inst.VSI(document.querySelector("#b3"),"gg145-vsi",true);
 
-//  instantiate the turn coordinator, give it the name that matches the template
-var turn = svg_ac_inst.Turn(document.querySelector('#svg-turn'),"gg145-turn",true);
-var turn_rate=-3.0;
-var db=0.1;
-var accel = 0.0;
+    var index      = 0;
+    var turn_rate  = 0;
+    var turn_alpha = 0.01;
+    function run(timestamp) {
+      var a = flight1[index];
 
-// simple resize that uses window size minus some border
-function panel_onResize() {
-    var cw = window.innerWidth  - 20;
-    var ch = window.innerHeight - 20;
-    var w = cw  / 3;
-    var h = ch / 2;
-    // use smaller of h and w so all 6 instruments will fit on the screen
-    var s = (h < w) ? h : w;
-    heading.resize(s);
-    altimeter.resize(s);
-    airspeed.resize(s);
-    vsi.resize(s);
-    attitude.resize(s);
-    turn.resize(s);
-}
+      turn_rate = turn_rate + ((a[4] - turn_rate) * turn_alpha);
+      attitude.set(a[1],-a[2]);
+      heading.set(a[3]);
+      turn.set(turn_rate,a[5]);
+      altimeter.set(a[6]);
+      airspeed.set(a[7]* (3600/6076));
+      vsi.set(-a[8] * 60);
 
-function panel_onReady() {
-    panel_onResize();
+      index++;
+      if (index >= flight1.length) {
+        index = 0;
+      }
 
-}
-
-function run(timestamp) {
-    airspeed.set(speed);
-    altimeter.set(altitude);
-    vsi.set(vspeed);
-    turn.set(turn_rate,accel);
-    attitude.set(pitch,roll);
-    heading.set(degrees);
-
-    pitch += dp;
-    if (Math.abs(pitch)>45.0) {
-        dp *= -1;
+      // start gauges running
+      requestAnimationFrame(run);
     }
 
-    roll += dr;
-    if (Math.abs(roll) >30.0) {
-        dr *= -1;
+    var cols = ['a1','a2','a3','b1','b2','b3'];
+    var img  = [airspeed,attitude,altimeter,turn,heading,vsi];
+    function ready() {
+      var elements = [];
+      cols.forEach(function(v,i,a) {
+        var e = $('#' + v);
+        elements.push({div:e,svg:img[i]});
+      })
+      return elements;
     }
 
-    vspeed+=dv;
-    if (Math.abs(vspeed) >= 2000) {
-      dv *= -1;
+    function resize(elements) {
+      elements.forEach(function(v,i,a) {
+        var d = v.div;
+        var s = v.svg;
+        var w = d.width();
+        s.resize(w);
+      });
     }
 
-    turn_rate += db;
-    if (Math.abs(turn_rate) >= 3.0) {
-      db *= -1.0;
-    }
+    return {
+      resize : resize,
+      ready  : ready,
+      run    : run
+    };
+  })();
 
-    degrees+=dhdg;
-    if (Math.abs(degrees) > 360.0) {
-        dhdg *= -1.0;
-    }
+  $(document).ready(function() {
+    var elements = module.ready();
+    module.resize(elements);
+    $(window).on('resize',function() {
+      module.resize(elements);
+    });
 
-    altitude+=dalt;
-
-    speed += dspd;
-    if (speed >= 220.0) {
-        dspd *= -1.0;
-    }
-    if (speed <= 0.0) {
-        dspd *= -1.0;
-    }
-
-    requestAnimationFrame(run);
-  }
-
-// add event listeners
-window.addEventListener('resize',panel_onResize);
-window.addEventListener('load',panel_onReady);
-
-// start gauges running
-requestAnimationFrame(run);
+    // start sim
+    requestAnimationFrame(module.run);
+  });
 
 </script>
 </body>

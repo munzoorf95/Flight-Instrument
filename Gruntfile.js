@@ -66,12 +66,6 @@ module.exports = function(grunt) {
           args: ['example/static/panel.template', 'example/static/panel.html']
         },
         src: ['lib/preprocess.js']
-      },
-      jsdoc: {
-        options: {
-          args: ['-d','./doc','svg-ac-inst.js']
-        },
-        src: ['node_modules/jsdoc/jsdoc.js']
       }
     },
     uglify : {
@@ -80,6 +74,12 @@ module.exports = function(grunt) {
           'svg-ac-inst.min.js': ['svg-ac-inst.js']
         }
       }
+    },
+    jsdoc : {
+      options: {
+        destination: 'doc'
+      },
+      src : ['svg-ac-inst.js','lib/*.js']
     },
     watch : {
       options: {
@@ -96,7 +96,7 @@ module.exports = function(grunt) {
       },
       jsdoc: {
         files: ['svg-ac-inst.js'],
-        tasks: ['execute:jsdoc']
+        tasks: ['jsdoc']
       }
     }
   });
