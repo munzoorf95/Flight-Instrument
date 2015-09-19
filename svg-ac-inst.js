@@ -975,23 +975,6 @@ var svg_ac_inst = (function(global) {
     e = _createElementSvg(dial_def.name,dial_def.attr);
     svg.appendChild(e);
 
-    // needle group
-    g = _createElementSvg(needle_group_def.name,needle_group_def.attr,id + '-needle');
-    svg.appendChild(g);
-
-    e = _createElementSvg(needle_path_def.name,needle_path_def.attr);
-    g.appendChild(e);
-
-    e = _createElementSvg(airspeed_arc_def.name,airspeed_arc_def.attr);
-    g.appendChild(e);
-
-    e = _createElementSvg(needle_tail_def.name,needle_tail_def.attr);
-    g.appendChild(e);
-
-    e = _createElementSvg(needle_tail2_def.name,needle_tail2_def.attr);
-    g.appendChild(e);
-    // ===== end of needle
-
     // green,yellow and white are behind ticks
     e = _createElementSvg(airspeed_arc_def.name,airspeed_arc_def.attr);
     e.setAttribute('stroke','#0f0');
@@ -1017,6 +1000,24 @@ var svg_ac_inst = (function(global) {
     e.setAttribute('stroke','#f00');
     e.setAttribute('d',arcs.red);
     svg.appendChild(e);
+
+    // needle group
+    g = _createElementSvg(needle_group_def.name,needle_group_def.attr,id + '-needle');
+    svg.appendChild(g);
+
+    e = _createElementSvg(needle_path_def.name,needle_path_def.attr);
+    g.appendChild(e);
+
+    e = _createElementSvg(airspeed_arc_def.name,airspeed_arc_def.attr);
+    g.appendChild(e);
+
+    e = _createElementSvg(needle_tail_def.name,needle_tail_def.attr);
+    g.appendChild(e);
+
+    e = _createElementSvg(needle_tail2_def.name,needle_tail2_def.attr);
+    g.appendChild(e);
+    // ===== end of needle
+
   }
 
   /**
@@ -1093,6 +1094,14 @@ var svg_ac_inst = (function(global) {
       ]
     };
 
+    var dial_group = {
+      name: 'g',
+      attr: [
+        ['stroke-width', '1'],
+        ['stroke' , '#fff']
+      ]
+    };
+
     var rectBlue = {
       name: 'rect',
       attr: [
@@ -1115,6 +1124,37 @@ var svg_ac_inst = (function(global) {
       ]
     };
 
+    var dial_path = {
+          name : 'path',
+          attr : [
+              ['fill','#fff'],
+              ['d','M-4 -50 L4 -50 L 0 -40 ']
+              ]
+    };
+
+    var pointer_path = {
+      name : 'path',
+      attr : [
+          ['stroke-width','1'],
+          ['stroke','#ff0'],
+          ['fill','#ff0'],
+          ['d','M46 18 L54 18 L50 11 z']
+          ]
+    };
+
+    var outline_rect = {
+        name : 'rect',
+        attr : [
+            ['fill','transparent'],
+              ['stroke','#9e9e9e'],
+            ['stroke-width','8'],
+            ['x','0'],
+            ['y','0'],
+            ['width','100'],
+            ['height','100']
+          ]
+    };
+
       // svg element
     svg = _createElementSvg(svg_def.name,svg_def.attr,id);
     parent.appendChild(svg);
@@ -1128,127 +1168,87 @@ var svg_ac_inst = (function(global) {
     e = _createElementSvg(rectBrown.name,rectBrown.attr);
     g.appendChild(e);
 
-    // TODO : these can be generated programmatically
-    e = drawLine( -8  ,-6.25   ,8  ,-6.25);
+    // draw pitch angle ticks
+    var angle = -60.0;
+    for(var i = 0;i <= 13;i++) {
+      if (i == 6) {
+        angle += 10.0;
+        continue;
+      }
+      var a  = angle * 1.25;
+      var dy = -6.25;
+      var b  = a-dy;
+      //  e = drawLine( -8  ,-68.75   ,8  ,-68.75);
+      e = drawLine(-8,b,8,b);
+      g.appendChild(e);
+
+      // e = drawLine( -16 ,-75.0    ,-4 ,-75.0 );
+      e = drawLine(-16,a,-4,a);
+      g.appendChild(e);
+
+      // e = drawText( 0 ,-73,"60");
+      e = drawText(0,a+2,Math.abs(angle).toString());
+      e.setAttribute('stroke-width','0.1');
+      g.appendChild(e);
+
+      // e = drawLine( 4   ,-75.0    ,16 ,-75.0 );
+      e = drawLine(4,a,16,a);
+      g.appendChild(e);
+
+      angle += 10.0;
+    }
+
+    g = _createElementSvg(standard_group_def.name,standard_group_def.attr,null);
+    g.setAttribute('stroke-width','2');
+    g.setAttribute('stroke','#ff0');
+    svg.appendChild(g);
+    e = drawLine( 30,50,43,50);
     g.appendChild(e);
-    e = drawLine( -16 ,-12     ,-4 ,-12  );
+    e = drawLine( 42,50,42,53);
     g.appendChild(e);
-    e = drawText( 0 ,-10,"10");
-    e.setAttribute('stroke-width','0.1');
+    e = drawLine( 49,50,51,50);
     g.appendChild(e);
-    e = drawLine( 4   ,-12     ,16 ,-12  );
+    e = drawLine( 58,53,58,50);
+    g.appendChild(e);
+    e = drawLine( 57,50,70,50);
     g.appendChild(e);
 
-    e = drawLine( -8  ,-18.75  ,8  ,-18.75);
+    g = _createElementSvg(dial_group.name,dial_group.attr,id + '-dial');
+    svg.appendChild(g);
+    e = drawLine(20.00,-34.64,24.50,-42.44  ,2);
     g.appendChild(e);
-    e = drawLine( -16 ,-24     ,-4 ,-24  );
+    e = drawLine(34.64,-20.00,42.44,-24.50  ,2);
     g.appendChild(e);
-    e = drawText( 0 ,-22,"20");
-    e.setAttribute('stroke-width','0.1');
+    e = drawLine(40.00,0.00,49.00,0.00      ,2);
     g.appendChild(e);
-    e = drawLine( 4   ,-24     ,16 ,-24  );
+    e = drawLine(-20.00,-34.64,-24.50,-42.44,2);
     g.appendChild(e);
-
-    e = drawLine( -8  ,-31.25   ,8  ,-31.25);
+    e = drawLine(-34.64,-20.00,-42.44,-24.50,2);
     g.appendChild(e);
-    e = drawLine( -16 ,-37.5    ,-4 ,-37.5  );
-    g.appendChild(e);
-    e = drawText( 0 ,-35,"30");
-    e.setAttribute('stroke-width','0.1');
-    g.appendChild(e);
-    e = drawLine( 4   ,-37.5    ,16 ,-37.5  );
+    e = drawLine(-40.00,-0.00,-49.00,-0.00  ,2);
     g.appendChild(e);
 
-    e = drawLine( -8  ,-43.75   ,8  ,-43.75);
+    e = drawLine(6.95,-39.39,7.81,-44.32);
     g.appendChild(e);
-    e = drawLine( -16 ,-50.0    ,-4 ,-50.0  );
+    e = drawLine(13.68,-37.59,15.39,-42.29);
     g.appendChild(e);
-    e = drawText( 0 ,-48,"40");
-    e.setAttribute('stroke-width','0.1');
+    e = drawLine(28.28,-28.28,31.82,-31.82);
     g.appendChild(e);
-    e = drawLine( 4   ,-50.0    ,16 ,-50.0  );
+    e = drawLine(-6.95,-39.39,-7.81,-44.32);
     g.appendChild(e);
-
-    e = drawLine( -8  ,-56.25   ,8  ,-56.25);
+    e = drawLine(-13.68,-37.59,-15.39,-42.29);
     g.appendChild(e);
-    e = drawLine( -16 ,-62.5    ,-4 ,-62.5  );
+    e = drawLine(-28.28,-28.28,-31.82,-31.82);
     g.appendChild(e);
-    e = drawText( 0 ,-60.5,"50");
-    e.setAttribute('stroke-width','0.1');
+    e = drawLine(0.00,-40.00,0.00,-45.00);
     g.appendChild(e);
-    e = drawLine( 4   ,-62.5    ,16 ,-62.5  );
+    e = _createElementSvg(dial_path.name,dial_path.attr,null);
     g.appendChild(e);
 
-    e = drawLine( -8  ,-68.75   ,8  ,-68.75);
-    g.appendChild(e);
-    e = drawLine( -16 ,-75.0    ,-4 ,-75.0 );
-    g.appendChild(e);
-    e = drawText( 0 ,-73,"60");
-    e.setAttribute('stroke-width','0.1');
-    g.appendChild(e);
-    e = drawLine( 4   ,-75.0    ,16 ,-75.0 );
-    g.appendChild(e);
+    e = _createElementSvg(pointer_path.name,pointer_path.attr,null);
+    svg.appendChild(e);
 
-    e = drawLine( -8  ,6.25   ,8  ,6.25);
-    g.appendChild(e);
-    e = drawLine( -16 ,12     ,-4 ,12  );
-    g.appendChild(e);
-    e = drawText( 0 ,14,"10");
-    e.setAttribute('stroke-width','0.1');
-    g.appendChild(e);
-    e = drawLine( 4   ,12     ,16 ,12  );
-    g.appendChild(e);
-
-    e = drawLine( -8  ,18.75   ,8  ,18.75);
-    g.appendChild(e);
-    e = drawLine( -16 ,24     ,-4 ,24  );
-    g.appendChild(e);
-    e = drawText( 0 ,26,"20");
-    e.setAttribute('stroke-width','0.1');
-    g.appendChild(e);
-    e = drawLine( 4   ,24     ,16 ,24  );
-    g.appendChild(e);
-
-    e = drawLine( -8  ,31.25   ,8  ,31.25);
-    g.appendChild(e);
-    e = drawLine( -16 ,37.5    ,-4 ,37.5  );
-    g.appendChild(e);
-    e = drawText( 0 ,39,"30");
-    e.setAttribute('stroke-width','0.1');
-    g.appendChild(e);
-    e = drawLine( 4   ,37.5    ,16 ,37.5  );
-    g.appendChild(e);
-
-    e = drawLine( -8  ,43.75   ,8  ,43.75);
-    g.appendChild(e);
-    e = drawLine( -16 ,50.0    ,-4 ,50.0  );
-    g.appendChild(e);
-    e = drawText( 0 ,52,"40");
-    e.setAttribute('stroke-width','0.1');
-    g.appendChild(e);
-    e = drawLine( 4   ,50.0    ,16 ,50.0  );
-    g.appendChild(e);
-
-    e = drawLine( -8  ,56.25   ,8  ,56.25);
-    g.appendChild(e);
-    e = drawLine( -16 ,62.5    ,-4 ,62.5  );
-    g.appendChild(e);
-    e = drawText( 0 ,64.5,"50");
-    e.setAttribute('stroke-width','0.1');
-    g.appendChild(e);
-    e = drawLine( 4   ,62.5    ,16 ,62.5  );
-    g.appendChild(e);
-
-    e = drawLine( -8  ,68.75   ,8  ,68.75);
-    g.appendChild(e);
-    e = drawLine( -16 ,75.0    ,-4 ,75.0 );
-    g.appendChild(e);
-    e = drawText( 0 ,77,"60");
-    e.setAttribute('stroke-width','0.1');
-    g.appendChild(e);
-    e = drawLine( 4   ,75.0    ,16 ,75.0 );
-    g.appendChild(e);
-
+    e = _createElementSvg(outline_rect.name,outline_rect.attr,null);
   }
 
   /**
