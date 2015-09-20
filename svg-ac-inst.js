@@ -345,6 +345,7 @@ var svg_ac_inst = (function (global) {
         y2 = Math.sin(a) * r2 + cy;
         e = drawLine(x1, y1, x2, y2, 1.0);
         g.appendChild(e);
+
         e = drawText(txc2[index],tyc2[index],speed.toFixed(0));
         e.setAttribute('text-anchor', 'middle');
         g.appendChild(e);
@@ -407,7 +408,7 @@ var svg_ac_inst = (function (global) {
         g.appendChild(e);
       }
       else if (i == 10) {
-        drawText( vsi_x[index].toFixed(1),vsi_y[index].toFixed(1),vsi_t[index]);
+        e = drawText( vsi_x[index],vsi_y[index],vsi_t[index]);
         e.setAttribute('text-anchor', 'middle');
         g.appendChild(e);
         index++;
@@ -421,7 +422,7 @@ var svg_ac_inst = (function (global) {
         e = drawLine(x1, y1, x2, y2, 1.0);
         g.appendChild(e);
 
-        drawText( vsi_x[index].toFixed(1),vsi_y[index].toFixed(1),vsi_t[index]);
+        e = drawText( vsi_x[index],vsi_y[index],vsi_t[index]);
         e.setAttribute('text-anchor', 'middle');
         g.appendChild(e);
         index++;
@@ -1116,15 +1117,13 @@ var svg_ac_inst = (function (global) {
       var a = angle * 1.25;
       var dy = -6.25;
       var b = a - dy;
-      //  e = drawLine( -8  ,-68.75   ,8  ,-68.75);
+
       e = drawLine(-8, b, 8, b);
       g.appendChild(e);
 
-      // e = drawLine( -16 ,-75.0    ,-4 ,-75.0 );
       e = drawLine(-16, a, -4, a);
       g.appendChild(e);
 
-      // e = drawText( 0 ,-73,"60");
       e = drawText(0, a + 2, Math.abs(angle).toString());
       e.setAttribute('stroke-width', '0.1');
       g.appendChild(e);
