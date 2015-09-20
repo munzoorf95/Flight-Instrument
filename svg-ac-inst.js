@@ -172,11 +172,6 @@ var svg_ac_inst = (function (global) {
     ]
   };
 
-  var vsi_annotation_def = {
-    name: 'text',
-    attr: []
-  };
-
   /**
    * create a string from a floating point number with padding and specified factional digits
    * @param {number} f value to format
@@ -236,7 +231,7 @@ var svg_ac_inst = (function (global) {
     if (font_size) {
       e.setAttribute('font-size', font_size);
     }
-    e.innerHTML = text;
+    e.textContent = text;
     return e;
   }
 
@@ -284,11 +279,8 @@ var svg_ac_inst = (function (global) {
         e = drawLine(x1, y1, x2, y2, 1);
         g.appendChild(e);
 
-        e = global.createElementNS(ns, 'text');
-        e.setAttribute('x', tx[alt].toFixed(1));
-        e.setAttribute('y', ty[alt].toFixed(1));
+        e = drawText(tx[alt].toFixed(1),ty[alt].toFixed(1),alt.toFixed(0));
         e.setAttribute('text-anchor', 'middle');
-        e.innerHTML = alt.toFixed(0);
         g.appendChild(e);
         alt++;
         index++;
@@ -353,11 +345,8 @@ var svg_ac_inst = (function (global) {
         y2 = Math.sin(a) * r2 + cy;
         e = drawLine(x1, y1, x2, y2, 1.0);
         g.appendChild(e);
-        e = global.createElementNS(ns, 'text');
-        e.setAttribute('x', txc2[index]);
-        e.setAttribute('y', tyc2[index]);
+        e = drawText(txc2[index],tyc2[index],speed.toFixed(0));
         e.setAttribute('text-anchor', 'middle');
-        e.innerHTML = speed.toFixed(0);
         g.appendChild(e);
         speed += dspeed;
         index++;
@@ -418,11 +407,8 @@ var svg_ac_inst = (function (global) {
         g.appendChild(e);
       }
       else if (i == 10) {
-        e = global.createElementNS(ns, 'text');
+        drawText( vsi_x[index].toFixed(1),vsi_y[index].toFixed(1),vsi_t[index]);
         e.setAttribute('text-anchor', 'middle');
-        e.setAttribute('x', vsi_x[index].toFixed(1));
-        e.setAttribute('y', vsi_y[index].toFixed(1));
-        e.innerHTML = vsi_t[index];
         g.appendChild(e);
         index++;
       }
@@ -435,11 +421,8 @@ var svg_ac_inst = (function (global) {
         e = drawLine(x1, y1, x2, y2, 1.0);
         g.appendChild(e);
 
-        e = global.createElementNS(ns, 'text');
+        drawText( vsi_x[index].toFixed(1),vsi_y[index].toFixed(1),vsi_t[index]);
         e.setAttribute('text-anchor', 'middle');
-        e.setAttribute('x', vsi_x[index].toFixed(1));
-        e.setAttribute('y', vsi_y[index].toFixed(1));
-        e.innerHTML = vsi_t[index];
         g.appendChild(e);
         index++;
       }
@@ -502,7 +485,7 @@ var svg_ac_inst = (function (global) {
         t += d.toFixed(0);
         t += ")";
         e = global.createElementNS(ns, 'text');
-        e.innerHTML = (d / 10).toFixed(0);
+        e.textContent = (d / 10).toFixed(0);
         e.setAttribute('transform', t);
         g.appendChild(e);
 
@@ -538,45 +521,27 @@ var svg_ac_inst = (function (global) {
     svg.appendChild(g);
 
     // <text text-anchor='middle' x='50' y='37' >VERTICAL</text>
-    e = _createElementSvg(vsi_annotation_def.name, vsi_annotation_def.attr, null);
-    e.setAttribute('x', '50');
-    e.setAttribute('y', '37');
-    e.innerHTML = 'VERTICAL';
+    e = drawText(50,37,"VERTICAL");
     g.appendChild(e);
 
     // <text text-anchor='middle' x='50' y='43'>SPEED</text>
-    e = _createElementSvg(vsi_annotation_def.name, vsi_annotation_def.attr, null);
-    e.setAttribute('x', '50');
-    e.setAttribute('y', '43');
-    e.innerHTML = 'SPEED';
+    e = drawText(50,43,'SPEED');
     g.appendChild(e);
 
     // <text text-anchor='left' x='14' y='43'>up</text>
-    e = _createElementSvg(vsi_annotation_def.name, vsi_annotation_def.attr, null);
-    e.setAttribute('x', '14');
-    e.setAttribute('y', '43');
-    e.innerHTML = 'up';
+    e = drawText(14,43,'up');
     g.appendChild(e);
 
     // <text text-anchor='left' x='14' y='61'>down</text>
-    e = _createElementSvg(vsi_annotation_def.name, vsi_annotation_def.attr, null);
-    e.setAttribute('x', '14');
-    e.setAttribute('y', '61');
-    e.innerHTML = 'down';
+    e = drawText(14,61,'down');
     g.appendChild(e);
 
     // <text text-anchor='middle' x='50' y='67'>100 ft</text>
-    e = _createElementSvg(vsi_annotation_def.name, vsi_annotation_def.attr, null);
-    e.setAttribute('x', '50');
-    e.setAttribute('y', '67');
-    e.innerHTML = '100 ft';
+    e = drawText(50,67,'100 ft');
     g.appendChild(e);
 
     // <text text-anchor='middle' x='50' y='72'>per min</text>
-    e = _createElementSvg(vsi_annotation_def.name, vsi_annotation_def.attr, null);
-    e.setAttribute('x', '50');
-    e.setAttribute('y', '72');
-    e.innerHTML = 'per min';
+    e = drawText(50,72,'per min');
     g.appendChild(e);
   }
 
@@ -895,7 +860,7 @@ var svg_ac_inst = (function (global) {
 
     // pressure text
     e = _createElementSvg(alt_pressure_text_def.name, alt_pressure_text_def.attr, id + '-pwin');
-    e.innerHTML = pad(29.92, 5, 2);
+    e.textContent = pad(29.92, 5, 2);
     svg.appendChild(e);
 
     // needle
@@ -1314,14 +1279,14 @@ var svg_ac_inst = (function (global) {
           altitude = 999999;
         }
         var d = (altitude % 1000) * (360.0 / 1000.0) - 90;
-        drum.innerHTML = pad(altitude, 6, 0);
+        drum.textContent = pad(altitude, 6, 0);
         needle.setAttribute('transform', 'translate(50,50),rotate(' + d + ')');
       },
       /** @param pressure altimeter setting
        * @inner
        */
       setPressure: function (pressure) {
-        pwindow.innerHtml = pad(pressure, 5, 2);
+        pwindow.textContent = pad(pressure, 5, 2);
       },
       /** @param size new size in feet
        * @inner
