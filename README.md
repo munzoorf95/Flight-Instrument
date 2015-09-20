@@ -1,5 +1,7 @@
 # SVG Based Aircraft Instruments
 
+[API Documentation](http://www.geezer-x.com/svg-ac-inst/doc)
+
 [Scalable Vector Graphics (SVG)](https://en.wikipedia.org/wiki/Scalable_Vector_Graphics)
 is a file format for rendering images using vectors rather than a bitmap. This repo is less about
 how to construct an image using svg, than it is how to use svg with javascript on a web page. [Go here to
@@ -227,5 +229,3 @@ This instance has two functions:
 
 _Note_ : the 'panel' example also has basic resizing in which the instruments are sized to fit the window size. Resizing the window will resize the instruments. It is a good example of how the svg image is sharp regardless of resizing.
 
-## JSDoc
-JSDoc documentation of source code is in /doc/index.html. 
