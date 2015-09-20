@@ -3,6 +3,15 @@
 
 /**
  * @module
+ *
+ * @desc
+ * The svg_ac_inst module returns an object that contains 6 instrument factories:<br/>
+ * {@link svg_ac_inst:Airspeed}  : returns an {@link AirspeedInstance}<br/>
+ * {@link svg_ac_inst:Altimeter} : returns an {@link AltimeterInstance}<br/>
+ * {@link svg_ac_inst:Attitude}  : returns an {@link AttitudeInstance}<br/>
+ * {@link svg_ac_inst:Heading}   : returns a {@link HeadingInstance}<br/>
+ * {@link svg_ac_inst:Turn}      : returns a {@link TurnInstance}<br/>
+ * {@link svg_ac_inst:VSI}       : returns a {@link VSIInstance}<br/>
  */
 var svg_ac_inst = (function (global) {
   'use strict';
@@ -651,11 +660,11 @@ var svg_ac_inst = (function (global) {
 
   /**
    * generate the airspeed arc parameters
-   * @param {object}  options         - for client side draw
-   * @param {number}  options.range   - range index, 1 = 220
+   * @param {object}  options         - to set various airspeed limit arcs
+   * @param {number}  options.range   - airspeed range 0..range
    * @param {array}   options.green   - [80,140]  green arc from clean stall to max cruise
    * @param {array}   options.yellow  - [140,160] yellow arc from max cruise to never-exceed
-   * @param {number}  options.red     - [160,160] red arc from never-exceed to never-exceed
+   * @param {number}  options.red     - 160 never-exceed speed
    * @param {array}   options.white   - [50,100]  white arc for stall-flaps to max-flaps
    * @inner
    */
@@ -887,11 +896,11 @@ var svg_ac_inst = (function (global) {
    * draw an airspeed indicator
    * @param parent reference to parent element, such as a div
    * @param id     id to attach or reference to existing svg
-   * @param {object}  options         - for client side draw
-   * @param {number}  options.range   - range index, 1 = 220
+   * @param {object}  options         - to set various airspeed limit arcs
+   * @param {number}  options.range   - airspeed range 0..range
    * @param {array}   options.green   - [80,140]  green arc from clean stall to max cruise
    * @param {array}   options.yellow  - [140,160] yellow arc from max cruise to never-exceed
-   * @param {number}  options.red     - [160,160] red arc from never-exceed to never-exceed
+   * @param {number}  options.red     - 160 red   never-exceed
    * @param {array}   options.white   - [50,100]  white arc for stall-flaps to max-flaps
    * @inner
    */
@@ -1242,11 +1251,15 @@ var svg_ac_inst = (function (global) {
     headingDial(svg, id);
   }
 
+  /* ==================================== */
+  /* CONSTRUCTORS                         */
+  /* ==================================== */
+
   /**
    * Altimeter
-   * @param parent reference to parent element, such as a div
-   * @param id id to attach or reference to existing svg
-   * @param draw true = draw the altimeter, false = assume static draw
+   * @param {Element} parent parent element, such as a div
+   * @param {string}  id id of airspeed object
+   * @param {boolean} draw true to draw on client, false to use static svg with same id
    * @return {object} {@link AltimeterInstance}
    * @global
    * @alias svg_ac_inst:Altimeter
@@ -1301,14 +1314,14 @@ var svg_ac_inst = (function (global) {
 
   /**
    * Airspeed Indicator
-   * @param parent parent element, such as a div
-   * @param id element id of airspeed object
-   * @param draw true to draw on client, false to use static svg with same id
-   * @param {object}  options         - for client side draw
-   * @param {number}  options.range   - range index, 1 = 220
+   * @param {Element} parent parent element, such as a div
+   * @param {string}  id id of airspeed object
+   * @param {boolean} draw true to draw on client, false to use static svg with same id
+   * @param {object}  options         - to set various airspeed limit arcs
+   * @param {number}  options.range   - airspeed range 0..range
    * @param {array}   options.green   - [80,140]  green arc from clean stall to max cruise
    * @param {array}   options.yellow  - [140,160] yellow arc from max cruise to never-exceed
-   * @param {number}  options.red     - [160,160] red arc from never-exceed to never-exceed
+   * @param {number}  options.red     - 160 red never-exceed
    * @param {array}   options.white   - [50,100]  white arc for stall-flaps to max-flaps
    * @return {object} reference to an {@link  AirspeedInstance}
    * @global
@@ -1354,9 +1367,9 @@ var svg_ac_inst = (function (global) {
 
   /**
    * heading Indicator
-   * @param parent parent element, such as a div
-   * @param id element id of airspeed object
-   * @param draw true to draw on client, false to use static svg with same id
+   * @param {Element} parent parent element, such as a div
+   * @param {string}  id id of airspeed object
+   * @param {boolean} draw true to draw on client, false to use static svg with same id
    * @return {object} reference to a {@link HeadingInstance}
    * @global
    * @alias svg_ac_inst:Heading
@@ -1395,9 +1408,9 @@ var svg_ac_inst = (function (global) {
 
   /**
    * Attitude Indicator
-   * @param parent parent element, such as a div
-   * @param id element id of airspeed object
-   * @param draw true to draw on client, false to use static svg with same id
+   * @param {Element} parent parent element, such as a div
+   * @param {string}  id id of airspeed object
+   * @param {boolean} draw true to draw on client, false to use static svg with same id
    * @return {object} reference to an {@link AttitudeInstance}
    * @global
    * @alias svg_ac_inst:Attitude
@@ -1455,10 +1468,10 @@ var svg_ac_inst = (function (global) {
   }
 
   /**
-   * Turn and Bank Indicator
-   * @param parent parent element, such as a div
-   * @param id element id of airspeed object
-   * @param draw true to draw on client, false to use static svg with same id
+   * Turn Coordinator
+   * @param {Element} parent parent element, such as a div
+   * @param {string}  id id of airspeed object
+   * @param {boolean} draw true to draw on client, false to use static svg with same id
    * @return {object} reference to a {@link TurnInstance}
    * @global
    * @alias svg_ac_inst:Turn
@@ -1511,9 +1524,9 @@ var svg_ac_inst = (function (global) {
 
   /**
    * Vertical Speed Indicator
-   * @param parent parent element, such as a div
-   * @param id element id of airspeed object
-   * @param draw true to draw on client, false to use static svg with same id
+   * @param {Element} parent parent element, such as a div
+   * @param {string}  id id of airspeed object
+   * @param {boolean} draw true to draw on client, false to use static svg with same id
    * @return {object} {@link VSIInstance}
    * @global
    * @alias svg_ac_inst:VSI
