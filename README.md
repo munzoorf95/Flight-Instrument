@@ -1,5 +1,8 @@
 # SVG Based Aircraft Instruments
 
+
+[Live Demo](http://www.geezer-x.com/panel.html)
+
 [API Documentation](http://www.geezer-x.com/svg-ac-inst/doc)
 
 [Scalable Vector Graphics (SVG)](https://en.wikipedia.org/wiki/Scalable_Vector_Graphics)
