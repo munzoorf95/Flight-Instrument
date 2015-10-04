@@ -1,6 +1,6 @@
 {
     "globals": {
-      'geezerGauges':true
+      "require":true
     },
     "rules": {
         "indent": [
@@ -20,12 +20,13 @@
     },
     "env": {
         "node": true,
-        "browser": true
+        "browser": true,
+        "es6" : true
     },
     "extends": "eslint:recommended",
     "ecmaFeatures": {
       "templateStrings":true,
       "arrowFunctions":true,
-      "blockBindings":true,
+      "blockBindings":true
     }
 }

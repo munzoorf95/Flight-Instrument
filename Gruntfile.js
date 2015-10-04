@@ -66,6 +66,12 @@ module.exports = function(grunt) {
           args: ['example/static/panel.template', 'example/static/panel.html']
         },
         src: ['lib/preprocess.js']
+      },
+      pfd: {
+        options: {
+          args: ['example/static/pfd.template', 'example/static/pfd.html']
+        },
+        src: ['lib/preprocess.js']
       }
     },
     uglify : {
@@ -114,7 +120,8 @@ module.exports = function(grunt) {
      'execute:turn',
      'execute:attitude',
      'execute:vsi',
-     'execute:panel'
+     'execute:panel',
+      'execute:pfd'
    ]);
 
   grunt.registerTask('default', ['eslint','build']);
