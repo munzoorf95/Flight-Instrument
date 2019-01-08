@@ -1,9 +1,9 @@
 # SVG Based Aircraft Instruments
 
 
-[Live Demo](http://www.geezer-x.com/panel.html)
+[Live Demo](https://dmh2000.github.io/svgac.html)
 
-[API Documentation](http://www.geezer-x.com/svg-ac-inst/doc)
+[API Documentation](https://dmh2000.github.io/svg-ac-inst/doc/index.html)
 
 [Scalable Vector Graphics (SVG)](https://en.wikipedia.org/wiki/Scalable_Vector_Graphics)
 is a file format for rendering images using vectors rather than a bitmap. This repo is less about
