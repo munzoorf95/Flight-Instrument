@@ -1,6 +1,6 @@
 # SVG Based Aircraft Instruments
 
-![Instrument Panel](https://github.com/dmh2000/svg-ac-instruments/blob/master/svg-ac.png, "Instrument Panel")
+![Instrument Panel](https://i.imgur.com/h9WUm4S.png, "Instrument Panel")
 
 [Live Demo](https://dmh2000.github.io/svgac.html)
 
